@@ -1,6 +1,5 @@
 'use client'
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react"
-
 type contextInit = {
     showBar: boolean
     setShowBar:Dispatch<SetStateAction<boolean>>

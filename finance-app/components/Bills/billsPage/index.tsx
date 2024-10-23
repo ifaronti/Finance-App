@@ -1,12 +1,12 @@
 "use client";
 
 import Search from "@/components/searchInput";
-import Sort from "@/components/sort/sort";
+import Sort from "@/components/sort/sortCompoent";
 import { useState } from "react";
 import { transaction } from "@/components/types";
 import OneBill from "./oneBill";
 import { sortList } from "@/components/svgAssets";
-import { btnEvent } from "@/components/sort/sort";
+import { btnEvent } from "@/components/sort/sortCompoent";
 import { inputEvent } from "@/components/types";
 
 export default function Bills({bills}:{bills:transaction[]}) {

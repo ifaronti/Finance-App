@@ -6,6 +6,10 @@ import { usePathname } from "next/navigation";
 export default function TransactionsBTN({showBar}: navBTNProps) {
     const goTo = useRouter()
     const currentPath = usePathname()
+    const queryParams = new URLSearchParams
+    queryParams.append('skip', '0')
+    queryParams.append('sort', 'Latest')
+    queryParams.append('category', 'All Transaction')
     
     const transactions = (
         <svg
@@ -26,7 +30,7 @@ export default function TransactionsBTN({showBar}: navBTNProps) {
         if (currentPath === '/dashboard/transactions') {
             return
         }
-        goTo.push('/dashboard/transactions')
+        goTo.push(`/dashboard/transactions?${queryParams}`)
     }
 
     return (

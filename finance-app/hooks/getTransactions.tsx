@@ -5,13 +5,14 @@ import { transaction } from "@/components/types";
 type getTransactionsRequest = {
     skip: number
     category?:string,
-    orderBy?:string,
+    sort?:string,
     name?:string
 }
 
 type getTransactionsResponse = {
     success: boolean
-    data:transaction[]
+    data:transaction[],
+    isLastPage:boolean
 }
 
 export default function useGetTransactions(params:getTransactionsRequest) {
@@ -20,7 +21,7 @@ export default function useGetTransactions(params:getTransactionsRequest) {
   if (params) {
       //@ts-expect-error neccessary 
     const searchParams = new URLSearchParams(params);
-    url = `${url}?${searchParams.toString()}`;
+    url = `${url}?${searchParams.toString()}`;    
   }
   
     return useSWR(

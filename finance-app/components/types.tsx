@@ -106,8 +106,6 @@ export type transactionsContext = {
   setOrderBy: Dispatch<SetStateAction<string>>
   category: string;
   setCategory: Dispatch<SetStateAction<string>>;
-  skip: number;
-  setSkip: Dispatch<SetStateAction<number>>;
   name: string,
   searchKey: string
   handleChange: (e: inputEvent) => void
