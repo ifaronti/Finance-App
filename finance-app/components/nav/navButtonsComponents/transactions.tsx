@@ -9,8 +9,9 @@ export default function TransactionsBTN({showBar}: navBTNProps) {
     const queryParams = new URLSearchParams
     queryParams.append('skip', '0')
     queryParams.append('sort', 'Latest')
-    queryParams.append('category', 'All Transaction')
-    
+    queryParams.append('category', 'All Transactions')
+    // queryParams.append('category', 'name')
+
     const transactions = (
         <svg
             fill="none"

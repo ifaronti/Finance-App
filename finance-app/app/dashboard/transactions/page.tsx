@@ -4,6 +4,7 @@ import Sort from "@/components/sort";
 import Transactions from "@/components/transactions/transactionPage";
 
 export default function Page() {
+  
   return (
     <section className="flex flex-shrink-0 w-[343px] flex-col mx-auto py-6 md:py-8 md:w-[688px] xl:w-[1060px] gap-8">
       <Header text="Transactions" />

@@ -9,6 +9,7 @@ import { mutate } from "swr";
 export default function Pagination({isLastPage}:{isLastPage:boolean}){
     const [skip, setSkip] = useState(0)
     const searchParams = useSearchParams()
+    const querySkip = searchParams.get('skip')
     const pathName = usePathname()
     const router = useRouter()
     const buttonStyle = `w-10 hover:bg-[#98908b] rounded-lg hover:text-white border-[#98908b] border text-[14px] h-10`
@@ -31,11 +32,14 @@ export default function Pagination({isLastPage}:{isLastPage:boolean}){
 
     async function setQuery() {
         const params = new URLSearchParams(searchParams)
-        params.set('skip', '0')
+        params.set('skip', skip.toString())
         router.replace(`${pathName}?${params.toString()}`)
-        await mutate(["/transactions"])
         return
     }
+
+    useEffect(() => {
+        mutate(["/transactions"])
+    },[querySkip])
 
     useEffect(() => {
         setQuery()

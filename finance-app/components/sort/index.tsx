@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from "react";
-import SortComponent from "./sortCompoent";
+import SortComponent from "./sort";
 import { categoryList, sortList } from "../svgAssets";
 import { buttonEvent } from "../types";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
@@ -11,6 +11,8 @@ export default function Sort() {
   const [category, setCategory] = useState(categoryList[0].category)
   const pathName = usePathname()
   const searchParams = useSearchParams()
+  const querySort = searchParams.get('sort')
+  const queryCategory = searchParams.get('category')
   const router = useRouter()
 
   const theSort = async (e: buttonEvent) => {
@@ -23,10 +25,19 @@ export default function Sort() {
     const params = new URLSearchParams(searchParams)
     params.set('sort', sortBy)
     params.set('category', category)
+    params.delete('name')
     router.replace(`${pathName}?${params}`)
-    await mutate(['/transactions'])
     return
   }
+
+  useEffect(() => {
+    mutate(['/transactions'])
+  }, [queryCategory, querySort])
+
+  useEffect(() => {
+    setQueries()
+    //eslint-disable-next-line
+  },[category, sortBy])
   
   useEffect(() => {
       setQueries()
