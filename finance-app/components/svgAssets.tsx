@@ -165,6 +165,7 @@ export const sortList = [
 ];
 
 export const categoryList = [
+  {"categoryId":-1, "category":"All Transactions"},
   { "categoryId": 1, "category": "Education" },
   { "categoryId": 2, "category": "Bills" },
   { "categoryId": 3, "category": "Groceries" },

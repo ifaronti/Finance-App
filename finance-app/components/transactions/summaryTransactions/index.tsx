@@ -1,14 +1,13 @@
 "use client";
 
-import { useContext } from "react";
 import SectionH3 from "../../sectionHeader";
 import OneTransaction from "./transactionWrap";
 import { formatAmount, formatDate } from "./formatStrings";
-import { showBarContext } from "@/app/dashboard/layout";
+import useGetSummary from "@/hooks/getSummary";
 
 export default function SummaryTransactions() {
-  const { responseData } = useContext(showBarContext);
-  const data = responseData?.transactionsSummary;
+  const { data:responseData } = useGetSummary()
+  const data = responseData?.data?.transactionsSummary;
 
   const transactions = data?.map((item, index) => {
     return (

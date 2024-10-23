@@ -18,8 +18,8 @@ export default function PotCard({ pot, event, edit, del }: cardProp) {
             <BudgetHeader category={pot.name} theme={pot.theme} edit={(e)=>edit(e)} del={(e)=>del(e)} />
             <PotProgress pot={pot} />
             <div className="w-full flex justify-between">
-                <AddWithdrawButton text="+ Add Money" event={()=>event(pot)} pot={pot} />
-                <AddWithdrawButton text="Withdraw" pot={pot} event={()=>event(pot)} />
+                <AddWithdrawButton text="+ Add Money" toggleModal={()=>event(pot)} pot={pot} />
+                <AddWithdrawButton text="Withdraw" pot={pot} toggleModal={()=>event(pot)} />
             </div>
         </div>
     )

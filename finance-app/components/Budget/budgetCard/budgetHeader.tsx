@@ -1,7 +1,7 @@
 "use client";
 
 import { ellipsis } from "@/components/svgAssets";
-import MiniMenu from "@/components/miniMenu";
+import DeleteEditMenu from "@/components/miniMenu"
 import { useState } from "react";
 import { buttonEvent } from "@/components/modalFrames/input1";
 
@@ -26,7 +26,7 @@ export default function BudgetHeader({category,del,edit,theme,}: props){
           {ellipsis}
         </button>
         <span className={`${showMini ? "block right-[0] absolute top-3" : "hidden"}`}>
-          <MiniMenu event1={(e)=>edit(e)} event2={(e)=>del(e)} />
+          <DeleteEditMenu editItem={(e)=>edit(e)} deleteItem={(e)=>del(e)} />
         </span>
       </div>
     </article>

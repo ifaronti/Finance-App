@@ -1,15 +1,13 @@
 'use client'
 
 import { closeModal } from "../svgAssets"
-import { useContext } from "react"
-import { showBarContext } from "@/app/dashboard/layout"
 
 export default function FrameHeader({ text, event, bigFont }: {event:()=>void, text: string, bigFont?:string }) {
 
-    const { setShowModal } = useContext(showBarContext)
+    //const { setShowModal } = useContext(showBarContext)
     
     const modalClose = () => {
-        setShowModal(false)
+        //setShowModal(false)
         event()
     }
 

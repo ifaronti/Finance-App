@@ -33,12 +33,12 @@ export default function RingChart() {
                 }}>
 
                 </div>
-                <div className="h-[177.5px] z-[20] flex items-center justify-center absolute w-[177.5px] rounded-full bg-white/30">
+                 <div className="h-[177.5px] z-[20] flex items-center justify-center absolute w-[177.5px] rounded-full bg-white/30">
                         <div className="w-[150px] h-[150px] flex flex-col items-center justify-center bg-white rounded-full">
                             <p className="text-[2rem] text-gray-900 font-bold">${spent}</p>
                             <p className="text-[13px] text-gray-500">Of ${maximum} Limit</p>
                         </div>
-                </div>
+                </div> 
             </figure>
     )
 

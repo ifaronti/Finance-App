@@ -1,13 +1,14 @@
-'use client'
+import { useShowbar } from "@/providers/showBarContext";
 
-import { summaryProps } from "../../types";
-import { useContext } from "react";
-import { showBarContext } from "@/app/dashboard/layout";
+type summaryProps = {
+  value: number|undefined|string
+  description:string
+}
 
 export default function Summary({ value, description }: summaryProps) {
   const textColor = description === "Current Balance" ? "white" : "gray-900";
   const bgColor = description === "Current Balance" ? "black" : "white";
-  const { showBar } = useContext(showBarContext)
+  const {showBar}  = useShowbar()
   
   return (
     <article
@@ -15,7 +16,7 @@ export default function Summary({ value, description }: summaryProps) {
     >
       <div className="flex flex-col pl-5 sm:pl-6">
         <h2 className="text-gray-500 text-[14px]">{description}</h2>
-        <p className={`text-[2rem] font-bold text-${textColor}`}>{value}</p>
+        <p className={`text-[2rem] font-bold text-${textColor}`}>${value?.toString()}</p>
       </div>
     </article>
   );

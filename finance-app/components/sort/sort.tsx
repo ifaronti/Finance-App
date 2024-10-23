@@ -11,7 +11,7 @@ type sortProps = {
   valueArr: string[];
 };
 
-export default function Sort({
+export default function SortComponent({
   theSort,
   sortName,
   currentSort,

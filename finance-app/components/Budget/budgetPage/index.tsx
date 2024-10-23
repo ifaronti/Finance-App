@@ -6,21 +6,21 @@ import { budgetContexts } from "@/providers/budgetContext/budgetContext";
 import { buttonEvent } from "@/components/modalFrames/input1";
 import { budget } from "@/components/types";
 import useGetBudgets from "@/hooks/getBudgets";
-import { showBarContext } from "@/app/dashboard/layout";
+//import { showBarContext } from "@/app/dashboard/layout";
 
 export default function BudgetCard() {
   const { setCurrentBudget, skip, setModal2 } = useContext(budgetContexts);
-  const {setShowModal} = useContext(showBarContext)
+  //const {setShowModal} = useContext(showBarContext)
   
   const { data } = useGetBudgets({ skip: skip })
   
   const currModal = (e: buttonEvent) => {
-    setShowModal(true)
+    //setShowModal(true)
     const { name } = e.currentTarget || e.target
     return setModal2(prev => {return {...prev,[name]:true}})
   }
   
-  const editCard = (e: buttonEvent, item: budget) => {
+  const editBudget = (e: buttonEvent, item: budget) => {
     setCurrentBudget({
       category: item.category,
       spent: item.spent,
@@ -32,7 +32,9 @@ export default function BudgetCard() {
     currModal(e)
   };
 
-  const deletBudget=(e: buttonEvent, item: budget)=> {
+  
+
+  const deleteBudget=(e: buttonEvent, item: budget)=> {
     setCurrentBudget(prev=>{
       return {
         ...prev,
@@ -52,8 +54,8 @@ export default function BudgetCard() {
         <BudgetHeader
           category={item.category}
           theme={item.theme}
-          edit={(e: buttonEvent) => editCard(e, item)}
-          del={(e: buttonEvent) => deletBudget(e, item)}
+          edit={(e: buttonEvent) => editBudget(e, item)}
+          del={(e: buttonEvent) => deleteBudget(e, item)}
         />
         <ProgressBar theme={item.theme} max={item.maximum} spent={item.spent} />
         <BudgetTransaction  budget={item} />

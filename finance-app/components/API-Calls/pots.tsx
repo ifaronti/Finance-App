@@ -3,12 +3,12 @@ import { pot } from "../types";
 
 const url = process.env.NEXT_PUBLIC_URL;
 
-export const editPot = async (pot: pot, add?:number, subtract?:number) => {
-  let reqURL = `${url}/pot?`
-  if (add) {
+export const editPot = async (pot: pot, add?:number|string, subtract?:number|string) => {
+  let reqURL = `${url}/pots?`
+  if (add && add !=='') {
     reqURL += `add=${add}`
   }
-  if (subtract) {
+  if (subtract && subtract !=='') {
     reqURL += `subtract=${subtract}`
   }
   try {
@@ -18,6 +18,9 @@ export const editPot = async (pot: pot, add?:number, subtract?:number) => {
   } catch (err: any) {
     console.log(err.message);
   }
+
+  console.log(reqURL);
+  
 };
 
 export const createPot = async(body: pot) => {

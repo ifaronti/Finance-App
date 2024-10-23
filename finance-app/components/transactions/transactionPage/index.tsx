@@ -1,20 +1,18 @@
+'use client'
+
 import SingleTransaction from "./oneTransaction";
-import { useContext} from "react";
 import { formatAmount, formatDate } from "../summaryTransactions/formatStrings";
 import Pagination from "./pagination";
-import { transactionContext } from "@/providers/transactionsContext";
 import useGetTransactions from "@/hooks/getTransactions";
+import { useSearchParams } from "next/navigation";
 
 export default function Transactions() {
-  const { category, skip, orderBy, name } = useContext(transactionContext)
-  
-  const { data } = useGetTransactions({
-    skip: skip,
-    orderBy: orderBy,
-    category: category,
-    name:name
-  })
-  
+  const params = useSearchParams()
+  const sort = params.get('sort')?.toString()
+  const skip = Number(params.get('skip'))
+  const category = params.get('category')?.toString()
+  const { data } = useGetTransactions({skip, sort, category})
+
   const allTransactions = data?.data?.map((item, index) => {
     return (
       <div className="w-full" key={index + 1}>
@@ -36,7 +34,6 @@ export default function Transactions() {
 
   return (
     <section className="w-full flex-shrink-0 relative flex flex-col gap-4 md:gap-6">
-
       <div className="w-full hidden md:flex relative items-center justify-between">
 
         <p className="text-gray-500 text-[12px]">Reciever/Sender</p>
@@ -52,7 +49,7 @@ export default function Transactions() {
 
       <div>{allTransactions}</div>
       
-      <Pagination />
+      <Pagination isLastPage={Boolean(data?.isLastPage)} />
     </section>
   );
 }
