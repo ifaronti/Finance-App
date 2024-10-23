@@ -1,83 +1,35 @@
-import { btnProps } from "../types";
+'use client'
+
 import { smallLogo, largeLogo } from "../svgAssets";
-import SVGBTNS from "./navButtonsSVGs";
 import { navStyles } from './NavigationStyles'
 import NavToggle from "./navToggle";
+import BillsBTN from "./navButtonsComponents/bills";
+import OverviewBTN from "./navButtonsComponents/overview";
+import BudgetsBTN from "./navButtonsComponents/budgets";
+import PotsBTN from "./navButtonsComponents/pots";
+import TransactionsBTN from "./navButtonsComponents/transactions";
+import { useShowbar } from "@/providers/showBarContext";
+import ShowbarProvider from "@/providers/showBarContext";
 
-export default function NavigationButtons({
-  current,
-  goTo,
-  showBar,
-  toggle
-}: btnProps) {
-  const changePage = (page: string) => {
-    localStorage.setItem("page", page);
-    goTo(page);
-  };
-
-  const overview = (
-    <button
-      onClick={() => changePage("dashboard")}
-      className={navStyles(current, showBar, 'dashboard').buttons}
-    >
-      <span className="relative">{SVGBTNS(current).overview}</span>
-      <span className={navStyles('', showBar).btnSpan}>Overview</span>
-    </button>
-  );  
-
-  const transactions = (
-    <button
-      onClick={() => changePage("dashboard/transactions")}
-      className={navStyles(current, showBar, 'transactions').buttons}
-    >
-      <span>{SVGBTNS(current).transactions}</span>
-      <span className={navStyles('', showBar).btnSpan}>Transactions</span>
-    </button>
-  );
-
-  const budget = (
-    <button
-      onClick={() => changePage("dashboard/budgets")}
-      className={navStyles(current, showBar, 'budgets').buttons}
-    >
-      <span>{SVGBTNS(current).budget}</span>
-      <span className={navStyles('', showBar).btnSpan}>Budgets</span>
-    </button>
-  );
-
-  const pots = (
-    <button
-      onClick={() => changePage("dashboard/pots")}
-      className={navStyles(current, showBar, 'pots').buttons}
-    >
-      <span>{SVGBTNS(current).pots}</span>
-      <span className={navStyles('', showBar).btnSpan}>Pots</span>
-    </button>
-  );
-
-  const recurring = (
-    <button
-      onClick={() => changePage("dashboard/bills")}
-      className={navStyles(current, showBar, 'bills').buttons}
-    >
-      <span>{SVGBTNS(current).recurring}</span>
-      <span className={navStyles('', showBar).btnSpan}>Recurring Bills</span>
-    </button>
-  );
+export default function NavigationButtons() {
+  const {showBar, setShowBar} = useShowbar()
 
   return (
-    <section className={navStyles(current, showBar).section} >
-      <div className={navStyles(current, showBar).BTNsWrapper}>
-        <div className='hidden 2xl:block mb-[60px] pl-8'>
-          {showBar ? largeLogo : smallLogo}
+    <ShowbarProvider>
+      <section className={`2xl:h-screen flex-grow-0 relative flex transition-width duration-700 w-full ${showBar ? "2xl:w-[300px] relative md:w-[768px]" : "w-[88px] sm:w-full"
+            } bg-[#201F24] sm:px-10 px-4 2xl:px-[unset] sm:h-[74px] h-[52px] 2xl:rounded-l-none rounded-t-lg 2xl:rounded-r-xl`} >
+        <div className={navStyles('', showBar).BTNsWrapper}>
+          <div className='hidden 2xl:block mb-[60px] pl-8'>
+            {showBar ? largeLogo : smallLogo}
+          </div>
+          <OverviewBTN showBar={showBar} />
+          <TransactionsBTN showBar={showBar} />
+          <BudgetsBTN showBar={showBar} />
+          <PotsBTN showBar={showBar} />
+          <BillsBTN showBar={showBar} />
+          <NavToggle showBar={showBar} toggle={()=>setShowBar(!showBar)} />
         </div>
-        {overview}
-        {transactions}
-        {budget}
-        {pots}
-        {recurring}
-        <NavToggle showBar={showBar} toggle={toggle}/>
-      </div>
-    </section>
-  );
+      </section>
+      </ShowbarProvider>
+  )
 }

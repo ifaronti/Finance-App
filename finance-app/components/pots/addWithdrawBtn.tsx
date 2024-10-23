@@ -5,11 +5,11 @@ import { showBarContext } from "@/app/dashboard/layout";
 
 type props = {
   text: string;
-  event: (item: pot) => void,
+  toggleModal: (item: pot) => void,
   pot:pot
 };
 
-export default function AddWithdrawButton({ text, pot, event }: props) {
+export default function AddWithdrawButton({ text, pot, toggleModal }: props) {
   const { setModal } = useContext(potContext)
   const {setShowModal} = useContext(showBarContext)
   
@@ -31,7 +31,7 @@ export default function AddWithdrawButton({ text, pot, event }: props) {
         }
       })
     }
-    event(pot)
+    toggleModal(pot)
     setShowModal(true)
   }
 

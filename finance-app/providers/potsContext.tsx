@@ -10,13 +10,12 @@ const potsInit = {
   setModal: () => { },
   skip: 0,
   setSkip: () => { },
-  newValue: 0,
-  setNewValue:()=>{}
 };
 
 export const potContext = createContext<potsContext>(potsInit);
 
 export default function PotsProvider({ children }: { children: React.ReactNode }) {
+
   const [currentPot, setCurrentPot] = useState<pot>({
     name: "",
     target: 0,
@@ -32,11 +31,10 @@ export default function PotsProvider({ children }: { children: React.ReactNode }
     withdraw:false
   });
   const [skip, setSkip] = useState(0)
-  const [newValue, setNewValue] = useState(0)
 
   return (
     <potContext.Provider
-      value={{skip, newValue, setNewValue, setSkip, modal, setModal, currentPot, setCurrentPot }}
+      value={{skip, setSkip, modal, setModal, currentPot, setCurrentPot }}
     >
       <div>{children}</div>
     </potContext.Provider>

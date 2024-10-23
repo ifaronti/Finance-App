@@ -1,11 +1,9 @@
 "use client";
-
 import BudgetCard from "@/components/Budget/budgetPage";
 import Header from "@/components/PageHeader";
 import ChartCard from "@/components/Budget/budgetCard/chartCard";
 import AddButton from "@/components/addButton";
 import { useContext } from "react";
-import { showBarContext } from "../layout";
 import AddBudget from "@/components/Budget/budgetModal/addBudget";
 import { inputEvent } from "@/components/types";
 import { buttonEvent } from "@/components/modalFrames/input1";
@@ -15,9 +13,8 @@ import DeleteItem from "@/components/modalFrames/deleteItem";
 import { categories } from "@/components/types";
 
 export default function Page() {
-  const { showModal, setShowModal } = useContext(showBarContext);
   const { modal2, setModal2, setCurrentBudget} = useContext(budgetContexts)
-
+  const showModal = false
   const handleChange = (e: inputEvent | buttonEvent) => {
     const { value, name } = e.currentTarget || e.target
     setCurrentBudget(prev => {
@@ -28,7 +25,7 @@ export default function Page() {
   }  
   
   const currModal = (e: buttonEvent) => {
-    setShowModal(true)
+    //setShowModal(true)
     const { name } = e.currentTarget || e.target
     return setModal2(prev => {return {...prev,[name]:true}})
   }

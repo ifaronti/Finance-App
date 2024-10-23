@@ -20,43 +20,12 @@ export type formProps = {
   err: userInfo & { all?: string };
 };
 
-export type btnProps = {
-  current: string | null;
-  goTo: (page: string) => void;
-  showBar: boolean;
-  toggle: () => void;
-};
-
 export type toggleProps = { showBar: boolean; toggle: () => void };
-
-export type summaryProps = {
-  description: string;
-  value: string;
-};
-
-type user = {
-  balance: number
-  expenses: number
-  income:number
-}
 
 export type barContext = {
   showBar: boolean;
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
-  responseData: {
-    accountSummary:user
-    transactionsSummary: transaction[];
-    billsSummary: transaction[];
-    budgetSummary: {
-      summary: { _sum: { maximum: number; spent: number } };
-      snippet: budget[];
-    };
-    potSummary: {
-      totalSaved: { _sum: { total: number } };
-      summaryItems: pot[];
-    };
-  };
 };
 
 export type detailsLink = {
@@ -130,8 +99,6 @@ export type potsContext = {
   skip?: number;
   setSkip: Dispatch<SetStateAction<number>>;
   setModal: Dispatch<SetStateAction<modal>>;
-  newValue: number
-  setNewValue:Dispatch<SetStateAction<number>>
 };
 
 export type transactionsContext = {

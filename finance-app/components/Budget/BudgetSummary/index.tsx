@@ -1,15 +1,16 @@
 "use client";
 
-import { useContext } from "react";
 import ColorBars from "@/components/colorBars";
 import RingChart from "./budgetRing";
-import { showBarContext } from "@/app/dashboard/layout";
 import SectionH3 from "@/components/sectionHeader";
+import useGetSummary from "@/hooks/getSummary";
+import { useShowbar } from "@/providers/showBarContext";
 
 export default function BudgetSummary() {
-  const { showBar, responseData } = useContext(showBarContext);
+  const { data: responseData } = useGetSummary()
+  const {showBar }= useShowbar()
 
-  const indicators = responseData?.budgetSummary?.snippet?.map((item, index) => {
+  const indicators = responseData?.data?.budgetSummary?.snippet?.map((item, index) => {
     return (
       <ColorBars
         key={index + 1}

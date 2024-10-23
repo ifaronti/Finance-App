@@ -10,7 +10,7 @@ import { budgetContexts } from "@/providers/budgetContext/budgetContext";
 import AddEditBTN from "@/components/modalFrames/modalbutton";
 import { editBudget } from "@/components/API-Calls/budgets";
 import { budget } from "@/components/types";
-import { showBarContext } from "@/app/dashboard/layout";
+//import { showBarContext } from "@/app/dashboard/layout";
 import useGetBudgets from "@/hooks/getBudgets";
 import { mutate } from "swr";
 
@@ -21,7 +21,7 @@ type props = {
 export default function EditBudget({ handleChange}:props) {
     const description = 'As your budgets change, feel free to update your spending limits.'
     const {currentBudget, setModal2, skip } = useContext(budgetContexts)
-    const { setShowModal } = useContext(showBarContext)
+    //const { setShowModal } = useContext(showBarContext)
     const {data} = useGetBudgets({skip:skip})
     async function editRequest(currentBudget: budget) {
         await editBudget(currentBudget)
@@ -32,7 +32,7 @@ export default function EditBudget({ handleChange}:props) {
     const usedThemes = data?.data.map(item=>item.theme)
     const falseModal = () => {
         setModal2({ add: false, edit: false, delete: false })
-        setShowModal(false)
+       // setShowModal(false)
       }
 
     return (

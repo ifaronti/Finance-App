@@ -3,13 +3,12 @@
 import SectionH3 from "../../sectionHeader";
 import ColorBars from "../../colorBars";
 import PotsTotal from "./potTotal";
-import { useContext } from "react";
-import { showBarContext } from "@/app/dashboard/layout";
+import useGetSummary from "@/hooks/getSummary";
 
 export default function PotsSummary() {
-  const { responseData } = useContext(showBarContext)
-  const potBars = responseData?.potSummary?.summaryItems
-  const total = responseData?.potSummary?.totalSaved?._sum.total
+  const { data:responseData } = useGetSummary()
+  const potBars = responseData?.data.potSummary?.summaryItems
+  const total = responseData?.data.potSummary?.totalSaved?._sum.total
   const bars = potBars?.map((item, index) => {
     return (
       <ColorBars

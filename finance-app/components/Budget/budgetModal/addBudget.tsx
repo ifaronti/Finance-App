@@ -9,7 +9,7 @@ import { budgetContexts } from "@/providers/budgetContext/budgetContext";
 import ThemeSelect from "@/components/modalFrames/themeSelect";
 import AddEditBTN from "@/components/modalFrames/modalbutton";
 import { createbudget } from "@/components/API-Calls/budgets";
-import { showBarContext } from "@/app/dashboard/layout";
+//import { showBarContext } from "@/app/dashboard/layout";
 import useGetBudgets from "@/hooks/getBudgets";
 import { mutate } from "swr";
 
@@ -19,7 +19,7 @@ type props = {
 
 export default function AddBudget({ handleChange }: props) {
   const { setModal2, currentBudget, skip } = useContext(budgetContexts);
-  const { setShowModal } = useContext(showBarContext)
+  //const { setShowModal } = useContext(showBarContext)
   const { data } = useGetBudgets({ skip: skip })
   const usedThemes = data?.data?.map(item=>item.theme)
 
@@ -35,7 +35,7 @@ export default function AddBudget({ handleChange }: props) {
 
   const falseModal = () => {
     setModal2({ add: false, edit: false, delete: false })
-    setShowModal(false)
+    //setShowModal(false)
   }
 
   const description = `Choose a category to set a spending budget. 

@@ -15,6 +15,11 @@ type GetSummaryResponse = {
       totalSaved: { _sum: { total: number } };
       summaryItems: pot[];
     };
+    accountSummary: {
+      balance: number
+      expenses: number
+      income:number
+    }
   };
 };
 

@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:"Budgets spending limits for categories of expenses"
 }
 export default function Layout({ children }: { children: React.ReactNode }) {
-
   return (
     <BudgetProvider>
       <div>{children}</div>

@@ -1,10 +1,9 @@
 import FrameHeader from "./frameHeader";
 import { usePathname } from "next/navigation";
 import { budgetContexts } from "@/providers/budgetContext/budgetContext";
-import { potContext } from "@/app/dashboard/pots/layout";
+import { potContext } from "@/providers/potsContext";
 import { deleteBudget } from "../API-Calls/budgets";
 import { deletePot } from "../API-Calls/pots";
-import { showBarContext } from "@/app/dashboard/layout";
 import { useContext } from "react";
 import { mutate } from "swr";
 
@@ -13,7 +12,6 @@ export default function DeleteItem() {
   const isBudget = pathName.includes("budgets") ? true : false;
   const text = isBudget ? "budget" : "pot";
   const { currentBudget, setModal2 } = useContext(budgetContexts);
-  const { setShowModal } = useContext(showBarContext);
   const { currentPot, setModal } = useContext(potContext);
   const headerText = isBudget ? currentBudget.category : currentPot.name;
   const revalKey = isBudget? '/budgets':'/pots'
@@ -32,10 +30,10 @@ export default function DeleteItem() {
 
   const falseModal = () => {
     if (!isBudget) {
-      setShowModal(false);
+      //setShowModal(false);
       setModal({ add: false, edit: false, delete: false, addMoney:false, withdraw:false });
     } else {
-      setShowModal(false)
+      //setShowModal(false)
       setModal2({ add: false, edit: false, delete: false })
     }
   };
