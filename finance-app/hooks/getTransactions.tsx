@@ -25,7 +25,7 @@ export default function useGetTransactions(params:getTransactionsRequest) {
   }
   
     return useSWR(
-      ["http://localhost:3000/dashboard/transactions?skip=0&sort=Latest&category=All+Transactions&name="],
+      [url],
       () => callClient.get<getTransactionsResponse>(url).then((res) => res.data),
       {
         revalidateIfStale: false,
