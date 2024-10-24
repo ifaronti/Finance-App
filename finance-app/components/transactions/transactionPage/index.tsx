@@ -5,13 +5,14 @@ import { formatAmount, formatDate } from "../summaryTransactions/formatStrings";
 import Pagination from "./pagination";
 import useGetTransactions from "@/hooks/getTransactions";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Transactions() {
   const params = useSearchParams()
   const sort = params.get('sort')?.toString()
   const skip = Number(params.get('skip'))
   const category = params.get('category')?.toString()
-  const { data } = useGetTransactions({skip, sort, category})
+  const { data, mutate } = useGetTransactions({skip, sort, category})
 
   const allTransactions = data?.data?.map((item, index) => {
     return (
@@ -31,6 +32,11 @@ export default function Transactions() {
       </div>
     );
   });
+  
+  useEffect(() => {
+    mutate()
+    //eslint-disable-next-line
+  },[sort, skip, category])
 
   return (
     <section className="w-full flex-shrink-0 relative flex flex-col gap-4 md:gap-6">
