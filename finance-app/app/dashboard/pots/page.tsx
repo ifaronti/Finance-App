@@ -3,7 +3,7 @@
 import Pots from "@/components/pots"
 import Header from "@/components/PageHeader"
 import AddButton from "@/components/addButton"
-import { showBarContext } from "../layout"
+//import { showBarContext } from "../layout"
 import { useContext} from "react"
 import { potContext } from "@/providers/potsContext"
 import AddPot from "@/components/pots/potModal/addPot"
@@ -14,11 +14,11 @@ import AddWithdraw from "@/components/pots/potAddWithdraw"
 
 export default function Page() {
     const {setModal, modal, setCurrentPot} = useContext(potContext)
-    const { showModal, setShowModal } = useContext(showBarContext)
-    
+   // const { showModal, setShowModal } = useContext(showBarContext)
+    const showModal = false
     const currModal = (e:buttonEvent) => {
         const { name } = e.currentTarget || e.target
-        setShowModal(true)
+       // setShowModal(true)
         setModal(prev => {
             return {
                 ...prev,

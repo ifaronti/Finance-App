@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { potContext } from "@/providers/potsContext";
 import { buttonEvent, pot } from "../types";
-import { showBarContext } from "@/app/dashboard/layout";
+//import { showBarContext } from "@/app/dashboard/layout";
 
 type props = {
   text: string;
@@ -11,7 +11,7 @@ type props = {
 
 export default function AddWithdrawButton({ text, pot, toggleModal }: props) {
   const { setModal } = useContext(potContext)
-  const {setShowModal} = useContext(showBarContext)
+  //const {setShowModal} = useContext(showBarContext)
   
   function buttonEvent(e: buttonEvent) {
     const { name } = e.currentTarget
@@ -32,7 +32,7 @@ export default function AddWithdrawButton({ text, pot, toggleModal }: props) {
       })
     }
     toggleModal(pot)
-    setShowModal(true)
+    //setShowModal(true)
   }
 
   return (

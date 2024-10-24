@@ -4,6 +4,7 @@ import { categoryList, sortList } from "../svgAssets";
 import { buttonEvent } from "../types";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
+
 export default function Sort() {
   const pathName = usePathname()
   const searchParams = useSearchParams()

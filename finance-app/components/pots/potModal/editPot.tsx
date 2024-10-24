@@ -6,7 +6,7 @@ import FrameHeader from "@/components/modalFrames/frameHeader";
 import FrameDescription from "@/components/modalFrames/frameDescription";
 import AddEditBTN from "@/components/modalFrames/modalbutton";
 import ThemeSelect from "@/components/modalFrames/themeSelect";
-import { showBarContext } from "@/app/dashboard/layout";
+//import { showBarContext } from "@/app/dashboard/layout";
 import { potContext } from "@/providers/potsContext";
 import { useContext } from "react";
 import { buttonEvent, inputEvent } from "@/components/types";
@@ -21,12 +21,12 @@ type props = {
 
 export default function EditPot({handleChange }:props) {
     const { setModal, currentPot, skip } = useContext(potContext)
-    const { setShowModal } = useContext(showBarContext)
+    //const { setShowModal } = useContext(showBarContext)
     const {data:pots} = useGetPots({skip:Number(skip)})
     const description = 'If your saving targets change, feel free to update your pots.'
 
     const falseModal = () => {
-        setShowModal(false)
+        //setShowModal(false)
         setModal({add:false, addMoney:false, withdraw:false, edit:false, delete:false})
     }
 

@@ -2,7 +2,6 @@
 import { caretLeft } from "@/components/svgAssets";
 import { buttonEvent } from "@/components/types";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-
 export default function Pagination({isLastPage}:{isLastPage:boolean}){
     const searchParams = useSearchParams()
     const querySkip = searchParams.get('skip')

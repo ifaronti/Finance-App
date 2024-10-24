@@ -2,7 +2,7 @@ import FrameHeader from "../modalFrames/frameHeader";
 import FrameDescription from "../modalFrames/frameDescription";
 import { potContext } from "@/providers/potsContext";
 import { useContext, useState } from "react";
-import { showBarContext } from "@/app/dashboard/layout";
+//import { showBarContext } from "@/app/dashboard/layout";
 import {inputEvent } from "../types";
 import AddEditBTN from "../modalFrames/modalbutton";
 import Input2 from "../modalFrames/input2";
@@ -13,7 +13,7 @@ import { mutate } from "swr";
 export default function PotAddWithdraw() {
   const [newValue, setNewValue] = useState(0)
   const { modal, setModal,currentPot} = useContext(potContext);
-  const { setShowModal } = useContext(showBarContext);
+  //const { setShowModal } = useContext(showBarContext);
   const BTNText = modal.addMoney ? "Confirm Addition" : "Confirm Withdrawal";
 
   const description = `Add money to your pot to keep it separate from your 
@@ -21,7 +21,7 @@ export default function PotAddWithdraw() {
                        deducted from your current balance.`;
 
   const falseModal = () => {
-    setShowModal(false);
+    //setShowModal(false);
     setModal({
       add: false,
       edit: false,

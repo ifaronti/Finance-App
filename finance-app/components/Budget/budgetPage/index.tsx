@@ -1,51 +1,44 @@
+'use client'
+
 import BudgetHeader from "../budgetCard/budgetHeader";
 import ProgressBar from "../budgetCard/progressBar";
 import BudgetTransaction from "./budgetTransaction";
-import {useContext } from "react";
-import { budgetContexts } from "@/providers/budgetContext/budgetContext";
 import { buttonEvent } from "@/components/modalFrames/input1";
 import { budget } from "@/components/types";
 import useGetBudgets from "@/hooks/getBudgets";
-//import { showBarContext } from "@/app/dashboard/layout";
+import EditBudget from "../budgetModal/editBudget";
+import DeleteItem from "@/components/modalFrames/deleteItem";
+import AddBudget from "../budgetModal/addBudget";
+import { useState } from "react";
+import { cardProps } from "..";
 
-export default function BudgetCard() {
-  const { setCurrentBudget, skip, setModal2 } = useContext(budgetContexts);
-  //const {setShowModal} = useContext(showBarContext)
+export default function BudgetCard({ currentModal, budgetModal, falseModal }: cardProps) {
   
-  const { data } = useGetBudgets({ skip: skip })
-  
-  const currModal = (e: buttonEvent) => {
-    //setShowModal(true)
-    const { name } = e.currentTarget || e.target
-    return setModal2(prev => {return {...prev,[name]:true}})
-  }
-  
+  const [currentBudget, setCurrentBudget] = useState({category: "",budgetId:0, categoryId: 0,})
+  const { data } = useGetBudgets({ skip: 0 });
+
+
   const editBudget = (e: buttonEvent, item: budget) => {
     setCurrentBudget({
       category: item.category,
-      spent: item.spent,
-      maximum: Number(item.maximum),
-      theme: item.theme,
       categoryId: item?.categoryId,
-      budgetId:Number(item?.budgetId)
+      budgetId: Number(item?.budgetId),
     });
-    currModal(e)
+    currentModal(e);
   };
 
-  
-
-  const deleteBudget=(e: buttonEvent, item: budget)=> {
-    setCurrentBudget(prev=>{
+  const deleteBudget = (e: buttonEvent, item: budget) => {
+    setCurrentBudget((prev) => {
       return {
         ...prev,
         category: item.category,
-        budgetId:Number(item?.budgetId)
-      }
+        budgetId: Number(item?.budgetId),
+      };
     });
-    currModal(e)
-  }
+    currentModal(e);
+  };
 
-  const renderBudget = data?.data.map((item, index) => {
+  const renderBudget = data?.data?.map((item, index) => {
     return (
       <div
         key={index + 1}
@@ -58,10 +51,21 @@ export default function BudgetCard() {
           del={(e: buttonEvent) => deleteBudget(e, item)}
         />
         <ProgressBar theme={item.theme} max={item.maximum} spent={item.spent} />
-        <BudgetTransaction  budget={item} />
+        <BudgetTransaction budget={item} />
       </div>
     );
   });
 
-  return <div className="flex flex-col gap-6">{renderBudget}</div>;
+  return (
+    <div>
+      <div className="flex flex-col gap-6">{renderBudget}</div>
+        {budgetModal.showModal && (
+          <div className={`z-[100] bg-black opacity-50 absolute w-[99vw] h-[100vh]`}>
+            {budgetModal.add && <AddBudget falseModal={falseModal}  />}
+            {budgetModal.edit && <EditBudget falseModal={falseModal} id={currentBudget.budgetId} />}
+            {budgetModal.delete && <DeleteItem id={Number(currentBudget.budgetId)} falseModal={falseModal} nameCategory={currentBudget.category} />}
+          </div>
+      )}
+    </div>
+  )
 }

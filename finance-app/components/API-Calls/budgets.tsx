@@ -1,24 +1,22 @@
 import { budget, transaction } from "../types";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+
+export type reqBudget = {
+  category: string | undefined
+  categoryId: number | undefined
+  maximum: number | undefined
+  spent: number | undefined
+  budgetId: number | undefined
+  theme: string | undefined
+  spent?:number |undefined
+}
 
 export type handleparams = {
   success: boolean;
-  data: budget[] & { user?: { transactions: transaction[]; category: string } };
+  data: reqBudget[] & { user?: { transactions: transaction[]; category: string } };
 };
-type handleData = (data: handleparams) => void;
+
 const url = process.env.NEXT_PUBLIC_URL;
-
-export const getBudgets = async (skip: number, handleData: handleData) => {
-  try {
-    const { data } = await axios.get(`${url}/budgets?skip=${skip}`, {
-      headers: { authorization: `Booyaba ${localStorage.getItem("token")}` },
-    });
-    handleData(data);
-  } catch (err: any) {
-    console.log(err.message);
-  }
-};
-
 export const createbudget = async (body: budget) => {
   try {
     await axios.post(`${url}/budgets`, body, {
@@ -29,7 +27,7 @@ export const createbudget = async (body: budget) => {
   }
 };
 
-export const editBudget = async (budget:budget) => {
+export const editBudget = async (budget:reqBudget) => {
   try {
     await axios.patch(
       `${url}/budgets`,

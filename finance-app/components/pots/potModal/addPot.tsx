@@ -6,7 +6,7 @@ import Input2 from "@/components/modalFrames/input2"
 import ThemeSelect from "@/components/modalFrames/themeSelect"
 import { potContext } from "@/providers/potsContext"
 import { useContext } from "react"
-import { showBarContext } from "@/app/dashboard/layout"
+//import { showBarContext } from "@/app/dashboard/layout"
 import AddEditBTN from "@/components/modalFrames/modalbutton"
 import { createPot } from "@/components/API-Calls/pots"
 import { pot } from "@/components/types"
@@ -19,12 +19,12 @@ type props = {
 
 export default function AddPot({ handleChange }: props) {
     const { setModal, skip, currentPot } = useContext(potContext)
-    const { setShowModal } = useContext(showBarContext)
+    //const { setShowModal } = useContext(showBarContext)
     const {data:pots} = useGetPots({skip:Number(skip)})
     const description = 'Create a pot to set savings targets. These can help keep you on track as you save for special purchases.'
     const names = pots?.names
     const falseModal = () => {
-        setShowModal(false)
+      //  setShowModal(false)
         setModal({add:false, edit:false, delete:false, addMoney:false, withdraw:false})
     }
 
