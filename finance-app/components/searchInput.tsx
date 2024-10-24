@@ -1,14 +1,12 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { searchSVG } from "./svgAssets";
 import { inputEvent, formEvent } from "./types";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { mutate } from "swr";
 
 export default function Search() {
   const [inputValue, setInputValue] = useState('')
-  const [name, setName] = useState('')
   const searchParams = useSearchParams()
   const pathName = usePathname()
   const router = useRouter()
@@ -20,18 +18,18 @@ export default function Search() {
     setInputValue(value)
   }
 
-  const handleSubmit = async(e:formEvent) => {
-    e.preventDefault()
-    setName(inputValue)
+  const handleBlur=() => {
+    const params = new URLSearchParams(searchParams)
+    params.set('name', '')
+    router.replace(`${pathName}?${params}`)
   }
 
-  useEffect(() => {
+  const handleSubmit = async(e:formEvent) => {
+    e.preventDefault()
     const params = new URLSearchParams(searchParams)
-    params.set('name', name.toString())
+    params.set('name', inputValue)
     router.replace(`${pathName}?${params}`)
-    mutate(["/transactions"])
-    //eslint-disable-next-line
-  },[name])
+  }
 
   return (
     <form className="relative w-fit" onSubmit={handleSubmit}>
@@ -40,6 +38,7 @@ export default function Search() {
         name="search"
         value={inputValue}
         onChange={handleChange}
+        onBlur={handleBlur}
         placeholder={placeHolder}
         className="xl:w-[320px] md:w-[162px] w-[215px] pl-4 rounded-lg text-[1rem] h-[45px] border-[#98908b] border"
       />

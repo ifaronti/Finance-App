@@ -25,7 +25,7 @@ export default function useGetTransactions(params:getTransactionsRequest) {
   }
   
     return useSWR(
-      ["/transactions"],
+      [url],
       () => callClient.get<getTransactionsResponse>(url).then((res) => res.data),
       {
         revalidateIfStale: false,

@@ -10,8 +10,9 @@ export default function Transactions() {
   const params = useSearchParams()
   const sort = params.get('sort')?.toString()
   const skip = Number(params.get('skip'))
+  const name = (params.get('name'))?.toString()
   const category = params.get('category')?.toString()
-  const { data } = useGetTransactions({skip, sort, category})
+  const { data} = useGetTransactions({skip, sort, category, name})
 
   const allTransactions = data?.data?.map((item, index) => {
     return (

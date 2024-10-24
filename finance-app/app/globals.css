@@ -46,8 +46,5 @@ body {
     -moz-appearance: textfield;
     appearance: textfield;
   }
-  
-  /* .conic{
-    background-image: conic-gradient(#277C78 0% 30%, #F2CDAC 30% 60%, #82C9D7 60% 99%)
-  } */
+
 }

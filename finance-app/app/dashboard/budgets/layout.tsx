@@ -1,4 +1,3 @@
-import BudgetProvider from "@/providers/budgetContext/budgetContext";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,8 +6,7 @@ export const metadata: Metadata = {
 }
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <BudgetProvider>
       <div>{children}</div>
-    </BudgetProvider>
+
   );
 }

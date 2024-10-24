@@ -2,8 +2,6 @@ import { usePathname } from "next/navigation";
 import { inputEvent } from "../types";
 import CategorySelect from "./budgetCategory";
 import useGetBudgets from "@/hooks/getBudgets";
-import { useContext } from "react";
-import { budgetContexts } from "@/providers/budgetContext/budgetContext";
 
 export type buttonEvent = React.SyntheticEvent<HTMLButtonElement>;
 
@@ -15,10 +13,8 @@ export type inputProps = {
 export default function Input1({ handleChange, value }: inputProps) {
   const pathName = usePathname();
   const isBudget = pathName.includes("budgets") ? true : false;
-  const { skip, currentBudget } = useContext(budgetContexts);
-  const { data } = useGetBudgets({ skip: skip });
+  const { data } = useGetBudgets({ skip: 0 });
   const usedCategories = data?.data?.map((item) => item.category)
-    .filter((item) => item !== currentBudget.category);
 
   const input = (
     <div className="w-full relative flex flex-col gap-1">
