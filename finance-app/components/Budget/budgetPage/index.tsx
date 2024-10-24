@@ -60,12 +60,13 @@ export default function BudgetCard({ currentModal, budgetModal, falseModal }: ca
     <div>
       <div className="flex flex-col gap-6">{renderBudget}</div>
         {budgetModal.showModal && (
-          <div className={`z-[100] bg-black opacity-50 absolute w-[99vw] h-[100vh]`}>
+          <div className={`z-[500] flex items-center justify-center fixed top-0 left-0 w-full h-[100vh]`}>
             {budgetModal.add && <AddBudget falseModal={falseModal}  />}
             {budgetModal.edit && <EditBudget falseModal={falseModal} id={currentBudget.budgetId} />}
             {budgetModal.delete && <DeleteItem id={Number(currentBudget.budgetId)} falseModal={falseModal} nameCategory={currentBudget.category} />}
           </div>
       )}
+      {budgetModal.showModal &&<div className="bg-black z-[200] top-0 left-0 fixed opacity-50 w-full h-full"></div>  }
     </div>
   )
 }

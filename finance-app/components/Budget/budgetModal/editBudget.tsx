@@ -47,7 +47,7 @@ export default function EditBudget({falseModal, id}: props) {
 
     return (
         <div className="bg-white flex relative flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
-            <FrameHeader event={falseModal} text="Edit Budget" />
+            <FrameHeader shutModal={falseModal} text="Edit Budget" />
             <FrameDescription text={description} />
             <Input1 value={currentBudget.category} handleChange={handleChange} />
             <Input2 value={currentBudget.maximum} handleChange={handleChange} />

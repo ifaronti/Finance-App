@@ -35,7 +35,7 @@ export default function DeleteItem({id, falseModal, nameCategory}:props) {
     <div className="w-[335px] md:w-[560px] md:h-[278px] z-[150] h-[277px] gap-5 rounded-lg bg-white px-5 py-6 md:px-8 md:py-8 flex flex-col">
       <FrameHeader
         text={`Delete '${nameCategory}'?`}
-        event={falseModal}
+        shutModal={falseModal}
         bigFont="Yes"
       />
       <p className="text-gray-500 w-full text-[14px]">{confirmText}</p>

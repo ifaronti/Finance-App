@@ -38,8 +38,8 @@ export default function AddBudget({falseModal}:{falseModal:()=>void}) {
   const description = `Choose a category to set a spending budget. 
                         These categories can help you monitor spending.`
   return (
-    <div className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
-      <FrameHeader bigFont="Yup" event={falseModal} text="Add New Budget" />
+    <div className="bg-white flex z-[150] flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
+      <FrameHeader bigFont="Yup" shutModal={falseModal} text="Add New Budget" />
       <FrameDescription text={description} />
       <Input1 value={reqBody.category} handleChange={handleChange} />
       <Input2 handleChange={handleChange} value={reqBody.maximum} />

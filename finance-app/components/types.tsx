@@ -71,45 +71,12 @@ export type pot = {
 
 export type buttonEvent = React.SyntheticEvent<HTMLButtonElement>;
 
-type bdg = budget & { budgetId: number };
-type budgetModal = {add: boolean; edit: boolean; delete: boolean};
-
-
-export type budgetContext = {
-  currentBudget: bdg;
-  setCurrentBudget: Dispatch<SetStateAction<bdg>>;
-  skip?: number;
-  setSkip?: Dispatch<SetStateAction<number>>;
-  modal2: budgetModal;
-  setModal2: Dispatch<SetStateAction<budgetModal>>
-};
-
-export type modal = {
+export type potModal = {
   add: boolean;
   edit: boolean;
   delete: boolean;
   addMoney: boolean;
-  withdraw: boolean;
-};
-
-export type potsContext = {
-  setCurrentPot: Dispatch<SetStateAction<pot>>;
-  currentPot: pot;
-  modal: modal;
-  skip?: number;
-  setSkip: Dispatch<SetStateAction<number>>;
-  setModal: Dispatch<SetStateAction<modal>>;
-};
-
-export type transactionsContext = {
-  orderBy: string;
-  setOrderBy: Dispatch<SetStateAction<string>>
-  category: string;
-  setCategory: Dispatch<SetStateAction<string>>;
-  name: string,
-  searchKey: string
-  handleChange: (e: inputEvent) => void
-  handleSubmit:(e:formEvent)=>void
+  Withdraw: boolean;
 };
 
 type categories = {

@@ -1,7 +1,7 @@
-import type { modal, pot } from "../types";
+import type { potModal, pot } from "../types";
 
 type props = {
-  modal: modal;
+  modal: potModal;
   currentPot: pot;
   newValue: number;
 };
