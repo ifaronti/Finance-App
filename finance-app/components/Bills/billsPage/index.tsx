@@ -3,22 +3,20 @@
 import Search from "@/components/searchInput";
 import Sort from "@/components/sort/sort";
 import { useState } from "react";
-import { transaction } from "@/components/types";
 import OneBill from "./oneBill";
 import { sortList } from "@/components/svgAssets";
 import { btnEvent } from "@/components/sort/sort";
-import { inputEvent } from "@/components/types";
+import useGetTransactions from "@/hooks/getTransactions";
 
-export default function Bills({bills}:{bills:transaction[]}) {
+export default function Bills() {
   const [sortBy, setSortBy] = useState(sortList[0]);
-  const [searchParam, setSearchParam] = useState("");
+  const {data:bills} = useGetTransactions({skip:0, category:'Bills'})
 
-
-  const renderBills = bills.map((item, index) => {
+  const renderBills = bills?.data?.map((item, index) => {
     return (
       <div key={index + 1} className="w-full flex gap-5 flex-col">
-        <OneBill transaction={item} all={bills} />
-        {index + 1 === bills.length ? (
+        <OneBill transaction={item} all={bills?.data} />
+        {index + 1 === bills?.data?.length ? (
           ""
         ) : (
           <hr className="w-full h-[1px] bg-gray-500" />
@@ -32,19 +30,10 @@ export default function Bills({bills}:{bills:transaction[]}) {
     setSortBy(value);
   };
 
-  const searchSet = (e: inputEvent) => {
-    setSearchParam(e.target.value);
-  };
-
   return (
     <div className="w-[343px] md:w-[688px] xl:w-[699px] flex realtive rounded-lg flex-col gap-6 bg-white px-5 py-5 md:px-8 md:py-8">
       <div className="w-full flex justify-between items-center">
-        <Search
-          handleChange={searchSet}
-          searchParam={searchParam}
-          placeholder="Search bills"
-          handleSubmit={() => console.log("submit")}
-        />
+        <Search/>
         <Sort
           sortName="Sort by"
           theSort={sortParam}

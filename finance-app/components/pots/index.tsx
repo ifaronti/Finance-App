@@ -11,6 +11,7 @@ import Header from "../PageHeader";
 import AddButton from "../addButton";
 
 export default function Pots() {
+  const { data: pots } = useGetPots({ skip: 0 });
   const [currentPot, setCurrentPot] = useState({ name: '', target: 0, total: 0, theme: '', potId: 0 })
   const [potModal, setPotModal] = useState({
     add: false,
@@ -28,8 +29,6 @@ export default function Pots() {
     }
     else {setPotModal(prev => {return {...prev,[name]: true,showModal:true}})}
   }
-  
-  const { data: pots } = useGetPots({ skip: 0 });
 
   const potMod = (e: buttonEvent, item: pot) => {
     setCurrentPot({

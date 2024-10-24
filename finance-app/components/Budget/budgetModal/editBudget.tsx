@@ -1,14 +1,15 @@
 import FrameHeader from "@/components/modalFrames/frameHeader";
 import FrameDescription from "@/components/modalFrames/frameDescription";
 import Input1 from "@/components/modalFrames/input1";
-import { inputEvent, buttonEvent } from "@/components/types";
+import { inputEvent, buttonEvent, budget } from "@/components/types";
 import Input2 from "@/components/modalFrames/input2";
 import ThemeSelect from "@/components/modalFrames/themeSelect";
 import AddEditBTN from "@/components/modalFrames/modalbutton";
-import { editBudget, reqBudget } from "@/components/API-Calls/budgets";
+import { editBudget } from "@/components/API-Calls/budgets";
 import useGetBudgets from "@/hooks/getBudgets";
 import { useState } from "react";
 import { categories } from "@/components/types";
+import { mutate } from "swr";
 
 type props = {
     id: number
@@ -21,13 +22,13 @@ export default function EditBudget({falseModal, id}: props) {
     const usedThemes = data?.data.map(item=>item.theme)
     const targetBudget = data?.data?.find(item => item.budgetId === id)
     
-    const [currentBudget, setCurrentBudget] = useState<reqBudget>({
-        category: targetBudget?.category,
-        maximum: targetBudget?.maximum,
-        theme: targetBudget?.theme,
+    const [currentBudget, setCurrentBudget] = useState<budget>({
+        category: String(targetBudget?.category),
+        maximum: Number(targetBudget?.maximum),
+        theme: String(targetBudget?.theme),
         budgetId: targetBudget?.budgetId,
-        categoryId: targetBudget?.categoryId,
-        spent:targetBudget?.spent
+        categoryId: Number(targetBudget?.categoryId),
+        spent:Number(targetBudget?.spent)
     })
 
     const handleChange = (e: inputEvent | buttonEvent) => {
@@ -40,8 +41,10 @@ export default function EditBudget({falseModal, id}: props) {
         });
       };
     
-    async function editRequest(currentBudget: reqBudget) {
+    async function editRequest(currentBudget: budget) {
         await editBudget(currentBudget)
+        await mutate(["/budgets"])
+        falseModal()
         return
     }
 

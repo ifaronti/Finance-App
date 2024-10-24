@@ -19,11 +19,12 @@ export default function AddBudget({falseModal}:{falseModal:()=>void}) {
 
   async function newBudget() {
     const { category, maximum, theme, categoryId } = reqBody;
-    if (!category || !maximum || !theme || !categoryId) {
+    if (!category || !maximum || !theme || !categoryId ||maximum <10) {
       return console.log('check the values')
     }
     await createbudget({...reqBody, spent:0});
     await mutate(["/budgets"])
+    falseModal()
     return
   }
 
