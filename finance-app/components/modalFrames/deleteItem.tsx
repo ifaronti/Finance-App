@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import { deleteBudget } from "../API-Calls/budgets";
 import { deletePot } from "../API-Calls/pots";
 import { mutate } from "swr";
+import { deleteBill } from "../API-Calls/bills";
 
 type props = {
   id: number
@@ -12,19 +13,43 @@ type props = {
 
 export default function DeleteItem({id, falseModal, nameCategory}:props) {
   const pathName = usePathname();
-  const isBudget = pathName.includes("budgets") ? true : false;
-  const text = isBudget ? "budget" : "pot";
-  const revalKey = isBudget? '/budgets':'/pots'
+  const text = getCurrentPath()?.currText
+  const revalKey = getCurrentPath()?.currPath
+  
+  function getCurrentPath() {
+    let currPath
+    let currText
+    switch (pathName) {
+      case '/dashboard/budgets':
+        currPath = '/budgets'
+        currText = 'budget'
+        break
+      case '/dashboard/pots':
+        currPath = '/pots'
+        currText = 'pot'
+        break
+      default:
+        currPath = '/bills'
+        currText = 'bill'
+    }
+    return {currPath, currText}
+  }
 
   function deleteItem() {
-    return isBudget
-      ? deleteBudget(id)
-      : deletePot(id);
+    const currPath = getCurrentPath()?.currPath
+    if (currPath === '/budgets') {
+      return deleteBudget(id)
+    }
+    if (currPath === '/pots') {
+      return deletePot(id)
+    }
+    return deleteBill(id)
   }
 
   const deleteAndRevalidate = async() => {
     await deleteItem()
     await mutate([revalKey])
+    falseModal()
     return
   }
 

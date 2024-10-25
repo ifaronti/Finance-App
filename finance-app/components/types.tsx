@@ -61,6 +61,19 @@ export type budget = {
   };
 };
 
+export type bill = {
+  amount: number;
+  avatar: string;
+  categoryId: number;
+  category: string;
+  updatedAt?: string;
+  createdAt:string
+  name: string;
+  recurring?: boolean;
+  userId?: number;
+  BillId:number
+}
+
 export type pot = {
   name: string;
   target: number;

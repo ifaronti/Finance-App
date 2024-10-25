@@ -1,8 +1,8 @@
-import { transaction } from "@/components/types";
+import { bill } from "@/components/types";
 
 type props = {
-    transaction: transaction
-    somePaid: transaction[]
+    transaction: bill
+    somePaid: bill[]
 }
 
 export default function BillStatus({transaction, somePaid}:props) {
@@ -25,11 +25,11 @@ export default function BillStatus({transaction, somePaid}:props) {
         return format
     }
 
-    const billStatus = (transaction:transaction, somePaid:transaction[]) => {
+    const billStatus = (transaction:bill, somePaid:bill[]) => {
         let status
         // const dueMonth = Number(new Date(transaction.date).getMonth()) + 1
         // const currentMonth = Number(new Date().getMonth())+1
-        const dueDate = new Date(transaction.date).getDate()
+        const dueDate = new Date(transaction.createdAt).getDate()
         const currentDate = new Date().getDate()
         if (somePaid.some(item => item.name === transaction.name) && Number(currentDate) > Number(dueDate)) {
             status = 'paid'

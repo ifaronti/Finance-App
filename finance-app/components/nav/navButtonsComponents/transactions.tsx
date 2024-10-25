@@ -11,7 +11,6 @@ export default function TransactionsBTN({showBar}: navBTNProps) {
     queryParams.append('sort', 'Latest')
     queryParams.append('category', 'All Transactions')
     queryParams.append('name', '')
-    // queryParams.append('category', 'name')
 
     const transactions = (
         <svg

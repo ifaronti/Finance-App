@@ -6,16 +6,31 @@ import { useState } from "react";
 import OneBill from "./oneBill";
 import { sortList } from "@/components/svgAssets";
 import { btnEvent } from "@/components/sort/sort";
-import useGetTransactions from "@/hooks/getTransactions";
+import useGetBills from "@/hooks/getBills";
+import DeleteItem from "@/components/modalFrames/deleteItem";
 
 export default function Bills() {
   const [sortBy, setSortBy] = useState(sortList[0]);
-  const {data:bills} = useGetTransactions({skip:0, category:'Bills'})
+  const [currBillId, setCurrBillId] = useState(0)
+  const [showModal, setShowModal] = useState(false)
+  const { data: bills } = useGetBills({ skip: 0 })
+
+  const deleteModal = (id:number) => {
+    setShowModal(true)
+    setCurrBillId(id)
+    return
+  }
+
+  const falseModal = () => {
+    setShowModal(false)
+    setCurrBillId(0)
+    return
+  }
 
   const renderBills = bills?.data?.map((item, index) => {
     return (
       <div key={index + 1} className="w-full flex gap-5 flex-col">
-        <OneBill transaction={item} all={bills?.data} />
+        <OneBill transaction={item} deleteModal={()=>deleteModal(item.BillId)} allTransactions={bills?.data} />
         {index + 1 === bills?.data?.length ? (
           ""
         ) : (
@@ -50,6 +65,10 @@ export default function Bills() {
       </div>
       <hr className="w-full hidden md:block h-[1px] bg-gray-500" />
       <div className="w-full flex flex-col gap-5">{renderBills}</div>
+      {showModal &&<div className="z-[200] flex items-center justify-center top-0 left-0 fixed w-full h-full">
+        <DeleteItem falseModal={falseModal} id={currBillId} nameCategory="bill" />
+        <div className="bg-black z-[120] top-0 left-0 fixed opacity-50 w-full h-full"></div>
+      </div>}
     </div>
   );
 }

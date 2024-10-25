@@ -1,20 +1,22 @@
 import Profile from "@/components/transactions/summaryTransactions/summaryProfiles";
-import { transaction } from "@/components/types";
+import { bill } from "@/components/types";
 import BillStatus from "./billStatus";
 import { dueSVG, paidSVG } from "@/components/svgAssets";
+import { closeModal } from "@/components/svgAssets";
 import { formatAmount } from "@/components/transactions/summaryTransactions/formatStrings";
 
 type props = {
-  transaction: transaction;
-  all: transaction[];
+  transaction: bill;
+  allTransactions: bill[];
+  deleteModal:()=>void
 };
 
-export default function OneBill({ transaction, all }: props) {
-  const somePaid = all.filter((item) => item.recurring);
+export default function OneBill({ transaction, deleteModal, allTransactions }: props) {
+  const somePaid = allTransactions.filter((item) => item.recurring);
   const dateAndStatus = BillStatus({ transaction, somePaid });
 
   return (
-    <div className="w-full flex items-center justify-between">
+    <div className="w-full group relative flex items-center justify-between">
       <div className="md:w-[70%] gap-1 md:gap-[unset] flex md:items-center md:justify-between flex-col md:flex-row">
         <Profile name={transaction.name} profilePic={transaction.avatar.substring(1)} />
         <p
@@ -34,6 +36,7 @@ export default function OneBill({ transaction, all }: props) {
       >
         {formatAmount(transaction.amount)}
       </p>
+      <button onClick={deleteModal} className="absolute hidden group-hover:block right-14">{closeModal}</button>
     </div>
   );
 }
