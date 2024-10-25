@@ -7,10 +7,11 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 export default function Sort() {
   const pathName = usePathname()
+  const router = useRouter()
   const searchParams = useSearchParams()
   const querySort = searchParams.get('sort')
   const queryCategory = searchParams.get('category')
-  const router = useRouter()
+
 
   const theSort = (e: buttonEvent) => {
     e.preventDefault();

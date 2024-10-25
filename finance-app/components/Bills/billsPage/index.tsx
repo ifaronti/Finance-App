@@ -1,19 +1,21 @@
 "use client";
 
-import Search from "@/components/searchInput";
-import Sort from "@/components/sort/sort";
+import SortBills from "./billsSorting";
 import { useState } from "react";
 import OneBill from "./oneBill";
-import { sortList } from "@/components/svgAssets";
-import { btnEvent } from "@/components/sort/sort";
 import useGetBills from "@/hooks/getBills";
 import DeleteItem from "@/components/modalFrames/deleteItem";
+import { useSearchParams } from "next/navigation";
+import SearchBills from "./searchBills";
 
 export default function Bills() {
-  const [sortBy, setSortBy] = useState(sortList[0]);
   const [currBillId, setCurrBillId] = useState(0)
   const [showModal, setShowModal] = useState(false)
-  const { data: bills } = useGetBills({ skip: 0 })
+  const searchParams = useSearchParams()
+  const querySort = searchParams.get('sort')?.toString()
+  const querySkip = Number(searchParams.get('skip'))
+  const queryName = searchParams.get('name')?.toString()
+  const { data: bills } = useGetBills({ skip:querySkip, sort:querySort, name:queryName })
 
   const deleteModal = (id:number) => {
     setShowModal(true)
@@ -40,21 +42,11 @@ export default function Bills() {
     );
   });
 
-  const sortParam = (e: btnEvent) => {
-    const { value } = e.currentTarget;
-    setSortBy(value);
-  };
-
   return (
     <div className="w-[343px] md:w-[688px] xl:w-[699px] flex realtive rounded-lg flex-col gap-6 bg-white px-5 py-5 md:px-8 md:py-8">
       <div className="w-full flex justify-between items-center">
-        <Search/>
-        <Sort
-          sortName="Sort by"
-          theSort={sortParam}
-          valueArr={sortList}
-          currentSort={sortBy}
-        />
+        <SearchBills />
+        <SortBills/>
       </div>
       <div className="w-full flex-shrink-0 hidden text-left text-gray-500 text-[12px] md:flex items-center justify-between">
         <span className="w-[70%] flex justify-between">
