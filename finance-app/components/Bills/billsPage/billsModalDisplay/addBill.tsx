@@ -45,7 +45,7 @@ export default function AddBill({ falseModal }: props) {
         return
       }
       await addBill({ ...reqBody, amount: -reqBody.amount })
-      await mutate(['/bills'])
+      await mutate(['/bills?skip=0&sort=Latest&name='])
       falseModal()
       return
     }

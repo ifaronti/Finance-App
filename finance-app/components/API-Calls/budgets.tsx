@@ -14,7 +14,8 @@ export const createbudget = async (body: budget) => {
       headers: { authorization: `Booyaba ${localStorage.getItem("token")}` },
     });
   } catch (err) {
-    console.log(err);
+    //@ts-expect-error any decalration still lints with red lines
+    console.log(err.message);
   }
 };
 
@@ -25,7 +26,8 @@ export const editBudget = async (budget:budget) => {
       { budget },
       { headers: { authorization: `Booyaba ${localStorage.getItem('token')}` } }
     );
-  } catch (err: any) {
+  } catch (err) {
+    //@ts-expect-error any decalration still lints with red lines
     console.log(err.message);
   }
 };
@@ -34,7 +36,8 @@ export const deleteBudget = async (budgetId: number) => {
   try {
     await axios.delete(`${url}/budgets?budgetId=${budgetId}`,{headers:{authorization:`Booyaba ${localStorage.getItem('token')}`}} )
   }
-  catch (err: any) {
+  catch (err) {
+    //@ts-expect-error any decalration still lints with red lines
     console.log(err.message);
   }
 }

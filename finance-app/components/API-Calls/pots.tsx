@@ -11,23 +11,23 @@ export const editPot = async (pot: pot, add?:number|string, subtract?:number|str
   if (subtract && subtract !=='') {
     reqURL += `subtract=${subtract}`
   }
+  
   try {
     await axios.patch(reqURL, pot, {
       headers: { authorization: `Booyaba ${localStorage.getItem("token")}` },
     });
-  } catch (err: any) {
+  } catch (err) {
+    //@ts-expect-error unknown
     console.log(err.message);
   }
-
-  console.log(reqURL);
-  
 };
 
 export const createPot = async(body: pot) => {
   try {
-    await axios.post(`${url}/pots?subtract=${Number(body.total)}`, body, {headers:{authorization:`Booyaba ${localStorage.getItem('token')}`}})
+    await axios.post(`${url}/pots`, {...body}, {headers:{authorization:`Booyaba ${localStorage.getItem('token')}`}})
   }
-  catch (err:any) {
+  catch (err) {
+    //@ts-expect-error unknown
     console.log(err.message)
   }
 }
@@ -38,7 +38,8 @@ export const deletePot = async (potId: number) => {
       headers: { authorization: `Booyaba ${localStorage.getItem("token")}` },
     });
   }
-  catch (err: any) {
+  catch (err) {
+    //@ts-expect-error unknown
     console.log(err.message);
   }
 };

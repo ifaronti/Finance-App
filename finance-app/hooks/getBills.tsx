@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import callClient from "@/lib/axios";
-import { bill } from "@/components/types";
+import { bill, transaction } from "@/components/types";
 
 type reqParams = {
   name?: string;
@@ -12,6 +12,7 @@ type getResponse = {
   success: boolean;
   data: bill[];
   isLastPage: boolean;
+  paidBills:transaction[]
 };
 
 export default function useGetBills(params:reqParams) {

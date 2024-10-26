@@ -4,21 +4,23 @@ import BillStatus from "./billStatus";
 import { dueSVG, paidSVG } from "@/components/svgAssets";
 import { closeModal } from "@/components/svgAssets";
 import { formatAmount } from "@/components/transactions/summaryTransactions/formatStrings";
+import useGetBills from "@/hooks/getBills";
 
 type props = {
-  transaction: bill;
-  allTransactions: bill[];
-  deleteModal:()=>void
+  bill: bill;
+  deleteItemModal:()=>void
 };
 
-export default function OneBill({ transaction, deleteModal, allTransactions }: props) {
-  const somePaid = allTransactions.filter((item) => item.recurring);
-  const dateAndStatus = BillStatus({ transaction, somePaid });
+export default function OneBill({ bill, deleteItemModal }: props) {
+  const { data } = useGetBills({ skip: 0 })
+  const paymentTransaction = data?.paidBills
+  //@ts-expect-error swr undefined initial state
+  const dateAndStatus = BillStatus({ bill, paymentTransaction });
 
   return (
     <div className="w-full group relative flex items-center justify-between">
       <div className="md:w-[70%] gap-1 md:gap-[unset] flex md:items-center md:justify-between flex-col md:flex-row">
-        <Profile name={transaction.name} profilePic={transaction.avatar.substring(1)} />
+        <Profile name={bill?.name} profilePic={bill?.avatar.substring(1)} />
         <p
           className={`flex gap-2 items-center md:w-[25%] text-left ${
             dateAndStatus.status === "paid" ? "text-green-900" : "text-gray-500"
@@ -34,9 +36,9 @@ export default function OneBill({ transaction, deleteModal, allTransactions }: p
           dateAndStatus.status === "Due Soon" ? "text-red-500" : "text-gray-900"
         } text-[14px]`}
       >
-        {formatAmount(transaction.amount)}
+        {formatAmount(bill?.amount)}
       </p>
-      <button onClick={deleteModal} className="absolute hidden group-hover:block right-14">{closeModal}</button>
+      <button onClick={deleteItemModal} className="absolute hidden group-hover:block right-14">{closeModal}</button>
     </div>
   );
 }

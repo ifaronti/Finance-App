@@ -1,46 +1,38 @@
-import { bill } from "@/components/types";
+import { bill, transaction } from "@/components/types";
+import { formatDate, getLastDayOfMonth } from "@/components/svgAssets";
 
 type props = {
-    transaction: bill
-    somePaid: bill[]
+    bill: bill
+    paymentTransaction: transaction[]
 }
 
-export default function BillStatus({transaction, somePaid}:props) {
-
-    const formatDate = (date: number) => {
-        let format
-        switch (date) {
-            case 1:
-                format = date+'st'
-                break
-            case 2:
-                format = date+'nd'
-                break
-            case 3:
-                format = date+'rd'
-                break
-            default:
-                format = date+'th'
-        }
-        return format
-    }
-
-    const billStatus = (transaction:bill, somePaid:bill[]) => {
+export default function BillStatus({ bill, paymentTransaction }: props) {    
+    
+    const billStatus = (bill:bill, payments:transaction[]) => {
         let status
-        // const dueMonth = Number(new Date(transaction.date).getMonth()) + 1
-        // const currentMonth = Number(new Date().getMonth())+1
-        const dueDate = new Date(transaction.createdAt).getDate()
+        const dueMonth = Number(new Date(bill?.createdAt).getMonth())
+        const currentMonth = Number(new Date().getMonth())+1
+        const dueDate = new Date(bill?.createdAt).getDate()
         const currentDate = new Date().getDate()
-        if (somePaid.some(item => item.name === transaction.name) && Number(currentDate) > Number(dueDate)) {
+        const upcoming = Number(dueDate) - Number(currentDate) 
+
+        if (payments?.some(item => item.name === bill?.name) && dueMonth === currentMonth) {
             status = 'paid'
         } 
         if (dueDate > currentDate && Number(dueDate) - Number(currentDate) <= 7 ) {
             status = 'Due Soon'
         }
-        if (Number(dueDate) - Number(currentDate) > 7) {
+        if (upcoming > 7 && currentMonth == dueMonth) {
             status = 'Upcoming'
-        }       
+        }
+        const lastDay = getLastDayOfMonth(currentMonth)
+        if (dueDate < 7 && lastDay === currentDate ) {
+            status = 'Due Soon'
+        }
+        if (dueDate > 7 && lastDay - dueDate >= 0) {
+            status = 'Upcoming'
+        }
         return {status:status, date:formatDate(dueDate)}
     }
-    return billStatus(transaction, somePaid)
+    return billStatus(bill, paymentTransaction)
 }

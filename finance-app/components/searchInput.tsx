@@ -11,7 +11,7 @@ export default function Search() {
   const pathName = usePathname()
   const router = useRouter()
   const currentPath = usePathname()
-  const placeHolder = currentPath.includes('bills') ? 'Search Bills' : 'Search Transactions'
+  const placeHolder = currentPath.includes('bills') ? 'Search bills' : 'Search transactions'
   
   const handleChange = (e: inputEvent) => {
     const { value } = e.currentTarget

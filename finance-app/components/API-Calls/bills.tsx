@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 type params = {
   avatar: string;
@@ -14,9 +14,9 @@ export const addBill = async (body: params) => {
     await axios.post(`${url}/bills`, body, {
       headers: { authorization: `Booyaba ${localStorage.getItem("token")}` },
     });
-
-    // @ts-expect-error axios error
-  } catch (err: AxiosError) {
+    
+  } catch (err) {
+    //@ts-expect-error any decalration still lints with red lines
     console.log(err.message);
   }
 };
@@ -27,8 +27,8 @@ export const deleteBill = async (id: number) => {
       headers: { authorization: `Booyaba ${localStorage.getItem("token")}` },
     });
       
-  //@ts-expect-error any decalration still lints with red lines
-  } catch (err: AxiosError) {
+  } catch (err) {
+    //@ts-expect-error any decalration still lints with red lines
     console.log(err.message);
   }
 };

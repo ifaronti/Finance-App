@@ -1,3 +1,5 @@
+
+
 type props = { event: () => void, text:string};
 
 export default function AddEditBTN({ event, text }: props) {

@@ -33,7 +33,8 @@ export const summaryData = async (
     });
       handleData(data);
       
-  } catch (err: any) {
+  } catch (err) {
+    //@ts-expect-error any decalration still lints with red lines
     handleError(err.message);
   }
 };

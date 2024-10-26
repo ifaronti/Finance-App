@@ -2,22 +2,27 @@
 
 import { recurringSVG } from "@/components/svgAssets";
 import BillStatus from "./billStatus";
-import useGetTransactions from "@/hooks/getTransactions";
+import useGetBills from "@/hooks/getBills";
 
 export default function SummaryCards() {
-  const {data:transactions} = useGetTransactions({skip:0, category:'Bills'})
-  const somePaid = transactions?.data?.filter((item) => item.recurring);
-  const Paidbills = somePaid?.filter(
-    (transaction) => BillStatus({ transaction, somePaid }).status === "paid"
+  const { data } = useGetBills({ skip: 0 })
+  const bills = data?.data
+  const paymentTransaction = data?.paidBills
+
+  const Paidbills = bills?.filter(
+  //@ts-expect-error swr undefined init state
+    (bill) => BillStatus({bill, paymentTransaction }).status === "paid"
   ).map(item => Number(item.amount.toString().replace('-', '')))
-  
-  const DueSoon = somePaid?.filter(
-    (transaction) => BillStatus({ transaction, somePaid }).status === "Due Soon"
+
+  const DueSoon = bills?.filter(
+  //@ts-expect-error swr undefined init state
+    (bill) => BillStatus({bill, paymentTransaction }).status === "Due Soon"
   ).map(item => Number(item.amount.toString().replace('-', '')))
-  
-  const upcoming = somePaid?.filter(
-    (transaction) => BillStatus({ transaction, somePaid }).status === "Upcoming"
-  ).map(item=>Number(item.amount.toString().replace('-', '')))
+
+  const upcoming = bills?.filter(
+  //@ts-expect-error swr undefined init state
+    (bill) => BillStatus({bill, paymentTransaction }).status === "Upcoming"
+  ).map(item => Number(item.amount.toString().replace('-', '')))
 
   const totalPaid = Number(Paidbills?.reduce((a, b)=> a+b,0).toFixed(2))
   const totalUpcoming = Number(upcoming?.reduce((a, b)=> a+b,0).toFixed(2))

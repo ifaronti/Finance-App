@@ -4,14 +4,12 @@ import { categoryList, sortList } from "../svgAssets";
 import { buttonEvent } from "../types";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
-
 export default function Sort() {
   const pathName = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
   const querySort = searchParams.get('sort')
   const queryCategory = searchParams.get('category')
-
 
   const theSort = (e: buttonEvent) => {
     e.preventDefault();
@@ -21,7 +19,9 @@ export default function Sort() {
       params.set('sort', value)
     }
     else {
-      params.set('category', value)
+      if (queryCategory) {
+        params.set('category', value)
+      }
     }
     router.replace(`${pathName}?${params}`)
     return 
@@ -36,13 +36,13 @@ export default function Sort() {
         //@ts-expect-error params type
         currentSort={querySort?.toString()}
       />
-      <SortComponent
+    { pathName.includes('transactions') && <SortComponent
         valueArr={categoryList.map((item) => item.category)}
         sortName="Category"
         theSort={theSort}
         //@ts-expect-error params type
         currentSort={queryCategory?.toString()}
-      />
+      />}
     </div>
   )
 }

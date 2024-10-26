@@ -1,12 +1,12 @@
 "use client";
 
-import SortBills from "./billsSorting";
+import Sort from "@/components/sort";
 import { useState } from "react";
 import OneBill from "./oneBill";
 import useGetBills from "@/hooks/getBills";
 import DeleteItem from "@/components/modalFrames/deleteItem";
 import { useSearchParams } from "next/navigation";
-import SearchBills from "./searchBills";
+import Search from "@/components/searchInput";
 
 export default function Bills() {
   const [currBillId, setCurrBillId] = useState(0)
@@ -17,7 +17,7 @@ export default function Bills() {
   const queryName = searchParams.get('name')?.toString()
   const { data: bills } = useGetBills({ skip:querySkip, sort:querySort, name:queryName })
 
-  const deleteModal = (id:number) => {
+  const deleteItemModal = (id:number) => {
     setShowModal(true)
     setCurrBillId(id)
     return
@@ -32,7 +32,7 @@ export default function Bills() {
   const renderBills = bills?.data?.map((item, index) => {
     return (
       <div key={index + 1} className="w-full flex gap-5 flex-col">
-        <OneBill transaction={item} deleteModal={()=>deleteModal(item.BillId)} allTransactions={bills?.data} />
+        <OneBill bill={item} deleteItemModal={()=>deleteItemModal(item?.BillId)} />
         {index + 1 === bills?.data?.length ? (
           ""
         ) : (
@@ -45,8 +45,8 @@ export default function Bills() {
   return (
     <div className="w-[343px] md:w-[688px] xl:w-[699px] flex realtive rounded-lg flex-col gap-6 bg-white px-5 py-5 md:px-8 md:py-8">
       <div className="w-full flex justify-between items-center">
-        <SearchBills />
-        <SortBills/>
+        <Search />
+        <Sort/>
       </div>
       <div className="w-full flex-shrink-0 hidden text-left text-gray-500 text-[12px] md:flex items-center justify-between">
         <span className="w-[70%] flex justify-between">
@@ -57,6 +57,7 @@ export default function Bills() {
       </div>
       <hr className="w-full hidden md:block h-[1px] bg-gray-500" />
       <div className="w-full flex flex-col gap-5">{renderBills}</div>
+      
       {showModal &&<div className="z-[200] flex items-center justify-center top-0 left-0 fixed w-full h-full">
         <DeleteItem falseModal={falseModal} id={currBillId} nameCategory="bill" />
         <div className="bg-black z-[120] top-0 left-0 fixed opacity-50 w-full h-full"></div>

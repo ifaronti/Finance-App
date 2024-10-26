@@ -31,18 +31,19 @@ export default function AddPot({falseModal}:props) {
         })
     }
 
-    async function createThePot(data: pot) {
-        const { name, target, theme, total } = reqBody
-        if (!name || target || theme || total) {
+    async function createThePot() {
+        const { name, target, theme } = reqBody
+        if (!name || !target || !theme || target===0) {
             return
         }
-        if (names?.some(item => item.toLowerCase() === data.name.toLowerCase())) {
+        if (names?.some(item => item === reqBody.name)) {
             return
         }
-        await createPot(data)
+        await createPot(reqBody)
         await mutate(["/pots"])
+        falseModal()
         return
-    }
+    }    
 
     return (
         <div className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
@@ -51,7 +52,7 @@ export default function AddPot({falseModal}:props) {
             <Input1 handleChange={handleChange} value={reqBody.name} />
             <Input2 value={reqBody.target} handleChange={handleChange} />
             <ThemeSelect value={reqBody.theme} array={[reqBody.name]} handleChange={handleChange} />
-            <AddEditBTN text="Add Pot" event={()=>createThePot(reqBody)}/>
+            <AddEditBTN text="Add Pot" event={createThePot}/>
         </div>
     )
 }

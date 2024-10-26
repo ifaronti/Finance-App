@@ -29,7 +29,7 @@ export default function DeleteItem({id, falseModal, nameCategory}:props) {
         currText = 'pot'
         break
       default:
-        currPath = '/bills'
+        currPath = '/bills?skip=0&sort=Latest&name='
         currText = 'bill'
     }
     return {currPath, currText}

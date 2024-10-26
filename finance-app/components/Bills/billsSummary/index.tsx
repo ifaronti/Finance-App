@@ -9,18 +9,22 @@ import { useShowbar } from "@/providers/showBarContext";
 export default function BillsSummary() {
   const { showBar } = useShowbar();
   const { data: responseData } = useGetSummary()
-  const somePaid = responseData?.data.billsSummary
-
-  const Paidbills = somePaid?.filter(
-    (transaction) => BillStatus({ transaction, somePaid }).status === "paid"
+  const bills = responseData?.data.billsSummary
+  const paymentTransaction = responseData?.data.paidBills
+  
+  const Paidbills = bills?.filter(
+  //@ts-expect-error swr undefined init state
+    (bill) => BillStatus({bill, paymentTransaction }).status === "paid"
   ).map(item => Number(item.amount.toString().replace('-', '')))
 
-  const DueSoon = somePaid?.filter(
-    (transaction) => BillStatus({ transaction, somePaid }).status === "Due Soon"
+  const DueSoon = bills?.filter(
+  //@ts-expect-error swr undefined init state
+    (bill) => BillStatus({bill, paymentTransaction }).status === "Due Soon"
   ).map(item => Number(item.amount.toString().replace('-', '')))
 
-  const upcoming = somePaid?.filter(
-    (transaction) => BillStatus({ transaction, somePaid }).status === "Upcoming"
+  const upcoming = bills?.filter(
+  //@ts-expect-error swr undefined init state
+    (bill) => BillStatus({bill, paymentTransaction }).status === "Upcoming"
   ).map(item => Number(item.amount.toString().replace('-', '')))
 
   const totalPaid = Number(Paidbills?.reduce((a, b) => a + b, 0).toFixed(2))

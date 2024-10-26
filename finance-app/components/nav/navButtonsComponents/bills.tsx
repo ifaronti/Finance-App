@@ -8,7 +8,7 @@ export default function BillsBTN({ showBar }: navBTNProps) {
   const currentPath = usePathname()
   const queryParams = new URLSearchParams
   queryParams.append('skip', '0')
-  queryParams.append('sortBills', 'Latest')
+  queryParams.append('sort', 'Latest')
   queryParams.append('name', '')
 
     const recurringBills = (
