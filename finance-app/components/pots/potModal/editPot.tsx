@@ -1,5 +1,3 @@
-'use client'
-
 import Input1 from "@/components/modalFrames/input1";
 import Input2 from "@/components/modalFrames/input2";
 import FrameHeader from "@/components/modalFrames/frameHeader";

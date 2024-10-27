@@ -1,17 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import AuthenticationForm from "./form";
+import AuthenticationForm from "@/components/authForm";
 import { inputEvent, formEvent } from "@/components/types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { registerAccount } from "@/components/API-Calls/signUp";
 
 export default function SignUp() {
+  const router = useRouter()
   const signUp = true;
   const [userInfo, setUserInfo] = useState({
     email: "",
     name: "",
     password: "",
     confirmPassword: "",
+    income:0
   });
   const [showPassword, setShowPassword] = useState(false);
   const [err, setErr] = useState({
@@ -19,6 +23,7 @@ export default function SignUp() {
     name: "",
     password: "",
     confirmPassword: "",
+    income:0,
     all: "",
   });
 
@@ -44,38 +49,35 @@ export default function SignUp() {
       });
     }
     if (validity.valueMissing) {
-      return setErr((prev) => {
-        return { ...prev, [name]: `Can't be empty` };
-      });
+      return setErr((prev) => {return { ...prev, [name]: `Can't be empty` }});
     }
     if (validity.patternMismatch) {
-      return setErr((prev) => {
-        return { ...prev, [name]: `Please enter correct ${name} format` };
-      });
+      return setErr((prev) => {return { ...prev, [name]: `use correct ${name} format` }});
     }
     if (validity.valid) {
-      return setErr((prev) => {
-        return { ...prev, [name]: "" };
-      });
+      return setErr((prev) => {return { ...prev, [name]: "" }});
     }
   };
 
-  const handleSubmit = (e: formEvent) => {
+  async function handleResponse() {
+    router.push('/')
+  }
+
+  const handleSubmit = async (e: formEvent) => {
     e.preventDefault();
-    const { password, confirmPassword } = userInfo;
+    const { password, confirmPassword, email, name, income } = userInfo;
+    if (!password || !confirmPassword || !email || !name || income == 0) {
+      return setErr(prev=>{return{...prev, all:'All fields are required'}})
+    }
     if (password !== confirmPassword) {
       return setErr((prev) => {
-        return {
-          ...prev,
+        return {...prev,
           password: "Passwords do no match",
           confirmPassword: "Passwords do no match",
         };
       });
     }
-
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    console.log(data);
+    await registerAccount(userInfo, handleResponse)
   };
 
   const revealPassword = () => {
@@ -85,13 +87,10 @@ export default function SignUp() {
   return (
     <section className="w-full flex items-center gap-[140px]">
       <div className="hidden h-fit p-5 flex-grow-0 w-[600px] 2xl:block">
-        <Image
-          width={560}
-          height={920}
-          src={"/images/illustration-authentication.svg"}
-          alt="Home Image"
-          className=" rounded-lg"
+        <Image width={560} height={920} className=" rounded-lg" alt="Home Image"
+          src={"/assets/images/illustration-authentication.svg"}
         />
+
       </div>
       <AuthenticationForm
         handleChange={handleChange}

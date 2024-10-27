@@ -1,14 +1,16 @@
-'use client'
+"use client";
 
 import { useState } from "react";
-import AuthenticationForm from "../signup/form";
+import AuthenticationForm from "../../components/authForm";
 import { inputEvent, formEvent } from "@/components/types";
 import Image from "next/image";
 import { login } from "@/components/API-Calls/login";
 import { response } from "@/components/API-Calls/login";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const signUp = false;
+  const router = useRouter();
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -17,22 +19,26 @@ export default function Login() {
   const [err, setErr] = useState({
     email: "",
     password: "",
-    serverErr:""
+    serverErr: "",
   });
 
-  const handleResponse = (data:response) => {
+  const handleResponse = (data: response) => {
     if (data.success) {
-      localStorage.setItem('token', data.accessToken)
+      localStorage.setItem("token", data.accessToken);
+      router.push("/dashboard");
+    } else {
+      setErr((prev) => {
+        return { ...prev, serverErr: data.toString() };
+      });
     }
-    else {
-      setErr(prev => {return {...prev, serverErr:data.toString()}})
-    }
-  }
+  };
 
   const handleChange = (e: inputEvent) => {
-    const { name, value } = e.target; 
-    setErr(prev=>{return{...prev,[name]:''}})
-    
+    const { name, value } = e.target;
+    setErr((prev) => {
+      return { ...prev, [name]: "" };
+    });
+
     return setUserInfo((prev) => {
       return {
         ...prev,
@@ -40,20 +46,19 @@ export default function Login() {
       };
     });
   };
-    
+
   const handleBlur = (e: inputEvent) => {
-      e.preventDefault()
-       console.log('onBlur')
-    }
+    e.preventDefault();
+    console.log("onBlur");
+  };
 
   const handleSubmit = async (e: formEvent) => {
     e.preventDefault();
-    const {password, email } = userInfo;
+    const { password, email } = userInfo;
     if (!email || !password) {
-      return setErr({email:'invalid', password:'', serverErr:''})
+      return setErr({ email: "invalid", password: "", serverErr: "" });
     }
-    await login({ email, password }, handleResponse)
-
+    await login(userInfo, handleResponse);
   };
 
   const revealPassword = () => {

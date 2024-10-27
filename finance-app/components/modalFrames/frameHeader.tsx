@@ -1,15 +1,10 @@
-'use client'
-
 import { closeModal } from "../svgAssets"
 
 type props = { shutModal: () => void, text: string, bigFont?: string }
 
 export default function FrameHeader({ text, shutModal, bigFont }:props) {
-
-    //const { setShowModal } = useContext(showBarContext)
     
     const modalClose = () => {
-        //setShowModal(false)
         shutModal()
     }
 

@@ -7,6 +7,7 @@ export type userInfo = {
   email: string;
   password: string;
   confirmPassword?: string;
+  income?:number
 };
 
 export type formProps = {
@@ -17,7 +18,7 @@ export type formProps = {
   showPassword?: boolean;
   userInfo: userInfo;
   signUp: boolean;
-  err: userInfo & { all?: string };
+  err: userInfo & { all?: string};
 };
 
 export type toggleProps = { showBar: boolean; toggle: () => void };

@@ -1,4 +1,3 @@
-"use client";
 import { inputProps } from "./input1";
 import { categoryList } from "../svgAssets";
 import { useState } from "react";

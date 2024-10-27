@@ -1,5 +1,3 @@
-"use client";
-
 import { ellipsis } from "@/components/svgAssets";
 import DeleteEditMenu from "@/components/miniMenu"
 import { useState } from "react";

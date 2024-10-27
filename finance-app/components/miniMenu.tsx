@@ -1,8 +1,6 @@
-
 import { usePathname } from "next/navigation"
 import { buttonEvent } from "./modalFrames/input1"
-//import { useContext } from "react"
-//import { showBarContext } from "@/app/dashboard/layout"
+
 type props = {
     editItem: (e:buttonEvent)=>void
     deleteItem:(e:buttonEvent)=>void
@@ -13,15 +11,12 @@ export default function DeleteEditMenu({ editItem, deleteItem }: props) {
     const isBudget = pathName.includes("budgets") ? true : false;
     const text1 = isBudget ? "Edit Budget" : "Edit Pot";
     const text2 = isBudget ? "Delete Budget" : "Delete Pot";
-    //const { setShowModal } = useContext(showBarContext)
     
     const toggleEditModal = (e: buttonEvent) => {
-        //setShowModal(true)
         editItem(e)
     }
 
     const toggleDeleteModal = (e: buttonEvent) => {
-        //setShowModal(true)
         deleteItem(e)
     }
 
