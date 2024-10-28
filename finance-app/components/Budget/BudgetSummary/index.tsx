@@ -30,11 +30,11 @@ export default function BudgetSummary() {
       }  md:w-[688px]`}
     >
       <SectionH3 text="Budget" location="/budget" linkText="See Details" />
-      <div className={`flex relative mb-[58px] w-full items-center gap-4`}>
+      <div className={`flex relative flex-col md:flex-row mb-[58px] w-full items-center gap-4`}>
         <span className="mx-auto">
           <RingChart />
         </span>
-        <div className="flex relative flex-col gap-4">{indicators}</div>
+        <div className="relative md:grid-cols-1  grid grid-cols-2 gap-4">{indicators}</div>
       </div>
     </section>
   );

@@ -33,4 +33,3 @@ export default function useClickOutside({ ref, falseModal }: props) {
         //eslint-disable-next-line
       }, [ref])
 }
-     

@@ -62,7 +62,7 @@ export default function Pots() {
           <Header text="Pots" />
           <AddButton event={selectModal} />
       </header>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6">
         {renderPots}
       </div> 
       {potModal.showModal &&

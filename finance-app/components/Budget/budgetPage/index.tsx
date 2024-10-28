@@ -11,11 +11,13 @@ import DeleteItem from "@/components/modalFrames/deleteItem";
 import AddBudget from "../budgetModal/addBudget";
 import { useState } from "react";
 import { cardProps } from "..";
+import { useShowbar } from "@/providers/showBarContext";
 
 export default function BudgetCard({ currentModal, budgetModal, falseModal }: cardProps) {
   
   const [currentBudget, setCurrentBudget] = useState({category: "",budgetId:0, categoryId: 0,})
   const { data } = useGetBudgets({ skip: 0 });
+  const {showBar} = useShowbar()
 
 
   const editBudget = (e: buttonEvent, item: budget) => {
@@ -42,7 +44,7 @@ export default function BudgetCard({ currentModal, budgetModal, falseModal }: ca
     return (
       <div
         key={index + 1}
-        className="w-[343px] p-5 md:p-8 flex flex-col gap-5 rounded-lg bg-white md:w-[688px] xl:w-[608px]"
+        className={`w-[343px] p-5 md:p-8 flex flex-col gap-5 rounded-lg bg-white md:w-[688px] ${showBar? '2xl:w-[608px] transition-all duration-700':'2xl:w-[820px] transition-all duration-700'}`}
       >
         <BudgetHeader
           category={item.category}
