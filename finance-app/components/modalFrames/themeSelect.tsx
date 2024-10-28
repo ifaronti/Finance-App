@@ -21,6 +21,7 @@ export default function ThemeSelect({array, handleChange }: props) {
   const changeTheme = (theme:theme, e:buttonEvent) => {
     setTheme(theme)
     handleChange(e)
+    setShowTheme(false)
   }
 
   const selectBox = themeCollection.map((item, index) => {

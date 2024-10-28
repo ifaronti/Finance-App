@@ -11,11 +11,15 @@ import { createbudget } from "@/components/API-Calls/budgets";
 import { mutate } from "swr";
 import { categories } from "@/components/types";
 import useGetBudgets from "@/hooks/getBudgets";
+import { useRef } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 export default function AddBudget({falseModal}:{falseModal:()=>void}) {
   const [reqBody, setReqBody] = useState({category:'', maximum:0, theme:'', categoryId:0})
   const {data} = useGetBudgets({skip:0})
   const usedThemes = data?.data?.map(item => item.theme)
+  const addRef = useRef(null)
+  useClickOutside({ ref: addRef, falseModal})
 
   async function newBudget() {
     const { category, maximum, theme, categoryId } = reqBody;
@@ -39,7 +43,7 @@ export default function AddBudget({falseModal}:{falseModal:()=>void}) {
   const description = `Choose a category to set a spending budget. 
                         These categories can help you monitor spending.`
   return (
-    <div className="bg-white flex z-[150] flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
+    <div ref={addRef} className="bg-white flex z-[150] flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
       <FrameHeader bigFont="Yup" shutModal={falseModal} text="Add New Budget" />
       <FrameDescription text={description} />
       <Input1 value={reqBody.category} handleChange={handleChange} />

@@ -12,7 +12,7 @@ export default function Summary({ value, description }: summaryProps) {
   
   return (
     <article
-      className={`bg-${bgColor} flex flex-col justify-center rounded-lg ${showBar? 'xl:w-[337.33px] transition-all duration-700':'xl:w-[408px] transition-all duration-700'} w-[343px] h-[111px] sm:w-[213.33px] sm:h-[119px]`}
+      className={`bg-${bgColor} flex flex-col justify-center rounded-lg ${showBar? '2xl:w-[337.33px] md:w-[213px]  transition-all duration-700':'2xl:w-[408px] transition-all duration-700'} w-[343px] h-[111px] md:h-[119px]`}
     >
       <div className="flex flex-col pl-5 sm:pl-6">
         <h2 className="text-gray-500 text-[14px]">{description}</h2>

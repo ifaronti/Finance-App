@@ -10,6 +10,8 @@ import { pot } from "@/components/types"
 import { mutate } from "swr"
 import useGetPots from "@/hooks/getPots"
 import { useState } from "react"
+import { useRef } from "react"
+import useClickOutside from "@/hooks/useClickOutside"
 
 type props = {
     falseModal: ()=>void
@@ -20,6 +22,8 @@ export default function AddPot({falseModal}:props) {
     const {data:pots} = useGetPots({skip:0})
     const description = 'Create a pot to set savings targets. These can help keep you on track as you save for special purchases.'
     const names = pots?.names
+    const addPotRef = useRef(null)
+    useClickOutside({ref:addPotRef, falseModal})
 
     const handleChange = (e: buttonEvent | inputEvent) => {
         const { name, value } = e.currentTarget || e.target
@@ -46,7 +50,7 @@ export default function AddPot({falseModal}:props) {
     }    
 
     return (
-        <div className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
+        <div ref={addPotRef} className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
             <FrameHeader shutModal={falseModal} text="Add New Pot" />
             <FrameDescription text={description} />
             <Input1 handleChange={handleChange} value={reqBody.name} />

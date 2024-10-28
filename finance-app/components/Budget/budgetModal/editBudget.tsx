@@ -10,6 +10,8 @@ import useGetBudgets from "@/hooks/getBudgets";
 import { useState } from "react";
 import { categories } from "@/components/types";
 import { mutate } from "swr";
+import { useRef } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 type props = {
     id: number
@@ -21,6 +23,8 @@ export default function EditBudget({falseModal, id}: props) {
     const { data } = useGetBudgets({ skip: 0 })
     const usedThemes = data?.data.map(item=>item.theme)
     const targetBudget = data?.data?.find(item => item.budgetId === id)
+    const editRef = useRef(null)
+    useClickOutside({ref:editRef, falseModal})
     
     const [currentBudget, setCurrentBudget] = useState<budget>({
         category: String(targetBudget?.category),
@@ -49,7 +53,7 @@ export default function EditBudget({falseModal, id}: props) {
     }
 
     return (
-        <div className="bg-white flex relative flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
+        <div ref={editRef} className="bg-white flex relative flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
             <FrameHeader shutModal={falseModal} text="Edit Budget" />
             <FrameDescription text={description} />
             <Input1 value={currentBudget.category} handleChange={handleChange} />

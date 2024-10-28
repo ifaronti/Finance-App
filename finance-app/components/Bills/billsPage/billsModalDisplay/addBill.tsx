@@ -8,6 +8,8 @@ import CategorySelect from "@/components/modalFrames/budgetCategory";
 import InputComponent from "./InputsComponent";
 import AddEditBTN from "@/components/modalFrames/modalbutton";
 import { mutate } from "swr";
+import { useRef } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 type props = {
   falseModal: () => void;
@@ -21,6 +23,9 @@ export default function AddBill({ falseModal }: props) {
     amount: 0,
     categoryId: 0,
   });
+
+  const billRef = useRef(null)
+  useClickOutside({ref:billRef, falseModal})
 
   const handleChange = (e: inputEvent | buttonEvent) => {
     const { name, value } = e.currentTarget;
@@ -51,7 +56,7 @@ export default function AddBill({ falseModal }: props) {
     }
 
   return (
-    <div className="bg-white flex z-[150] flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
+    <div ref={billRef} className="bg-white flex z-[150] flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
       <FrameHeader shutModal={falseModal} text="Add New Monthly Bill" />
       <p className="text-gray-500 text-[14px]">Select category of this Bill and fill in details below</p>
       <CategorySelect value={reqBody.category} handleChange={handleChange} />

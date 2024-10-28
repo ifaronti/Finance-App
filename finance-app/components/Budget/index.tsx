@@ -37,7 +37,7 @@ export default function Budgets() {
   };
 
   return (
-    <section className="py-6 flex gap-8 flex-col">
+    <section className="py-6 flex w-fit mx-auto gap-8 flex-col">
       <div className="w-full flex items-center justify-between">
         <Header text="Budget" />
         <AddButton event={currModal} />

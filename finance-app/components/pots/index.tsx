@@ -57,7 +57,7 @@ export default function Pots() {
   }
 
   return (
-    <section className="flex mx-auto py-8 flex-col gap-8">
+    <section className="flex mx-auto w-fit py-8 flex-col gap-8">
       <header className="w-full flex items-center justify-between">
           <Header text="Pots" />
           <AddButton event={selectModal} />

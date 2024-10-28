@@ -4,6 +4,8 @@ import { deleteBudget } from "../API-Calls/budgets";
 import { deletePot } from "../API-Calls/pots";
 import { mutate } from "swr";
 import { deleteBill } from "../API-Calls/bills";
+import useClickOutside from "@/hooks/useClickOutside";
+import { useRef } from "react";
 
 type props = {
   id: number
@@ -15,6 +17,8 @@ export default function DeleteItem({id, falseModal, nameCategory}:props) {
   const pathName = usePathname();
   const text = getCurrentPath()?.currText
   const revalKey = getCurrentPath()?.currPath
+  const delRef = useRef(null)
+  useClickOutside({ref:delRef, falseModal})
   
   function getCurrentPath() {
     let currPath
@@ -57,7 +61,7 @@ export default function DeleteItem({id, falseModal, nameCategory}:props) {
                         be reversed, and all the data inside it will be removed forever.`;
 
   return (
-    <div className="w-[335px] md:w-[560px] md:h-[278px] z-[150] h-[277px] gap-5 rounded-lg bg-white px-5 py-6 md:px-8 md:py-8 flex flex-col">
+    <div ref={delRef} className="w-[335px] md:w-[560px] md:h-[278px] z-[150] h-[277px] gap-5 rounded-lg bg-white px-5 py-6 md:px-8 md:py-8 flex flex-col">
       <FrameHeader
         text={`Delete '${nameCategory}'?`}
         shutModal={falseModal}

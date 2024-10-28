@@ -7,7 +7,7 @@ import AccountSummary from "@/components/AccountSummary";
 
 export default function Page() {
   return (
-    <div className="relative flex flex-col gap-8 py-10">
+    <div className="relative flex w-fit mx-auto flex-col gap-8 py-10">
       <Header text={"Overview"} />
       <AccountSummary/>
       <section className="flex flex-col gap-6 2xl:flex-row">
