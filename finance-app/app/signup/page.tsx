@@ -15,7 +15,8 @@ export default function SignUp() {
     name: "",
     password: "",
     confirmPassword: "",
-    income:0
+    income: 0,
+    avatar:"./assets/images/avatars/emma-richardson.jpg"
   });
   const [showPassword, setShowPassword] = useState(false);
   const [err, setErr] = useState({

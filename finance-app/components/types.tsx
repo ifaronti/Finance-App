@@ -7,7 +7,8 @@ export type userInfo = {
   email: string;
   password: string;
   confirmPassword?: string;
-  income?:number
+  income?: number,
+  avatar?:string
 };
 
 export type formProps = {
