@@ -11,7 +11,8 @@ type props = {
   pattern?: string;
   togglePasswordState?: () => void;
   showPassword?: boolean;
-  value:string|number
+  value: string | number
+  isUpdate?: boolean
 };
 
 export default function AuthenticationInput({
@@ -24,12 +25,13 @@ export default function AuthenticationInput({
   value,
   pattern,
   togglePasswordState,
+  isUpdate,
   showPassword,
 }: props) {
   return (
     <div className="w-full gap-1 h-[67px] relative flex flex-col-reverse">
       <input
-        required
+        required = {isUpdate? false:true}
         onChange={handleChange}
         name={name}
         onBlur={handleBlur}

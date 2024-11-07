@@ -1,6 +1,8 @@
 import { formProps } from "@/components/types";
 import AuthenticationInput from "./authInput";
 import FormButton from "./formBtn";
+import AuthFrameHeader from "./boxHeader";
+
 
 export default function AuthenticationForm({
   handleChange,
@@ -10,16 +12,16 @@ export default function AuthenticationForm({
   userInfo,
   signUp,
   err,
+  isUpdate,
   togglePasswordState,
 }: formProps) {
+
   return (
     <form
       onSubmit={handleSubmit}
       className="sm:w-[528px] rounded-xl gap-8 w-[323px] sm:py-8 py-5 px-5 sm:px-8 flex flex-col items-center bg-white"
     >
-      <h1 className="self-start font-bold text-[2rem]">
-        {signUp ? "Sign Up" : "Login"}
-      </h1>
+      <AuthFrameHeader/>
       <div className="w-full flex text-[#696868] flex-col gap-4">
         {signUp && (
           <AuthenticationInput
@@ -30,6 +32,7 @@ export default function AuthenticationForm({
             handleChange={handleChange}
             handleBlur={handleBlur}
             value={String(userInfo?.name)}
+            isUpdate={isUpdate}
           />
         )}
 
@@ -40,20 +43,22 @@ export default function AuthenticationForm({
           handleBlur={handleBlur}
           handleChange={handleChange}
           placeholder="jamisiaphogbon@gmail.com"
-          value={userInfo?.email}
+          value={String(userInfo?.email)}
           pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+          isUpdate={isUpdate}
         />
 
         <AuthenticationInput
-          err={err.password}
+          err={String(err.password)}
           name="password"
-          value={userInfo?.password}
+          value={String(userInfo?.password)}
           handleBlur={handleBlur}
           handleChange={handleChange}
           togglePasswordState={togglePasswordState}
           showPassword={showPassword}
           type={showPassword ? 'text' : 'password'}
           placeholder="Enter your password"
+          isUpdate={isUpdate}
         />
 
         {signUp && (
@@ -67,6 +72,7 @@ export default function AuthenticationForm({
             showPassword={showPassword}
             type={showPassword ? 'text' : 'password'}
             placeholder="confirm your password"
+            isUpdate={isUpdate}
           />
         )}
 
@@ -79,6 +85,7 @@ export default function AuthenticationForm({
             handleChange={handleChange}
             type='number'
             placeholder="Enter your expected monthly Income"
+            isUpdate={isUpdate}
           />
         )}
       </div>

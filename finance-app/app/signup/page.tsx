@@ -102,6 +102,7 @@ export default function SignUp() {
         err={err}
         handleBlur={handleBlur}
         togglePasswordState={revealPassword}
+        isUpdate={false}
       />
     </section>
   );

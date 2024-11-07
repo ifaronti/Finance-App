@@ -4,10 +4,10 @@ export type inputEvent = React.ChangeEvent<HTMLInputElement>;
 export type formEvent = React.FormEvent<HTMLFormElement>;
 export type userInfo = {
   name?: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   confirmPassword?: string;
-  income?: number,
+  income?: number|string|null,
   avatar?:string
 };
 
@@ -19,6 +19,8 @@ export type formProps = {
   showPassword?: boolean;
   userInfo: userInfo;
   signUp: boolean;
+  isUpdate?:boolean
+  updateframe?:boolean
   err: userInfo & { all?: string};
 };
 
