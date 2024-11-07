@@ -7,6 +7,8 @@ import AddDWithdrawBar from "./addWithdrawBar";
 import { editPot } from "../API-Calls/pots";
 import { mutate } from "swr";
 import { useState } from "react";
+import { useRef } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 type props = {
   falseModal: () =>void;
@@ -16,7 +18,9 @@ type props = {
 
 export default function PotAddWithdraw({potModal, falseModal, currentPot}:props) {
   const [newValue, setNewValue] = useState(0)
-  //const { setShowModal } = useContext(showBarContext);
+  const addWithdrawRef = useRef(null)
+  useClickOutside({ref:addWithdrawRef, falseModal})
+  
   const BTNText = potModal.addMoney ? "Confirm Addition" : "Confirm Withdrawal";
 
   const description = `Add money to your pot to keep it separate from your 
@@ -56,7 +60,7 @@ export default function PotAddWithdraw({potModal, falseModal, currentPot}:props)
   const changeInput = <Input2 value={newValue} handleChange={handleChange} />
     
   return (
-    <div className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
+    <div ref={addWithdrawRef} className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
       <FrameHeader bigFont="yes" text={headerText} shutModal={falseModal} />
       <FrameDescription text={description} />
       <AddDWithdrawBar modal={potModal} currentPot={currentPot} newValue={newValue} />

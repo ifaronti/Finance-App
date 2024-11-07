@@ -4,9 +4,11 @@ export type inputEvent = React.ChangeEvent<HTMLInputElement>;
 export type formEvent = React.FormEvent<HTMLFormElement>;
 export type userInfo = {
   name?: string;
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   confirmPassword?: string;
+  income?: number|string|null,
+  avatar?:string
 };
 
 export type formProps = {
@@ -17,7 +19,9 @@ export type formProps = {
   showPassword?: boolean;
   userInfo: userInfo;
   signUp: boolean;
-  err: userInfo & { all?: string };
+  isUpdate?:boolean
+  updateframe?:boolean
+  err: userInfo & { all?: string};
 };
 
 export type toggleProps = { showBar: boolean; toggle: () => void };
@@ -60,6 +64,19 @@ export type budget = {
     transactions: transaction[];
   };
 };
+
+export type bill = {
+  amount: number;
+  avatar: string;
+  categoryId: number;
+  category: string;
+  updatedAt?: string;
+  createdAt:string
+  name: string;
+  recurring?: boolean;
+  userId?: number;
+  BillId:number
+}
 
 export type pot = {
   name: string;

@@ -1,5 +1,3 @@
-'use client'
-
 import Input1 from "@/components/modalFrames/input1";
 import Input2 from "@/components/modalFrames/input2";
 import FrameHeader from "@/components/modalFrames/frameHeader";
@@ -12,6 +10,8 @@ import { pot } from "@/components/types";
 import { editPot } from "@/components/API-Calls/pots";
 import useGetPots from "@/hooks/getPots";
 import { mutate } from "swr";
+import { useRef } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 type props = {
     falseModal: () => void
@@ -21,6 +21,8 @@ type props = {
 export default function EditPot({ falseModal, potId }: props) {
     const { data: pots } = useGetPots({ skip: 0 })
     const targetPot = pots?.data.find(item => item.potId === potId)
+    const editPotRef = useRef(null)
+    useClickOutside({ref:editPotRef, falseModal})
     const [reqBody, setReqBody] = useState<pot>({
         name: String(targetPot?.name),
         potId: targetPot?.potId,
@@ -50,7 +52,7 @@ export default function EditPot({ falseModal, potId }: props) {
     }
 
     return (
-        <div className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
+        <div ref={editPotRef} className="bg-white flex flex-col px-5 py-6 md:px-8 md:py-8 gap-5 w-[335px] md:w-[560px] rounded-lg">
             <FrameHeader text="Edit Pot" shutModal={falseModal} />
             <FrameDescription text={description} />
             <Input1 value={reqBody.name} handleChange={handleChange} />

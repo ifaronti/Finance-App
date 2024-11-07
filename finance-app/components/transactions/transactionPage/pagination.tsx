@@ -1,4 +1,3 @@
-'use client'
 import { caretLeft } from "@/components/svgAssets";
 import { buttonEvent } from "@/components/types";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";

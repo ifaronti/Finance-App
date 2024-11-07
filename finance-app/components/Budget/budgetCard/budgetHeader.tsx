@@ -1,9 +1,9 @@
-"use client";
-
 import { ellipsis } from "@/components/svgAssets";
 import DeleteEditMenu from "@/components/miniMenu"
 import { useState } from "react";
 import { buttonEvent } from "@/components/modalFrames/input1";
+import { useRef } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 type props = {
   category: string;
@@ -14,6 +14,8 @@ type props = {
 
 export default function BudgetHeader({category,del,edit,theme,}: props){
   const [showMini, setShowMini] = useState(false);
+  const miniMenuRef = useRef(null)
+  useClickOutside({ref:miniMenuRef, falseModal:()=>setShowMini(false)})
 
   return (
     <article className="w-full flex items-center justify-between">
@@ -25,7 +27,7 @@ export default function BudgetHeader({category,del,edit,theme,}: props){
         <button className=" border-none bg-none" onClick={()=>setShowMini(!showMini)}>
           {ellipsis}
         </button>
-        <span className={`${showMini ? "block right-[0] absolute top-3" : "hidden"}`}>
+        <span ref={miniMenuRef} className={`${showMini ? "block right-[0] absolute top-3" : "hidden"}`}>
           <DeleteEditMenu editItem={(e)=>edit(e)} deleteItem={(e)=>del(e)} />
         </span>
       </div>

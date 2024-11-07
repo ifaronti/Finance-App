@@ -306,3 +306,58 @@ export const recurringSVG = (
     />
   </svg>
 );
+
+export const formatDate = (date: number) => {
+  let format
+  switch (date) {
+      case 1||21||31:
+          format = date+'st'
+          break
+      case 31:
+          format = date+'st'
+          break
+      case 21:
+          format = date+'st'
+          break
+      case 2:
+          format = date+'nd'
+          break
+      case 22:
+          format = date+'nd'
+          break
+      case 3:
+          format = date+'rd'
+          break
+      case 23:
+          format = date+'rd'
+          break
+      default:
+          format = date+'th'
+  }
+  return format
+}
+
+export const getLastDayOfMonth = (month: number) => {
+  let lastDay = 0
+  switch (month) {
+      case 2:
+          lastDay = 28
+          break
+      case 4:
+          lastDay = 30
+          break
+      case 6:
+          lastDay = 30
+          break
+      case 9:
+          lastDay = 30
+          break
+      case 11:
+          lastDay = 30
+          break
+      
+      default:
+          lastDay = 31
+  }
+  return lastDay
+}

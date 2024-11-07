@@ -1,8 +1,8 @@
-"use client";
 import { inputProps } from "./input1";
 import { categoryList } from "../svgAssets";
 import { useState } from "react";
 import SelectBTN from "./selectButton";
+import { buttonEvent, inputEvent } from "../types";
 
 type props = inputProps & {array?:string[]}
 
@@ -13,12 +13,17 @@ export default function CategorySelect({ value, handleChange, array }:props) {
     setShowCategory(prev=>!prev);
   };
 
+  const hideOnSelect = async(e:inputEvent|buttonEvent) => {
+    handleChange(e)
+    setShowCategory(false)
+  }
+
   const categoryBox = categoryList.map((item, index) => {
     return (
       <div key={index + 1} className="flex flex-col gap-3">
         <button
           className="text-[14px] text-left text-gray-900"
-          onClick={handleChange}
+          onClick={hideOnSelect}
           name='category'
           value={item.category}
           disabled={array?.some(category=>item.category === category)? true:false}

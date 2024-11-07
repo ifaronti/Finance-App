@@ -1,16 +1,17 @@
-import Header from "@/components/PageHeader";
 import HomePots from "@/components/pots/potsSummary";
 import SummaryTransactions from "@/components/transactions/summaryTransactions";
 import BillsSummary from "@/components/Bills/billsSummary";
 import BudgetSummary from "@/components/Budget/BudgetSummary";
 import AccountSummary from "@/components/AccountSummary";
+import Header from "@/components/PageHeader";
 
 export default function Page() {
+
   return (
-    <div className="relative flex flex-col gap-8 py-10">
-      <Header text={"Overview"} />
+    <section className="relative flex w-fit mx-auto flex-col gap-8 py-10">
+      <Header text="Overview"/>
       <AccountSummary/>
-      <section className="flex flex-col gap-6 2xl:flex-row">
+      <div className="flex flex-col gap-6 2xl:flex-row">
         <div className="flex flex-col gap-6">
           <HomePots />
           <SummaryTransactions />
@@ -19,7 +20,7 @@ export default function Page() {
           <BudgetSummary />
           <BillsSummary />
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

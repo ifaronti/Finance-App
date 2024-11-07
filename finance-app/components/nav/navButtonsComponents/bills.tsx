@@ -6,6 +6,11 @@ import { usePathname } from "next/navigation";
 export default function BillsBTN({ showBar }: navBTNProps) {
   const router = useRouter()
   const currentPath = usePathname()
+  const queryParams = new URLSearchParams
+  queryParams.append('skip', '0')
+  queryParams.append('sort', 'Latest')
+  queryParams.append('name', '')
+
     const recurringBills = (
         <svg
           fill="none"
@@ -25,7 +30,7 @@ export default function BillsBTN({ showBar }: navBTNProps) {
     if (currentPath === "/dashboard/bills") {
       return
     }
-      router.push('/dashboard/bills')
+      router.push(`/dashboard/bills?${queryParams}`)
     }
 
     return (

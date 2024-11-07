@@ -57,12 +57,12 @@ export default function Pots() {
   }
 
   return (
-    <section className="flex mx-auto py-8 flex-col gap-8">
+    <section className="flex mx-auto w-fit py-8 flex-col gap-8">
       <header className="w-full flex items-center justify-between">
           <Header text="Pots" />
           <AddButton event={selectModal} />
       </header>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6">
         {renderPots}
       </div> 
       {potModal.showModal &&

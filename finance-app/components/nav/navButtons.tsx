@@ -16,9 +16,8 @@ export default function NavigationButtons() {
 
   return (
     <ShowbarProvider>
-      <section className={`2xl:h-screen flex-grow-0 relative flex transition-width duration-700 w-full ${showBar ? "2xl:w-[300px] relative md:w-[768px]" : "w-[88px] sm:w-full"
-            } bg-[#201F24] sm:px-10 px-4 2xl:px-[unset] sm:h-[74px] h-[52px] 2xl:rounded-l-none rounded-t-lg 2xl:rounded-r-xl`} >
-        <div className={navStyles('', showBar).BTNsWrapper}>
+      <section className={navStyles('', showBar, '').section} >
+        <div className={`${navStyles('', showBar).BTNsWrapper} w-fit mx-auto md:mx-[unset]`}>
           <div className='hidden 2xl:block mb-[60px] pl-8'>
             {showBar ? largeLogo : smallLogo}
           </div>
@@ -30,6 +29,6 @@ export default function NavigationButtons() {
           <NavToggle showBar={showBar} toggle={()=>setShowBar(!showBar)} />
         </div>
       </section>
-      </ShowbarProvider>
+    </ShowbarProvider>
   )
 }

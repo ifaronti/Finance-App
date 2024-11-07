@@ -1,5 +1,3 @@
-'use client'
-
 import { usePathname } from "next/navigation";
 import { buttonEvent } from "./modalFrames/input1";
 
@@ -18,7 +16,7 @@ export default function AddButton({ event }: props) {
         isBudget ? "w-[155px]" : "w-[129px]"
       } hover:bg-gray-500 bg-gray-900 text-white`}
     >
-      {buttonText}
+      {pathName.includes('bills')?"+ Add Bills": buttonText}
     </button>
   );
 }

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import SortBox from "./sortBox";
 import SortButton from "./sortBTN";
+import { useRef } from "react";
+import useClickOutside from "@/hooks/useClickOutside";
 
 export type btnEvent = React.SyntheticEvent<HTMLButtonElement>;
 
@@ -18,13 +20,15 @@ export default function SortComponent({
   valueArr,
 }: sortProps) {
   const [showSort, setShowSort] = useState(false);
+  const sortRef = useRef(null)
+  useClickOutside({ref:sortRef, falseModal:()=>setShowSort(false)})
 
   const showList = () => {
     setShowSort(!showSort);
   };
 
   return (
-    <div className="flex relative items-center gap-2">
+    <div ref={sortRef} className="flex relative items-center gap-2">
       <p className="text-[14px] hidden md:block text-gray-500">{sortName}</p>
       <div className="flex relative flex-col gap-4">
         <span className="pr-5 md:pr-[unset]">

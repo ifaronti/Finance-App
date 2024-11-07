@@ -1,12 +1,13 @@
 import callClient from "@/lib/axios";
 import useSWR from "swr";
-import { transaction, pot, budget } from "@/components/types";
+import { transaction, pot, budget, bill } from "@/components/types";
 
 type GetSummaryResponse = {
   success: boolean;
   data: {
     transactionsSummary: transaction[];
-    billsSummary: transaction[];
+    billsSummary: bill[];
+    paidBills:transaction[]
     budgetSummary: {
       summary: { _sum: { maximum: number; spent: number } };
       snippet: budget[];
@@ -19,7 +20,7 @@ type GetSummaryResponse = {
       balance: number
       expenses: number
       income:number
-    }
+    },
   };
 };
 

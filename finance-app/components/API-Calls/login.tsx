@@ -17,7 +17,8 @@ export const login =async (body:loginBody, handleResponse:handleResponse) => {
         const { data } = await axios.post(`${url}/login`, body)
         handleResponse(data)
     }
-    catch (err:any) {
+    catch (err) {
+        //@ts-expect-error any decalration still lints with red lines
         handleResponse(err.message)
     }
 }
