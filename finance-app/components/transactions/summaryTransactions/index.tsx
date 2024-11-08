@@ -31,7 +31,7 @@ export default function SummaryTransactions() {
     <section className={`flex w-[343px] ${isLoading? 'animate-pulse':''} gap-8 md:w-[688px] rounded-lg bg-white xl:w-[608px] flex-col sm:p-8 p-5`}>
       <SectionH3
         text="Transactions"
-        location="/dashboard/transactions"
+        location="/dashboard/transactions?skip=0&sort=Latest&category=All+Transactions&name="
         linkText="View All"
       />
       <span>{transactions}</span>
