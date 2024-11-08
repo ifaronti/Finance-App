@@ -68,6 +68,7 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
       return deletePot(Number(id))
     }
     if (currPath.includes('delete')) {
+      localStorage.clear()
       return deleteUser()
     }
     return deleteBill(Number(id))
