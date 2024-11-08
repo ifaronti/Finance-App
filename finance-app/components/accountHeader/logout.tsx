@@ -11,7 +11,7 @@ export default function Logout() {
         await logout()
         localStorage.removeItem('token')
         router.push('/')
-        location.reload()
+        return location.reload()
     }
     
     const logoutBTN = <button onClick={exitAccount} className={btnClass}>Log Out</button>
