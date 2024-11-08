@@ -17,7 +17,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="text-white flex flex-col gap-3">
+      <div className="text-white 2xl:w-[unset] 2xl:h-[unset] w-full h-[100vh] items-center justify-center flex flex-col gap-3">
         <Link className="border-none hover:bg-gray-500 justify-center font-bold flex items-center bg-gray-900 transition-all duration-500 w-[200px] rounded-lg h-[53px]" href={'/signup'}>Sign Up</Link>
         <Link className="border-none hover:bg-gray-500 justify-center font-bold flex items-center bg-gray-900 transition-all duration-500 w-[200px] rounded-lg h-[53px]" href={'/login'}>Login</Link>
         <Link className="border-none hover:bg-gray-500 justify-center font-bold flex items-center bg-gray-900 transition-all duration-500 w-[200px] rounded-lg h-[53px]" href={oauthLink}> Sign In With Github</Link>
