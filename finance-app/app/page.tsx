@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
 
-  const oauthLink = 'https://github.com/login/oauth/authorize?client_id=Ov23liyOmaYRAksPwbCp'
+  const oauthLink = 'https://github.com/login/oauth/authorize?client_id=Ov23liyOmaYRAksPwbCp&scope=read:user'
   
   return (
     <section className="w-full flex items-center gap-[140px]">
