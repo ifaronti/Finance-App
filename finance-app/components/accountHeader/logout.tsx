@@ -7,10 +7,14 @@ export default function Logout() {
     const router = useRouter()
     const btnClass = `border-none transition-all w-52 duration-500 rounded-lg h-[60px] hover:bg-gray-500 bg-gray-900 text-white`
 
+    async function navigateTo() {
+        router.push('/')
+    }
+
     async function exitAccount(){
         await logout()
         localStorage.removeItem('token')
-        router.push('/')
+        await navigateTo()
         return location.reload()
     }
     
