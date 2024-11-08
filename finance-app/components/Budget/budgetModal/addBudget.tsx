@@ -16,18 +16,21 @@ import useClickOutside from "@/hooks/useClickOutside";
 
 export default function AddBudget({falseModal}:{falseModal:()=>void}) {
   const [reqBody, setReqBody] = useState({category:'', maximum:0, theme:'', categoryId:0})
-  const {data} = useGetBudgets({skip:0})
+  const { data } = useGetBudgets({ skip: 0 })
+  const [loading, setLoading] = useState(false)
   const usedThemes = data?.data?.map(item => item.theme)
   const addRef = useRef(null)
   useClickOutside({ ref: addRef, falseModal})
 
   async function newBudget() {
+    setLoading(true)
     const { category, maximum, theme, categoryId } = reqBody;
     if (!category || !maximum || !theme || !categoryId ||maximum <10) {
       return console.log('check the values')
     }
     await createbudget({...reqBody, spent:0});
     await mutate(["/budgets"])
+    setLoading(false)
     falseModal()
     return
   }
@@ -53,7 +56,7 @@ export default function AddBudget({falseModal}:{falseModal:()=>void}) {
         array={usedThemes}
         handleChange={handleChange}
       />
-      <AddEditBTN event={() => newBudget()} text="Add Budget" />
+      <AddEditBTN isLoading={loading} event={() => newBudget()} text="Add Budget" />
     </div>
   );
 }

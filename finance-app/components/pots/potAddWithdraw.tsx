@@ -18,6 +18,7 @@ type props = {
 
 export default function PotAddWithdraw({potModal, falseModal, currentPot}:props) {
   const [newValue, setNewValue] = useState(0)
+  const [loading, setLoading] = useState(false)
   const addWithdrawRef = useRef(null)
   useClickOutside({ref:addWithdrawRef, falseModal})
   
@@ -29,6 +30,7 @@ export default function PotAddWithdraw({potModal, falseModal, currentPot}:props)
 
 
   async function updatePot() {
+    setLoading(true)
     const newTotal = currentPot.total + Number(newValue)
     if (newValue === 0 || newValue === undefined) {
       return
@@ -43,6 +45,8 @@ export default function PotAddWithdraw({potModal, falseModal, currentPot}:props)
     await mutate(['/pots'])
     await mutate(['/summary'])
     setNewValue(0)
+    setLoading(false)
+    falseModal()
     return
   }
 
@@ -65,7 +69,7 @@ export default function PotAddWithdraw({potModal, falseModal, currentPot}:props)
       <FrameDescription text={description} />
       <AddDWithdrawBar modal={potModal} currentPot={currentPot} newValue={newValue} />
       {changeInput}
-      <AddEditBTN text={BTNText} event={updatePot} />
+      <AddEditBTN isLoading={loading} text={BTNText} event={updatePot} />
     </div>
   );
 }

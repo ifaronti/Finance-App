@@ -21,7 +21,8 @@ type props = {
 export default function EditBudget({falseModal, id}: props) {
     const description = 'As your budgets change, feel free to update your spending limits.'
     const { data } = useGetBudgets({ skip: 0 })
-    const usedThemes = data?.data.map(item=>item.theme)
+    const usedThemes = data?.data.map(item => item.theme)
+    const [loading, setLoading] = useState(false)
     const targetBudget = data?.data?.find(item => item.budgetId === id)
     const editRef = useRef(null)
     useClickOutside({ref:editRef, falseModal})
@@ -46,8 +47,10 @@ export default function EditBudget({falseModal, id}: props) {
       };
     
     async function editRequest(currentBudget: budget) {
+        setLoading(true)
         await editBudget(currentBudget)
         await mutate(["/budgets"])
+        setLoading(false)
         falseModal()
         return
     }
@@ -59,7 +62,7 @@ export default function EditBudget({falseModal, id}: props) {
             <Input1 value={currentBudget.category} handleChange={handleChange} />
             <Input2 value={currentBudget.maximum} handleChange={handleChange} />
             <ThemeSelect array={usedThemes} handleChange={handleChange} value={currentBudget.theme} />
-            <AddEditBTN text="Save Changes" event={()=>editRequest(currentBudget)}/>
+            <AddEditBTN isLoading={loading} text="Save Changes" event={()=>editRequest(currentBudget)}/>
         </div>
     )
 }

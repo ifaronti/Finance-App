@@ -310,7 +310,7 @@ export const recurringSVG = (
 export const formatDate = (date: number) => {
   let format
   switch (date) {
-      case 1||21||31:
+      case 1:
           format = date+'st'
           break
       case 31:
@@ -360,4 +360,27 @@ export const getLastDayOfMonth = (month: number) => {
           lastDay = 31
   }
   return lastDay
+}
+
+export function getDeleteContext(pathName:string) {
+  let currPath
+  let currText
+  switch (pathName) {
+    case '/dashboard/budgets':
+      currPath = '/budgets'
+      currText = 'budget'
+      break
+    case '/dashboard/pots':
+      currPath = '/pots'
+      currText = 'pot'
+      break
+    case '/dashboard/bills':
+      currPath = '/bills?skip=0&sort=Latest&name='
+      currText = 'bill'
+      break
+    default:
+      currPath = 'delete'
+      currText = 'account?'
+  }
+  return {currPath, currText}
 }

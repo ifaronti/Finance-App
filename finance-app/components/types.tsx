@@ -21,7 +21,8 @@ export type formProps = {
   signUp: boolean;
   isUpdate?:boolean
   updateframe?:boolean
-  err: userInfo & { all?: string};
+  err: userInfo & { all?: string };
+  loading?:boolean
 };
 
 export type toggleProps = { showBar: boolean; toggle: () => void };

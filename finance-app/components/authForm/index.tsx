@@ -13,6 +13,7 @@ export default function AuthenticationForm({
   signUp,
   err,
   isUpdate,
+  loading,
   togglePasswordState,
 }: formProps) {
 
@@ -89,7 +90,7 @@ export default function AuthenticationForm({
           />
         )}
       </div>
-      <FormButton signUp={signUp} />
+      <FormButton loading={loading} signUp={signUp} />
     </form>
   );
 }

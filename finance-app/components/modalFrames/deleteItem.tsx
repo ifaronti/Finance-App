@@ -8,6 +8,7 @@ import useClickOutside from "@/hooks/useClickOutside";
 import { deleteUser } from "../API-Calls/user";
 import { useRef, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
+import { getDeleteContext } from "../svgAssets";
 
 type props = {
   id?: number
@@ -19,8 +20,8 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
   const [isLoading, setIsLoading] = useState(false)
   const pathName = usePathname();
   const router = useRouter()
-  const text = getCurrentPath()?.currText
-  const revalKey = getCurrentPath()?.currPath
+  const text = getDeleteContext(pathName)?.currText
+  const revalKey = getDeleteContext(pathName)?.currPath
   const delRef = useRef(null)
   useClickOutside({ ref: delRef, falseModal })
   
@@ -35,32 +36,9 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
       colors={['#306cce', '#72a1ed']}
     />
   )
-  
-  function getCurrentPath() {
-    let currPath
-    let currText
-    switch (pathName) {
-      case '/dashboard/budgets':
-        currPath = '/budgets'
-        currText = 'budget'
-        break
-      case '/dashboard/pots':
-        currPath = '/pots'
-        currText = 'pot'
-        break
-      case '/dashboard/bills':
-        currPath = '/bills?skip=0&sort=Latest&name='
-        currText = 'bill'
-        break
-      default:
-        currPath = 'delete'
-        currText = 'account?'
-    }
-    return {currPath, currText}
-  }
 
   async function deleteItem() {
-    const currPath = getCurrentPath()?.currPath
+    const currPath = getDeleteContext(pathName)?.currPath
     if (currPath.includes('/budgets')) {
       return deleteBudget(Number(id))
     }

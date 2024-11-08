@@ -16,6 +16,7 @@ type props = {
 };
 
 export default function AddBill({ falseModal }: props) {
+  const [isLoading, setIsLoading] = useState(false)
   const [reqBody, setReqBody] = useState({
     avatar: "./assets/images/avatars/buzz-marketing-group.jpg",
     name: "",
@@ -44,13 +45,15 @@ export default function AddBill({ falseModal }: props) {
     }); 
   };
     
-    async function handleSubmit() {
+  async function handleSubmit() {
+      setIsLoading(true)
       const { amount, category, categoryId, name, avatar } = reqBody
       if (!amount || !category || !categoryId || !name || !avatar) {
         return
       }
       await addBill({ ...reqBody, amount: -reqBody.amount })
       await mutate(['/bills?skip=0&sort=Latest&name='])
+      setIsLoading(false)
       falseModal()
       return
     }
@@ -72,7 +75,7 @@ export default function AddBill({ falseModal }: props) {
         type="text"
         name="name"
       />
-      <AddEditBTN text="Add Bill" event={handleSubmit}/>
+      <AddEditBTN isLoading={isLoading} text="Add Bill" event={handleSubmit}/>
     </div>
   );
 }

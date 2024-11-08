@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 export default function Login() {
   const signUp = false;
   const router = useRouter();
+  const [loading, setLoading] = useState(false)
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -54,11 +55,13 @@ export default function Login() {
 
   const handleSubmit = async (e: formEvent) => {
     e.preventDefault();
+    setLoading(true)
     const { password, email } = userInfo;
     if (!email || !password) {
       return setErr({ email: "invalid", password: "", serverErr: "" });
     }
     await login(userInfo, handleResponse);
+    setLoading(false)
   };
 
   const revealPassword = () => {
@@ -85,6 +88,7 @@ export default function Login() {
         err={err}
         handleBlur={handleBlur}
         togglePasswordState={revealPassword}
+        loading={loading}
       />
     </section>
   );

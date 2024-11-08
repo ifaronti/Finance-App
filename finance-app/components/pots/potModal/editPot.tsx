@@ -20,6 +20,7 @@ type props = {
 
 export default function EditPot({ falseModal, potId }: props) {
     const { data: pots } = useGetPots({ skip: 0 })
+    const [loading, setLoading] = useState(false)
     const targetPot = pots?.data.find(item => item.potId === potId)
     const editPotRef = useRef(null)
     useClickOutside({ref:editPotRef, falseModal})
@@ -43,11 +44,14 @@ export default function EditPot({ falseModal, potId }: props) {
     }
 
     async function potEdit(data: pot) {
+        setLoading(true)
         if (pots?.names?.some(item => item === data.name && data.name !== reqBody.name)) {
             return alert('Name conflict')
         }
         await editPot(data)
         await mutate(['/pots'])
+        setLoading(false)
+        falseModal()
         return
     }
 
@@ -58,7 +62,7 @@ export default function EditPot({ falseModal, potId }: props) {
             <Input1 value={reqBody.name} handleChange={handleChange} />
             <Input2 value={reqBody.target} handleChange={handleChange} />
             <ThemeSelect handleChange={handleChange} value={reqBody.theme} array={[reqBody.name]} />
-            <AddEditBTN text="Save changes" event={()=>potEdit(reqBody)} />
+            <AddEditBTN isLoading={loading} text="Save changes" event={()=>potEdit(reqBody)} />
         </div>
     )
 }

@@ -10,6 +10,7 @@ type props = {
 
 export default function UpdateUserDetails({shutModal}:props) {
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false)
     const [err, setErr] = useState({ password: "", confirmPassword: "", name:'', email:'' });
     const userRef = useRef(null)
     useClickOutside({ref:userRef, falseModal:shutModal})
@@ -37,6 +38,7 @@ export default function UpdateUserDetails({shutModal}:props) {
 
     const handleSubmit = async (e: formEvent) => {
         e.preventDefault();
+        setLoading(true)
         const { password, confirmPassword, email, name, income } = userInfo;
 
         if (!password && !confirmPassword && !email && !name && !income) {
@@ -57,6 +59,7 @@ export default function UpdateUserDetails({shutModal}:props) {
         }
         
         await updateUserDetails(userInfo)
+        setLoading(false)
         return shutModal()
     };
 
@@ -76,6 +79,7 @@ export default function UpdateUserDetails({shutModal}:props) {
                 isUpdate={true}
                 handleBlur={()=>null}
                 togglePasswordState={revealPassword}
+                loading = {loading}
             />
         </div>
     );

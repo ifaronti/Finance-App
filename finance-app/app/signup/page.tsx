@@ -9,6 +9,7 @@ import { registerAccount } from "@/components/API-Calls/signUp";
 
 export default function SignUp() {
   const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const signUp = true;
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -66,6 +67,7 @@ export default function SignUp() {
 
   const handleSubmit = async (e: formEvent) => {
     e.preventDefault();
+    setLoading(true)
     const { password, confirmPassword, email, name, income } = userInfo;
     if (!password || !confirmPassword || !email || !name || income == 0) {
       return setErr(prev=>{return{...prev, all:'All fields are required'}})
@@ -79,6 +81,7 @@ export default function SignUp() {
       });
     }
     await registerAccount(userInfo, handleResponse)
+    setLoading(false)
   };
 
   const revealPassword = () => {
@@ -103,6 +106,7 @@ export default function SignUp() {
         handleBlur={handleBlur}
         togglePasswordState={revealPassword}
         isUpdate={false}
+        loading={loading}
       />
     </section>
   );

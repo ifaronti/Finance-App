@@ -19,6 +19,7 @@ type props = {
 
 export default function AddPot({falseModal}:props) {
     const [reqBody, setReqBody] = useState<pot>({name:'', target:0, total:0, theme:''})
+    const [loading, setLoading] = useState(false)
     const {data:pots} = useGetPots({skip:0})
     const description = 'Create a pot to set savings targets. These can help keep you on track as you save for special purchases.'
     const names = pots?.names
@@ -36,6 +37,7 @@ export default function AddPot({falseModal}:props) {
     }
 
     async function createThePot() {
+        setLoading(true)
         const { name, target, theme } = reqBody
         if (!name || !target || !theme || target===0) {
             return
@@ -45,6 +47,7 @@ export default function AddPot({falseModal}:props) {
         }
         await createPot(reqBody)
         await mutate(["/pots"])
+        setLoading(false)
         falseModal()
         return
     }    
@@ -56,7 +59,7 @@ export default function AddPot({falseModal}:props) {
             <Input1 handleChange={handleChange} value={reqBody.name} />
             <Input2 value={reqBody.target} handleChange={handleChange} />
             <ThemeSelect value={reqBody.theme} array={[reqBody.name]} handleChange={handleChange} />
-            <AddEditBTN text="Add Pot" event={createThePot}/>
+            <AddEditBTN isLoading={loading} text="Add Pot" event={createThePot}/>
         </div>
     )
 }
