@@ -84,7 +84,7 @@ I'll be doing more postgresql, ORMs, Typescript. I need to try Drizzle for the f
 
 ## Author
 - Ifarontimi Akeem and All my names
-- [My github] (https://github.com/ifaronti)
+- [My github](https://github.com/ifaronti)
 
 ## Acknowledgments
 [Anthony](https://github.com/purplenimbus) - Helped with suggesting different approach to my architecture to prevent unecessary useage of state management extras when the available default APIs are enough given good structure. I refactored the entire app after his initial review of the code base.
