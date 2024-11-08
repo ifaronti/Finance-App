@@ -64,10 +64,10 @@ Users should be able to:
 -  Scheduler: [Cron] (https://github.com/kelektiv/node-cron) - node cron job package used to schedule bill payments for monthly deductions
 -  Fallback:[React-Loader-Spinner] (https://mhnpd.github.io/react-loader-spinner/docs/intro) - load
  screens fallback
-- Data Fetching: [SWR] (https://swr.vercel.app/) - Easy to use data fetcher with cache, state, error management
+- Data Fetching: [SWR] (https://swr.vercel.app/)  Easy to use data fetcher with cache, state, error management
 - Styling: [Tailwind] - (https://tailwindcss.com) - Best CSS framework for me so far
 - Cross Origin : [cors] - (https://www.npmjs.com/package/cors) - node cross origin package
-- Server: [Express] - (http://expressjs.com/) -node package for REST API. Best for me so far.
+ Server: [Express] - (http://expressjs.com/) -node package for REST API. Best for me so far.
 - Authorization Tool: [JWT] (https://jwt.io/) - Json web token used for authorization to user specific data.
 - [bcryptjs] - (https://www.npmjs.com/package/bcryptjs) - for Hashing and verifying user passwords.
 
