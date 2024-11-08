@@ -57,7 +57,7 @@ export default function BillsSummary() {
       <SectionH3
         text="Recurring Bills"
         linkText="See Details"
-        location="dashboard/bills"
+        location="/dashboard/bills"
       />
       <div className="w-full flex flex-col gap-3">{billsRender}</div>
     </section>
