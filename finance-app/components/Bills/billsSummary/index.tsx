@@ -8,7 +8,7 @@ import { useShowbar } from "@/providers/showBarContext";
 
 export default function BillsSummary() {
   const { showBar } = useShowbar();
-  const { data: responseData } = useGetSummary()
+  const { data: responseData, isLoading } = useGetSummary()
   const bills = responseData?.data.billsSummary
   const paymentTransaction = responseData?.data.paidBills
   
@@ -43,6 +43,7 @@ export default function BillsSummary() {
         key={index + 1}
         type={item.type}
         amount={item.amount.toFixed(2)}
+        isLoading={isLoading}
       />
     );
   });

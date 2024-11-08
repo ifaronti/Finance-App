@@ -6,7 +6,7 @@ import { formatAmount, formatDate } from "./formatStrings";
 import useGetSummary from "@/hooks/getSummary";
 
 export default function SummaryTransactions() {
-  const { data:responseData } = useGetSummary()
+  const { data:responseData, isLoading } = useGetSummary()
   const data = responseData?.data?.transactionsSummary;
 
   const transactions = data?.map((item, index) => {
@@ -28,7 +28,7 @@ export default function SummaryTransactions() {
   });
 
   return (
-    <section className="flex w-[343px] gap-8 md:w-[688px] rounded-lg bg-white xl:w-[608px] flex-col sm:p-8 p-5">
+    <section className={`flex w-[343px] ${isLoading? 'animate-pulse':''} gap-8 md:w-[688px] rounded-lg bg-white xl:w-[608px] flex-col sm:p-8 p-5`}>
       <SectionH3
         text="Transactions"
         location="/dashboard/transactions"

@@ -5,7 +5,7 @@ import BillStatus from "./billStatus";
 import useGetBills from "@/hooks/getBills";
 
 export default function SummaryCards() {
-  const { data } = useGetBills({ skip: 0 })
+  const { data, isLoading } = useGetBills({ skip: 0 })
   const bills = data?.data
   const paymentTransaction = data?.paidBills
 
@@ -24,12 +24,12 @@ export default function SummaryCards() {
     (bill) => BillStatus({bill, paymentTransaction }).status === "Upcoming"
   ).map(item => Number(item.amount.toString().replace('-', '')))
 
-  const totalPaid = Number(Paidbills?.reduce((a, b)=> a+b,0).toFixed(2))
-  const totalUpcoming = Number(upcoming?.reduce((a, b)=> a+b,0).toFixed(2))
-  const totalDue = Number(DueSoon?.reduce((a, b)=> a+b,0).toFixed(2))
+  const totalPaid = isLoading? 0: Number(Paidbills?.reduce((a, b)=> a+b,0).toFixed(2))
+  const totalUpcoming = isLoading? 0: Number(upcoming?.reduce((a, b)=> a+b,0).toFixed(2))
+  const totalDue = isLoading? 0: Number(DueSoon?.reduce((a, b)=> a+b,0).toFixed(2))
 
   const card1 = (
-    <div className="bg-gray-900 rounded-lg xl:h-[190px] md:h-[204px] h-[118px] items-center md:items-start p-6 gap-5 md:gap-8 md:pt-[38px] flex flex-row md:flex-col w-[343px] xl:w-[337px] md:w-[332px]">
+    <div className={`bg-gray-900 ${isLoading? 'animate-pulse':''} rounded-lg xl:h-[190px] md:h-[204px] h-[118px] items-center md:items-start p-6 gap-5 md:gap-8 md:pt-[38px] flex flex-row md:flex-col w-[343px] xl:w-[337px] md:w-[332px]`}>
       <span>{recurringSVG}</span>
       <div className="flex text-white flex-col">
         <p className="text-[14px]">Total Bills</p>
@@ -39,7 +39,7 @@ export default function SummaryCards() {
   );
 
   const card2 = (
-    <div className="w-[343px] xl:w-[337px] md:w-[332px] h-[204px] p-5 rounded-lg bg-white flex flex-col gap-5">
+    <div className={`${isLoading? 'animate-pulse':''} w-[343px] xl:w-[337px] md:w-[332px] h-[204px] p-5 rounded-lg bg-white flex flex-col gap-5`}>
       <h3 className=" text-gray-900 text-[1rem] font-bold">Summary</h3>
       <div className="w-full flex flex-col gap-4">
         <div className="w-full flex items-center justify-between">

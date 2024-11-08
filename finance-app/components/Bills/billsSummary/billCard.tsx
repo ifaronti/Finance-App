@@ -1,6 +1,6 @@
-type cardProps = { type: string; amount: string;};
+type cardProps = { type: string; amount: string, isLoading:boolean};
 
-export default function BillCard({ type, amount }: cardProps) {
+export default function BillCard({ type, amount, isLoading }: cardProps) {
   const borderColor = () => {
     let color
     switch (type) {
@@ -18,10 +18,10 @@ export default function BillCard({ type, amount }: cardProps) {
 
   return (
     <div
-      className={`w-full ${borderColor()} px-4 rounded-lg bg-[#F8F4F0] border-l-[3px] h-[61px] items-center flex justify-between`}
+      className={`w-full ${borderColor()} ${isLoading? 'animate-pulse':''} px-4 rounded-lg bg-[#F8F4F0] border-l-[3px] h-[61px] items-center flex justify-between`}
     >
       <p className="text-gray-500 text-[14px]">{type}</p>
-      <p className="text-[14px] font-bold text-gray-900">${amount}</p>
+      <p className="text-[14px] font-bold text-gray-900">{isLoading? '...':'$'+amount}</p>
     </div>
   );
 }

@@ -11,7 +11,7 @@ import Header from "../PageHeader";
 import AddButton from "../addButton";
 
 export default function Pots() {
-  const { data: pots } = useGetPots({ skip: 0 });
+  const { data: pots, isLoading } = useGetPots({ skip: 0 });
   const [currentPot, setCurrentPot] = useState({ name: '', target: 0, total: 0, theme: '', potId: 0 })
   const [potModal, setPotModal] = useState({
     add: false,
@@ -58,10 +58,10 @@ export default function Pots() {
 
   return (
     <section className="flex mx-auto w-fit py-8 flex-col gap-8">
-      <header className="w-full flex items-center justify-between">
+      {!isLoading &&<header className="w-full flex items-center justify-between">
           <Header text="Pots" />
           <AddButton event={selectModal} />
-      </header>
+      </header>}
       <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6">
         {renderPots}
       </div> 

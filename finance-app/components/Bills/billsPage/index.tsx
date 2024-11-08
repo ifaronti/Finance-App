@@ -17,7 +17,7 @@ export default function Bills() {
   const querySkip = Number(searchParams.get('skip'))
   const queryName = searchParams.get('name')?.toString()
   const {showBar} = useShowbar()
-  const { data: bills } = useGetBills({ skip:querySkip, sort:querySort, name:queryName })
+  const { data: bills, isLoading } = useGetBills({ skip:querySkip, sort:querySort, name:queryName })
 
   const deleteItemModal = (id:number) => {
     setShowModal(true)
@@ -45,7 +45,7 @@ export default function Bills() {
   });
 
   return (
-    <div className={`w-[343px] flex-grow-1 md:w-[688px] ${showBar?'2xl:w-[699px] transition-all duration-700':'2xl:w-[911px] transition-all duration-700'} flex realtive rounded-lg flex-col gap-6 bg-white px-5 py-5 md:px-8 md:py-8`}>
+    <div className={`w-[343px] ${isLoading? 'animate-pulse':''} flex-grow-1 md:w-[688px] ${showBar?'2xl:w-[699px] transition-all duration-700':'2xl:w-[911px] transition-all duration-700'} flex realtive rounded-lg flex-col gap-6 bg-white px-5 py-5 md:px-8 md:py-8`}>
       
       <div className="w-full flex justify-between items-center">
         <Search />
