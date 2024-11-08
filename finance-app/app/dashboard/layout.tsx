@@ -2,6 +2,7 @@ import NavSideBar from "@/components/nav";
 import ShowbarProvider from "@/providers/showBarContext";
 import MainHeader from "@/components/accountHeader";
 
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ShowbarProvider>
@@ -17,3 +18,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </ShowbarProvider>
   );
 }
+
+
