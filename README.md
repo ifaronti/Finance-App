@@ -72,13 +72,12 @@ Users should be able to:
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) - for Hashing and verifying user passwords.
 
 ### What I learned
-I used this practice project to solidify my grip on practices/concepts I needed to get familiar with(CI/CD and Oauth). Also, I picked up postgresql and use of ORMs. I tried sequelize which was great but I went for Prisma for its flavours cause it supports multiple langauages and database types. My main achievment with this project is many to many and one to many relations; solidifying my understanding of these is important and this project data architecture is a good practice example for that.
+I used this practice project to solidify my grip on practices/concepts I needed to get familiar with(CI/CD and Oauth). I tried sequelize (ORM) which was great but I went for Prisma for its flavours cause it supports multiple langauages and database types. My main achievment with this project is many to many and one to many relations; solidifying my understanding of these is important and this project's data structure is a good practice example for that.
 
 ### Continued development
-I'll be doing more postgresql, ORMs, Typescript. I need to try Drizzle for the fun of it. 
+Continous practice of devops
 
 ### Useful resources
-
 - [Prisma](https://prisma.io) - doc for Prisma orm. Made set up and useage super easy.
 - [stackoverflow](https://stackoverflow.com) - I use this to check if there are better ways to do whatever I'm doing.
 
@@ -87,4 +86,4 @@ I'll be doing more postgresql, ORMs, Typescript. I need to try Drizzle for the f
 - [My github](https://github.com/ifaronti)
 
 ## Acknowledgments
-[Anthony](https://github.com/purplenimbus) - Helped with suggesting different approach to my architecture to prevent unecessary useage of state management extras when the available default APIs are enough given good structure. I refactored the entire app after his initial review of the code base.
+[Anthony](https://github.com/purplenimbus) - Helped with suggesting different approach to my architecture to prevent unecessary use of state management extras when the default APIs are enough given good structure. I refactored the entire app after his initial review of the code base.
