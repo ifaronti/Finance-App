@@ -48,7 +48,7 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
         currPath = '/pots'
         currText = 'pot'
         break
-      case 'dashboard/bills':
+      case '/dashboard/bills':
         currPath = '/bills?skip=0&sort=Latest&name='
         currText = 'bill'
         break
@@ -61,13 +61,13 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
 
   function deleteItem() {
     const currPath = getCurrentPath()?.currPath
-    if (currPath === '/budgets') {
+    if (currPath.includes('/budgets')) {
       return deleteBudget(Number(id))
     }
-    if (currPath === '/pots') {
+    if (currPath.includes('/pots')) {
       return deletePot(Number(id))
     }
-    if (currPath === 'delete') {
+    if (currPath.includes('delete')) {
       return deleteUser()
     }
     return deleteBill(Number(id))
