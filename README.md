@@ -61,14 +61,14 @@ Users should be able to:
 -  Axios
 -  Oauth
 -  Nodemon
--  [Cron] (https://github.com/kelektiv/node-cron) - node cron job package
--  [React-Loader-Spinner] (https://mhnpd.github.io/react-loader-spinner/docs/intro) - load
+-  Scheduler: [Cron] (https://github.com/kelektiv/node-cron) - node cron job package used to schedule bill payments for monthly deductions
+-  Fallback:[React-Loader-Spinner] (https://mhnpd.github.io/react-loader-spinner/docs/intro) - load
  screens fallback
-- [SWR] (https://swr.vercel.app/) - Easy to use data fetcher with cache, state, error management
-- [Tailwind] - (https://tailwindcss.com) - Best CSS framework for me so far
-- [cors] - (https://www.npmjs.com/package/cors) - node cross origin package
-- [Express] - (http://expressjs.com/) -node package for REST API. Best for me so far.
-- [JWT] (https://jwt.io/) - Json web token used for authorization to user specific data.
+- Data Fetching: [SWR] (https://swr.vercel.app/) - Easy to use data fetcher with cache, state, error management
+- Styling: [Tailwind] - (https://tailwindcss.com) - Best CSS framework for me so far
+- Cross Origin : [cors] - (https://www.npmjs.com/package/cors) - node cross origin package
+- Server: [Express] - (http://expressjs.com/) -node package for REST API. Best for me so far.
+- Authorization Tool: [JWT] (https://jwt.io/) - Json web token used for authorization to user specific data.
 - [bcryptjs] - (https://www.npmjs.com/package/bcryptjs) - for Hashing and verifying user passwords.
 
 ### What I learned
