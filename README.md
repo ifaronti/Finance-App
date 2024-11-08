@@ -56,7 +56,7 @@ Users should be able to:
 - [Prisma] (prisma.io) - Rugged but lightweight ORM
 - [postgresql] (https://www.postgresql.org) - Battle tested database
 - [Neon] (https://neon.tech) - database serverless host
-- [Typescript] (https://typescript.org) - strong typed programming language
+- Programming Language: [Typescript] (https://typescript.org)
 -  Eslint
 -  Axios
 -  Oauth
