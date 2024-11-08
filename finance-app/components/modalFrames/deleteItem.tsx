@@ -59,7 +59,7 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
     return {currPath, currText}
   }
 
-  function deleteItem() {
+  async function deleteItem() {
     const currPath = getCurrentPath()?.currPath
     if (currPath.includes('/budgets')) {
       return deleteBudget(Number(id))
@@ -68,8 +68,8 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
       return deletePot(Number(id))
     }
     if (currPath.includes('delete')) {
-      localStorage.clear()
-      return deleteUser()
+      await deleteUser()
+      return localStorage.clear()
     }
     return deleteBill(Number(id))
   }
