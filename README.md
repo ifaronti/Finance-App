@@ -68,7 +68,7 @@ Users should be able to:
 - [Tailwind](https://tailwindcss.com) - Best CSS framework for me so far
 - [cors](https://www.npmjs.com/package/cors) - node cross origin package
 - [Express](http://expressjs.com/) -node package for REST API. Best for me so far.
-- [JWT] (https://jwt.io/) - Json web token used for authorization to user specific data.
+- [JWT](https://jwt.io/) - Json web token used for authorization to user specific data.
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) - for Hashing and verifying user passwords.
 
 ### What I learned
