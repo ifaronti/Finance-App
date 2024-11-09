@@ -69,7 +69,7 @@ export default function Login() {
   };
 
   return (
-    <section className="w-full flex items-center gap-[140px]">
+    <section className="w-full flex items-center h-[100vh] 2xl:justify-normal justify-center gap-[140px]">
       <div className="hidden p-5 w-[600px] 2xl:block">
         <Image
           width={560}

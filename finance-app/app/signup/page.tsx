@@ -89,7 +89,7 @@ export default function SignUp() {
   };
 
   return (
-    <section className="w-full flex items-center gap-[140px]">
+    <section className="w-full flex items-center h-[100vh] 2xl:justify-normal justify-center gap-[140px]">
       <div className="hidden h-fit p-5 flex-grow-0 w-[600px] 2xl:block">
         <Image width={560} height={920} className=" rounded-lg" alt="Home Image"
           src={"/assets/images/illustration-authentication.svg"}
