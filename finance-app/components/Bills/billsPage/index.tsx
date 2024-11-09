@@ -8,6 +8,7 @@ import DeleteItem from "@/components/modalFrames/deleteItem";
 import { useSearchParams } from "next/navigation";
 import Search from "@/components/searchInput";
 import { useShowbar } from "@/providers/showBarContext";
+import { deleteBill } from "@/components/API-Calls/bills";
 
 export default function Bills() {
   const [currBillId, setCurrBillId] = useState(0)
@@ -64,7 +65,7 @@ export default function Bills() {
       <div className="w-full flex flex-col gap-5">{renderBills}</div>
       
       {showModal &&<div className="z-[200] flex items-center justify-center top-0 left-0 fixed w-full h-full">
-        <DeleteItem falseModal={falseModal} id={currBillId} nameCategory="bill" />
+        <DeleteItem deleteItem={()=>deleteBill(currBillId)} falseModal={falseModal} id={currBillId} nameCategory="bill" />
         <div className="bg-black z-[120] top-0 left-0 fixed opacity-50 w-full h-full"></div>
       </div>}
     </div>

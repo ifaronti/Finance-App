@@ -6,6 +6,7 @@ import Header from "../PageHeader"
 import DeleteItem from "../modalFrames/deleteItem"
 import { buttonEvent } from "../types"
 import SelectHeaderEvent from "./headerEventSelect"
+import { deleteUser } from "../API-Calls/user"
 
 export default function MainHeader() {
     const [showModal, setShowModal] = useState({main:false, deleteUser:false, updateDetails:false})
@@ -34,7 +35,8 @@ export default function MainHeader() {
                 showModal.main && (
                     <div className="fixed left-0 top-0 z-[250] w-full h-[100vh] flex items-center justify-center">
                         {showModal.updateDetails && <UpdateUserDetails shutModal={shutModal} />}
-                        {showModal.deleteUser && <DeleteItem nameCategory="Account" falseModal={shutModal}/>}
+                        
+                        {showModal.deleteUser && <DeleteItem deleteItem={()=>deleteUser()} nameCategory="Account" falseModal={shutModal}/>}
                         <div className="bg-black z-20 opacity-50 fixed w-full h-[100vh]"></div>
                     </div>
                 )

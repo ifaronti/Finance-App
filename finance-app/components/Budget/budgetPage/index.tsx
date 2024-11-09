@@ -12,6 +12,7 @@ import AddBudget from "../budgetModal/addBudget";
 import { useState } from "react";
 import { cardProps } from "..";
 import { useShowbar } from "@/providers/showBarContext";
+import { deleteBudget } from "@/components/API-Calls/budgets";
 
 export default function BudgetCard({ currentModal, budgetModal, falseModal }: cardProps) {
   
@@ -29,7 +30,7 @@ export default function BudgetCard({ currentModal, budgetModal, falseModal }: ca
     currentModal(e);
   };
 
-  const deleteBudget = (e: buttonEvent, item: budget) => {
+  const deleteBtnEvent = (e: buttonEvent, item: budget) => {
     setCurrentBudget((prev) => {
       return {
         ...prev,
@@ -50,7 +51,7 @@ export default function BudgetCard({ currentModal, budgetModal, falseModal }: ca
           category={item.category}
           theme={item.theme}
           edit={(e: buttonEvent) => editBudget(e, item)}
-          del={(e: buttonEvent) => deleteBudget(e, item)}
+          del={(e: buttonEvent) => deleteBtnEvent(e, item)}
         />
         <ProgressBar theme={item.theme} max={item.maximum} spent={item.spent} />
         <BudgetTransaction budget={item} />
@@ -65,7 +66,7 @@ export default function BudgetCard({ currentModal, budgetModal, falseModal }: ca
           <div className={`z-[500] flex items-center justify-center fixed top-0 left-0 w-full h-[100vh]`}>
             {budgetModal.add && <AddBudget falseModal={falseModal}  />}
             {budgetModal.edit && <EditBudget falseModal={falseModal} id={currentBudget.budgetId} />}
-            {budgetModal.delete && <DeleteItem id={Number(currentBudget.budgetId)} falseModal={falseModal} nameCategory={currentBudget.category} />}
+            {budgetModal.delete && <DeleteItem deleteItem={()=>deleteBudget(currentBudget.budgetId)} id={Number(currentBudget.budgetId)} falseModal={falseModal} nameCategory={currentBudget.category} />}
           </div>
       )}
       {budgetModal.showModal &&<div className="bg-black z-[200] top-0 left-0 fixed opacity-50 w-full h-full"></div>  }

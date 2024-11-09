@@ -1,11 +1,7 @@
 import FrameHeader from "./frameHeader";
 import { usePathname, useRouter } from "next/navigation";
-import { deleteBudget } from "../API-Calls/budgets";
-import { deletePot } from "../API-Calls/pots";
 import { mutate } from "swr";
-import { deleteBill } from "../API-Calls/bills";
 import useClickOutside from "@/hooks/useClickOutside";
-import { deleteUser } from "../API-Calls/user";
 import { useRef, useState } from "react";
 import { Hourglass } from "react-loader-spinner";
 import { getDeleteContext } from "../svgAssets";
@@ -13,10 +9,11 @@ import { getDeleteContext } from "../svgAssets";
 type props = {
   id?: number
   falseModal: () => void
-  nameCategory:string
+  nameCategory: string
+  deleteItem:(id: number)=> void;
 }
 
-export default function DeleteItem({ id, falseModal, nameCategory }: props) {
+export default function DeleteItem({ id, falseModal, nameCategory, deleteItem }: props) {
   const [isLoading, setIsLoading] = useState(false)
   const pathName = usePathname();
   const router = useRouter()
@@ -37,24 +34,13 @@ export default function DeleteItem({ id, falseModal, nameCategory }: props) {
     />
   )
 
-  async function deleteItem() {
-    const currPath = getDeleteContext(pathName)?.currPath
-    if (currPath.includes('/budgets')) {
-      return deleteBudget(Number(id))
-    }
-    if (currPath.includes('/pots')) {
-      return deletePot(Number(id))
-    }
-    if (currPath.includes('delete')) {
-      await deleteUser()
-      return localStorage.clear()
-    }
-    return deleteBill(Number(id))
+  const awaitDelete = async () => {
+    return deleteItem(Number(id))
   }
 
   const deleteAndRevalidate = async () => {
     setIsLoading(true)
-    await deleteItem()
+    await awaitDelete()
     await mutate([revalKey])
     setIsLoading(false)
     falseModal()
