@@ -37,7 +37,7 @@ export default function MainHeader() {
 
     return (
         <header className="w-full flex flex-col gap-5 md:gap-[unset] md:flex-row-reverse items-center justify-between">
-            <Header text={accountName}/>
+            <Header text={`${accountName}'s Account`}/>
             {
                 showModal.main && (
                     <div className="fixed left-0 top-0 z-[250] w-full h-[100vh] flex items-center justify-center">
