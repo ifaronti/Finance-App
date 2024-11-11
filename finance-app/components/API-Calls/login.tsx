@@ -7,7 +7,8 @@ type loginBody = {
 
 export type response = {
     success: boolean
-    accessToken:string
+    accessToken: string
+    name?:string
 }
 
 type handleResponse = (data:response)=>void

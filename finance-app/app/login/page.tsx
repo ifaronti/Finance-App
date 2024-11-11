@@ -26,6 +26,7 @@ export default function Login() {
   const handleResponse = (data: response) => {
     if (data.success) {
       localStorage.setItem("token", data.accessToken);
+      localStorage.setItem('name', String(data.name))
       router.push("/dashboard");
     } else {
       setErr((prev) => {

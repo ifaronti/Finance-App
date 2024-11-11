@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams, useRouter  } from "next/navigation";
 import Link from "next/link";
 import { FidgetSpinner } from 'react-loader-spinner'
+import { response } from "@/hooks/oauth";
 
 export default function Page() {
     const [err, setErr] = useState('')
@@ -12,12 +13,16 @@ export default function Page() {
     const code = params.get('code')?.toString()
     const router = useRouter()
 
-    const redirect = () => {
-        router.push('/dashboard')
+    const redirect = (data: response) => {
+        if (data.accessToken) {
+          return router.push('/dashboard')
+        }
+        setErr(String(data))
     }
 
     useEffect(() => {
-        if (code && code !== null) {
+        if (code && code !== undefined) {
+            //@ts-expect-error unnow
             OAuth(code, redirect)
         }
         else {
@@ -26,9 +31,9 @@ export default function Page() {
         //eslint-disable-next-line
     }, [])
     
-    return err ? <div className="w-full flex justify-center items-center gap-4 flex-col h-f[100vh]">
-        <p className="text-[14px] text-red-500">{err}</p>
-        <Link className="border-none hover:bg-gray-500 justify-center font-bold flex items-center bg-gray-900 transition-all duration-500 w-[200px] rounded-lg h-[53px]" href={'/'}>Retry</Link>
+    return err ? <div className="w-full flex justify-center items-center gap-4 flex-col h-[100vh]">
+        <p className="text-[18px] text-red-500">{String(err)}</p>
+        <Link className="border-none text-white hover:bg-gray-500 justify-center font-bold flex items-center bg-gray-900 transition-all duration-500 w-[200px] rounded-lg h-[53px]" href={'/'}>Retry</Link>
     </div>
         :
         <div className="w-full flex items-center justify-center gap-4 flex-col h-[100vh]">
