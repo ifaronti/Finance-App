@@ -29,7 +29,7 @@ export default function MainHeader() {
        return  setShowModal({main:false, deleteUser:false, updateDetails:false})
     }
 
-    const name = localStorage.getItem('name')
+    const name = 'test'
 
     return (
         <header className="w-full flex flex-col gap-5 md:gap-[unset] md:flex-row-reverse items-center justify-between">
