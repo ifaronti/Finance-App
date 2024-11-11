@@ -7,6 +7,7 @@ import DeleteItem from "../modalFrames/deleteItem"
 import { buttonEvent } from "../types"
 import SelectHeaderEvent from "./headerEventSelect"
 import { deleteUser } from "../API-Calls/user"
+import React from "react"
 
 export default function MainHeader() {
     const [showModal, setShowModal] = useState({main:false, deleteUser:false, updateDetails:false})
