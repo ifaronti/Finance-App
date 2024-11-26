@@ -35,7 +35,7 @@ export default function Bills() {
   const renderBills = bills?.data?.map((item, index) => {
     return (
       <div key={index + 1} className="w-full flex gap-5 flex-col">
-        <OneBill bill={item} deleteItemModal={()=>deleteItemModal(item?.BillId)} />
+        <OneBill bill={item} deleteItemModal={()=>deleteItemModal(item?.billId)} />
         {index + 1 === bills?.data?.length ? (
           ""
         ) : (

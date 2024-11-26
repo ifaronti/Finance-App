@@ -76,7 +76,7 @@ export type bill = {
   name: string;
   recurring?: boolean;
   userId?: number;
-  BillId:number
+  billId:number
 }
 
 export type pot = {
