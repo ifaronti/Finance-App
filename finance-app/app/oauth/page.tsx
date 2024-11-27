@@ -20,14 +20,18 @@ export default function Page() {
         setErr(String(data))
     }
 
-    useEffect(() => {
-        if (code && code !== undefined) {
+    const gitLogin = () => {
+        if (code) {
             //@ts-expect-error unnow
             OAuth(code, redirect)
         }
         else {
             setErr('An err has occured retry from homePage')
         }
+    }
+
+    useEffect(() => {
+        gitLogin()
         //eslint-disable-next-line
     }, [])
     
