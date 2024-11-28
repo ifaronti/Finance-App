@@ -54,7 +54,7 @@ export default function BudgetCard({ currentModal, budgetModal, falseModal }: ca
           del={(e: buttonEvent) => deleteBtnEvent(e, item)}
         />
         <ProgressBar theme={item.theme} max={item.maximum} spent={item.spent} />
-        <BudgetTransaction budget={item} />
+        <BudgetTransaction category={item.category} budget={item} />
       </div>
     );
   });

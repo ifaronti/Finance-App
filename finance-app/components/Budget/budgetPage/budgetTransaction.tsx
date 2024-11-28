@@ -7,7 +7,7 @@ import {
 } from "@/components/transactions/summaryTransactions/formatStrings";
 import { budget } from "@/components/types";
 
-export default function BudgetTransaction({ budget }:{budget:budget}) {
+export default function BudgetTransaction({ budget, category }:{budget:budget, category:string}) {
 
   const renderTrn = budget?.category_relate?.transactions?.map((item, index) => {
     return (
@@ -32,7 +32,7 @@ export default function BudgetTransaction({ budget }:{budget:budget}) {
       <SectionH3
         text="Latest Spending"
         linkText="See Details"
-        location="/dashboard/transactions"
+        location={`/dashboard/transactions?skip=0&sort=Latest&category=${category}&name=`}
       />
       <span className="flex flex-col gap-3">{renderTrn}</span>
     </div>
