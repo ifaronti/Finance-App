@@ -1,8 +1,8 @@
 export const formatAmount = (amount: number) => {
   const amountStr = amount.toString().replace("-", "");
   const newFormat = amount.toString().includes("-")
-    ? "-$" + parseFloat(amountStr).toFixed(2)
-    : "+$" + amount.toFixed(2);
+    ? "-$" + Number(amountStr)
+    : "+$" + amount;
   return newFormat;
 };
 

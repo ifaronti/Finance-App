@@ -38,7 +38,7 @@ export default function OneBill({ bill, deleteItemModal }: props) {
       >
         {formatAmount(bill?.amount)}
       </p>
-      <button onClick={deleteItemModal} className="absolute hidden group-hover:block right-14">{closeModal}</button>
+      <button onClick={deleteItemModal} className="absolute block md:hidden group-hover:block right-14">{closeModal}</button>
     </div>
   );
 }
