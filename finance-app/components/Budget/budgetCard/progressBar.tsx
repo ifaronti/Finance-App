@@ -21,7 +21,7 @@ export default function ProgressBar({ theme, max, spent }:barProps) {
       </div>
       <div className="w-full gap-4 flex">
         <span className="w-[48.5295%]">
-            <ColorBars name="Spent" amount={spent.toFixed(2)} color={theme} />
+            <ColorBars name="Spent" amount={String(spent)} color={theme} />
         </span>
         <span className="w-[48.5295%]">
         <ColorBars name="Remaining" amount={remaining.toFixed(2)} color="#F8F4F0"/>

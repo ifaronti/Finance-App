@@ -9,8 +9,8 @@ export default function ChartCard() {
     return (
       <div key={index + 1} className="flex flex-col gap-4">  
         <ChartItems
-            maximum={item.maximum.toFixed(2)}
-            spent={item.spent.toFixed(2)}
+            maximum={String(item.maximum)}
+            spent={String(item.spent)}
             category={item.category}
             theme={item.theme}
         />
