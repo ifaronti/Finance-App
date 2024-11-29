@@ -14,7 +14,7 @@ export default function ChartCard() {
             category={item.category}
             theme={item.theme}
         />
-        {index +1 === data?.chartItems.length? '': <hr className="w-full bg-gray-100 h-[1px]"/>}
+        {index +1 === data?.data.length? '': <hr className="w-full bg-gray-100 h-[1px]"/>}
       </div>
     )
   });

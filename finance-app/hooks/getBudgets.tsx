@@ -9,7 +9,6 @@ type getBudgetRequest = {
 type getBudgetResponse = {
   success: true;
   data: budget[];
-  chartItems:budget[]
 };
 
 export default function useGetBudgets(params: getBudgetRequest) {
