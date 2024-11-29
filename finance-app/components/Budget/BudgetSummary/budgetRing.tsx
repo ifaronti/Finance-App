@@ -10,7 +10,7 @@ export default function RingChart() {
     const spent = data?.data?.budgetSummary?.summary?._sum?.spent
     const maximum = data?.data.budgetSummary.summary._sum.maximum
 
-    const percentage = budget?.chartItems.map(item => {
+    const percentage = budget?.data.map(item => {
         return {theme:item.theme, percentage:((item.spent)/Number(spent)*100)}
     }).sort((a, b)=>Number(a.percentage) - Number(b.percentage))
     

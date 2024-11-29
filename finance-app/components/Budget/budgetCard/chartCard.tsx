@@ -5,7 +5,7 @@ import ChartItems from "./ringChartItems";
 export default function ChartCard() {
   const { data, isLoading } = useGetBudgets({ skip: 0 })
 
-  const summaryBudget = data?.chartItems.map((item, index) => {
+  const summaryBudget = data?.data.map((item, index) => {
     return (
       <div key={index + 1} className="flex flex-col gap-4">  
         <ChartItems
