@@ -8,10 +8,10 @@ export default function RingChart() {
     const { data } = useGetSummary()
     const {data:budget} = useGetBudgets({skip:0})
     const spent = data?.data?.budgetSummary?.summary?._sum?.spent
-    const maximum = data?.data.budgetSummary.summary._sum.maximum
+    const maximum = data?.data.budgetSummary.summary._sum.maximum    
 
     const percentage = budget?.data.map(item => {
-        return {theme:item.theme, percentage:((item.spent)/Number(spent)*100)}
+        return {theme:item.theme, percentage:(Number(String(item.spent).replace(/-/, ''))/Number(spent)*100)}
     }).sort((a, b)=>Number(a.percentage) - Number(b.percentage))
     
     function gradient(arr:arr) {

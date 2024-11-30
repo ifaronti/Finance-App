@@ -1,4 +1,4 @@
-type barsProps = { name: string; amount: string; color: string };
+type barsProps = { name: string; amount: number; color: string };
 
 export default function ColorBars({ name, amount, color }: barsProps) {
 

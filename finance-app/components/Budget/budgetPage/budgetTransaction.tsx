@@ -9,7 +9,7 @@ import { budget } from "@/components/types";
 
 export default function BudgetTransaction({ budget, category }:{budget:budget, category:string}) {
 
-  const renderTrn = budget?.category_relate?.transactions?.map((item, index) => {
+  const renderTrn = budget?.transactions?.map((item, index) => {
     return (
       <div key={index + 1} className="flex flex-col gap-3">
         <OneTransaction
@@ -18,7 +18,7 @@ export default function BudgetTransaction({ budget, category }:{budget:budget, c
           profilePic={item.avatar.substring(1)}
           date={formatDate(item.date)}
         />
-        {index + 1 === budget?.category_relate?.transactions.length ? (
+        {index + 1 === budget?.transactions.length ? (
           ""
         ) : (
           <hr className="w-full bg-gray-500 h-[1px]" />

@@ -10,7 +10,7 @@ export default function ChartCard() {
       <div key={index + 1} className="flex flex-col gap-4">  
         <ChartItems
             maximum={String(item.maximum)}
-            spent={String(item.spent)}
+            spent={String(item.spent).replace(/-/, '')}
             category={item.category}
             theme={item.theme}
         />

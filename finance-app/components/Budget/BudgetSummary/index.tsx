@@ -15,7 +15,7 @@ export default function BudgetSummary() {
       <ColorBars
         key={index + 1}
         name={item.category}
-        amount={item.maximum.toFixed(2).toString()}
+        amount={item.maximum}
         color={item.theme}
       />
     );

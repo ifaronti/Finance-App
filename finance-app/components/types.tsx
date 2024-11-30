@@ -60,10 +60,8 @@ export type budget = {
   userId?: number;
   budgetId?: number;
   date?: string;
-  category_relate?: {
-    category?: string;
-    transactions: transaction[];
-  };
+  transactions: transaction[];
+  
 };
 
 export type bill = {
