@@ -14,7 +14,7 @@ export default function PotsSummary() {
       <ColorBars
         key={index + 1}
         name={item.name}
-        amount={item.total.toString()}
+        amount={item.total}
         color={item?.theme}
       />
     );
