@@ -1,31 +1,31 @@
-import { bill, transaction } from "@/components/types";
+import { bill } from "@/components/types";
 import { formatDate, getLastDayOfMonth } from "@/components/svgAssets";
 
 type props = {
     bill: bill
-    paymentTransaction: transaction[]
 }
 
-export default function BillStatus({ bill, paymentTransaction }: props) {    
+export default function BillStatus({ bill}: props) {    
     
-    const billStatus = (bill:bill, payments:transaction[]) => {
+    const billStatus = (bill:bill) => {
         let status
-        const dueMonth = Number(new Date(bill?.createdAt).getMonth())
-        const currentMonth = Number(new Date().getMonth())+1
-        const dueDate = new Date(bill?.createdAt).getDate()
-        const currentDate = new Date().getDate()
-        const upcoming = Number(dueDate) - Number(currentDate) 
 
-        if (payments?.some(item => item.name === bill?.name) && dueMonth === currentMonth) {
+        const currentMonth = Number(new Date().getMonth())+1
+        const dueDate = bill?.due_day
+        const currentDate = new Date().getDate()
+        const upcoming = dueDate - currentDate
+        const lastDay = getLastDayOfMonth(currentMonth)
+
+        if (dueDate < currentDate) {
             status = 'paid'
         } 
-        if (dueDate > currentDate && Number(dueDate) - Number(currentDate) <= 7 ) {
+        if (dueDate > currentDate && dueDate - currentDate <= 7 ) {
             status = 'Due Soon'
         }
-        if (upcoming > 7 && currentMonth == dueMonth) {
+        if (upcoming > 7 ) {
             status = 'Upcoming'
         }
-        const lastDay = getLastDayOfMonth(currentMonth)
+        
         if (dueDate < 7 && lastDay === currentDate ) {
             status = 'Due Soon'
         }
@@ -34,5 +34,5 @@ export default function BillStatus({ bill, paymentTransaction }: props) {
         }
         return {status:status, date:formatDate(dueDate)}
     }
-    return billStatus(bill, paymentTransaction)
+    return billStatus(bill)
 }

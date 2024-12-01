@@ -1,14 +1,14 @@
 import useGetBudgets from "@/hooks/getBudgets"
-import useGetSummary from "@/hooks/getSummary"
 
 type obj = { theme: string, percentage: number }
 type arr =obj[]
 
 export default function RingChart() {
-    const { data } = useGetSummary()
     const {data:budget} = useGetBudgets({skip:0})
-    const spent = data?.data?.budgetSummary?.summary?._sum?.spent
-    const maximum = data?.data.budgetSummary.summary._sum.maximum    
+    const maximum = budget?.data.map(item => Number(String(item.maximum).replace(/-/, '')))
+    .reduce((a, b)=> a+b,0)  
+    const spent = budget?.data.map(item => Number(String(item.spent).replace(/-/, '')))
+    .reduce((a, b)=> a+b,0)    
 
     const percentage = budget?.data.map(item => {
         return {theme:item.theme, percentage:(Number(String(item.spent).replace(/-/, ''))/Number(spent)*100)}

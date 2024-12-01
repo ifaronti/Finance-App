@@ -8,10 +8,10 @@ type props = {
 
 export default function AddWithDrawProgressBar({ modal, currentPot, newValue }: props) {
   const newTotal = modal.addMoney
-    ? Number(newValue) + currentPot.total
-    : Number(newValue) > currentPot.total
+    ? Number(newValue) + Number(Number(currentPot.total))
+    : Number(newValue) > Number(currentPot.total)
     ? 0
-    : currentPot.total - Number(newValue);
+    : Number(currentPot.total) - Number(newValue);
 
   const newAmount = (
     <div className="w-full flex items-center justify-between">
@@ -23,12 +23,12 @@ export default function AddWithDrawProgressBar({ modal, currentPot, newValue }: 
   );
 
   const projectedPercent = (newTotal / currentPot.target) * 100;
-  const actualPercent = (currentPot.total / currentPot.target) * 100;
+  const actualPercent = (Number(currentPot.total) / currentPot.target) * 100;
   const actualProgress = modal.addMoney
     ? actualPercent + "%"
     : newValue && projectedPercent + "%";
   const projectedProgress =
-    modal.addMoney && currentPot.total !== 0
+    modal.addMoney && Number(currentPot.total) !== 0
       ? projectedPercent + "%"
       : actualPercent - projectedPercent + "%";
 

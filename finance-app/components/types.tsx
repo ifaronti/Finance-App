@@ -55,12 +55,12 @@ export type budget = {
   category: string;
   maximum: number;
   theme: string;
-  spent: number;
+  spent?: number;
   categoryId: number;
   userId?: number;
   budgetId?: number;
   date?: string;
-  transactions: transaction[];
+  transactions?: transaction[];
   
 };
 
@@ -74,7 +74,8 @@ export type bill = {
   name: string;
   recurring?: boolean;
   userId?: number;
-  billId:number
+  billId: number;
+  due_day: number;
 }
 
 export type pot = {

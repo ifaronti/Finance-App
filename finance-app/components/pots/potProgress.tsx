@@ -11,7 +11,7 @@ export default function PotProgress({ pot }: prop) {
   const progressHeader = (
     <div className="w-full flex justify-between items-center">
       <p className="text-gray-500 text-[14px]">Total Saved</p>
-      <p className="text-gray-900 font-bold text-[2rem]">${(pot.total).toFixed(2)}</p>
+      <p className="text-gray-900 font-bold text-[2rem]">${(pot.total)}</p>
     </div>
   );
 

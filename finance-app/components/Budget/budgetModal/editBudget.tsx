@@ -33,7 +33,7 @@ export default function EditBudget({falseModal, id}: props) {
         theme: String(targetBudget?.theme),
         budgetId: targetBudget?.budgetId,
         categoryId: Number(targetBudget?.categoryId),
-        spent:Number(targetBudget?.spent)
+        // spent:Number(targetBudget?.spent)
     })
 
     const handleChange = (e: inputEvent | buttonEvent) => {

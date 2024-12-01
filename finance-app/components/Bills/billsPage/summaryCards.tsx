@@ -7,22 +7,15 @@ import useGetBills from "@/hooks/getBills";
 export default function SummaryCards() {
   const { data, isLoading } = useGetBills({ skip: 0 })
   const bills = data?.data
-  const paymentTransaction = data?.paidBills
 
-  const Paidbills = bills?.filter(
-  //@ts-expect-error swr undefined init state
-    (bill) => BillStatus({bill, paymentTransaction }).status === "paid"
-  ).map(item => Number(item.amount.toString().replace('-', '')))
+  const Paidbills = bills?.filter((bill) => BillStatus({ bill }).status === "paid")
+    .map(item => Number(item.amount.toString().replace('-', '')))
 
-  const DueSoon = bills?.filter(
-  //@ts-expect-error swr undefined init state
-    (bill) => BillStatus({bill, paymentTransaction }).status === "Due Soon"
-  ).map(item => Number(item.amount.toString().replace('-', '')))
+  const DueSoon = bills?.filter((bill) => BillStatus({ bill }).status === "Due Soon")
+    .map(item => Number(item.amount.toString().replace('-', '')))
 
-  const upcoming = bills?.filter(
-  //@ts-expect-error swr undefined init state
-    (bill) => BillStatus({bill, paymentTransaction }).status === "Upcoming"
-  ).map(item => Number(item.amount.toString().replace('-', '')))
+  const upcoming = bills?.filter((bill) => BillStatus({ bill }).status === "Upcoming")
+    .map(item => Number(item.amount.toString().replace('-', '')))
 
   const totalPaid = isLoading? 0: Number(Paidbills?.reduce((a, b)=> a+b,0).toFixed(2))
   const totalUpcoming = isLoading? 0: Number(upcoming?.reduce((a, b)=> a+b,0).toFixed(2))

@@ -5,27 +5,19 @@ import BillStatus from "../billsPage/billStatus";
 import useGetSummary from "@/hooks/getSummary";
 import { useShowbar } from "@/providers/showBarContext";
 
-
 export default function BillsSummary() {
   const { showBar } = useShowbar();
   const { data: responseData, isLoading } = useGetSummary()
   const bills = responseData?.data.billsSummary
-  const paymentTransaction = responseData?.data.paidBills
   
-  const Paidbills = bills?.filter(
-  //@ts-expect-error swr undefined init state
-    (bill) => BillStatus({bill, paymentTransaction }).status === "paid"
-  ).map(item => Number(item.amount.toString().replace('-', '')))
+  const Paidbills = bills?.filter((bill) => BillStatus({ bill }).status === "paid")
+    .map(item => Number(item.amount.toString().replace('-', '')))
 
-  const DueSoon = bills?.filter(
-  //@ts-expect-error swr undefined init state
-    (bill) => BillStatus({bill, paymentTransaction }).status === "Due Soon"
-  ).map(item => Number(item.amount.toString().replace('-', '')))
+  const DueSoon = bills?.filter((bill) => BillStatus({ bill }).status === "Due Soon")
+    .map(item => Number(item.amount.toString().replace('-', '')))
 
-  const upcoming = bills?.filter(
-  //@ts-expect-error swr undefined init state
-    (bill) => BillStatus({bill, paymentTransaction }).status === "Upcoming"
-  ).map(item => Number(item.amount.toString().replace('-', '')))
+  const upcoming = bills?.filter((bill) => BillStatus({ bill }).status === "Upcoming")
+    .map(item => Number(item.amount.toString().replace('-', '')))
 
   const totalPaid = Number(Paidbills?.reduce((a, b) => a + b, 0).toFixed(2))
   const totalUpcoming = Number(upcoming?.reduce((a, b) => a + b, 0).toFixed(2))
@@ -36,7 +28,7 @@ export default function BillsSummary() {
     { type: "Total Upcoming", amount: totalUpcoming },
     { type: "Due Soon", amount: totalDue, },
   ];
-
+ 
   const billsRender = renderData.map((item, index) => {
     return (
       <BillCard
