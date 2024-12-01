@@ -23,7 +23,11 @@ export default function AddBill({ falseModal }: props) {
     category: "",
     amount: 0,
     categoryId: 0,
+    due_day:0
   });
+
+  console.log(reqBody);
+  
 
   const billRef = useRef(null)
   useClickOutside({ref:billRef, falseModal})
@@ -47,9 +51,10 @@ export default function AddBill({ falseModal }: props) {
     
   async function handleSubmit() {
       setIsLoading(true)
-      const { amount, category, categoryId, name, avatar } = reqBody
-      if (!amount || !category || !categoryId || !name || !avatar) {
-        return
+      const { amount, category, categoryId, name, avatar, due_day } = reqBody
+    if (!amount || !category || !categoryId || !name || !avatar || Number(due_day) === null || Number(due_day) > 31 || Number(due_day) < 1 || String(due_day).length > 2) {
+        setIsLoading(false)
+        return alert('Ensure all fields are entered. Due day field can not be more than 31 or less than 1')
       }
       await addBill({ ...reqBody, amount: -reqBody.amount })
       await mutate(['/bills?skip=0&sort=Latest&name='])
@@ -74,6 +79,12 @@ export default function AddBill({ falseModal }: props) {
         value={reqBody.name}
         type="text"
         name="name"
+      />
+      <InputComponent
+        handleChange={handleChange}
+        value={reqBody.due_day}
+        type="number"
+        name="due_day"
       />
       <AddEditBTN isLoading={isLoading} text="Add Bill" event={handleSubmit}/>
     </div>
