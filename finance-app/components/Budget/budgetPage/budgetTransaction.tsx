@@ -18,7 +18,7 @@ export default function BudgetTransaction({ budget, category }:{budget:budget, c
           profilePic={item.avatar.substring(1)}
           date={formatDate(item.date)}
         />
-        {index + 1 === budget?.transactions.length ? (
+        {index + 1 === budget?.transactions?.length ? (
           ""
         ) : (
           <hr className="w-full bg-gray-500 h-[1px]" />
