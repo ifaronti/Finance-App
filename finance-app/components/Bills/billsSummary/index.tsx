@@ -1,32 +1,17 @@
 'use client'
 import BillCard from "./billCard";
 import SectionH3 from "@/components/sectionHeader";
-import BillStatus from "../billsPage/billStatus";
 import useGetSummary from "@/hooks/getSummary";
 import { useShowbar } from "@/providers/showBarContext";
 
 export default function BillsSummary() {
   const { showBar } = useShowbar();
   const { data: responseData, isLoading } = useGetSummary()
-  const bills = responseData?.data.billsSummary
   
-  const Paidbills = bills?.filter((bill) => BillStatus({ bill }).status === "paid")
-    .map(item => Number(item.amount.toString().replace('-', '')))
-
-  const DueSoon = bills?.filter((bill) => BillStatus({ bill }).status === "Due Soon")
-    .map(item => Number(item.amount.toString().replace('-', '')))
-
-  const upcoming = bills?.filter((bill) => BillStatus({ bill }).status === "Upcoming")
-    .map(item => Number(item.amount.toString().replace('-', '')))
-
-  const totalPaid = Number(Paidbills?.reduce((a, b) => a + b, 0).toFixed(2))
-  const totalUpcoming = Number(upcoming?.reduce((a, b) => a + b, 0).toFixed(2))
-  const totalDue = Number(DueSoon?.reduce((a, b) => a + b, 0).toFixed(2))
-
   const renderData = [
-    { type: "Paid Bills", amount: totalPaid },
-    { type: "Total Upcoming", amount: totalUpcoming },
-    { type: "Due Soon", amount: totalDue, },
+    { type: "Paid Bills", amount: responseData?.data.paid_bills },
+    { type: "Total Upcoming", amount: responseData?.data.upcoming_bills },
+    { type: "Due Soon", amount: responseData?.data.due_soon, },
   ];
  
   const billsRender = renderData.map((item, index) => {
@@ -34,7 +19,7 @@ export default function BillsSummary() {
       <BillCard
         key={index + 1}
         type={item.type}
-        amount={item.amount.toFixed(2)}
+        amount={Number(item?.amount)}
         isLoading={isLoading}
       />
     );

@@ -30,6 +30,7 @@ export default function AddBudget({falseModal}:{falseModal:()=>void}) {
     }
     await createbudget({...reqBody, spent:0});
     await mutate(["/budgets"])
+    await mutate(["/summary"])
     setLoading(false)
     falseModal()
     return

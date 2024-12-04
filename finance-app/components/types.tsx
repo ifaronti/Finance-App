@@ -76,6 +76,7 @@ export type bill = {
   userId?: number;
   billId: number;
   due_day: number;
+  status?:string
 }
 
 export type pot = {

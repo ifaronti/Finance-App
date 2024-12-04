@@ -13,6 +13,7 @@ export default function Transactions() {
   const name = (params.get('name'))?.toString()
   const category = params.get('category')?.toString()
   const { data} = useGetTransactions({skip, sort, category, name})
+console.log(data);
 
   const allTransactions = data?.data?.map((item, index) => {
     return (

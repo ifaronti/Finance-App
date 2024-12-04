@@ -8,9 +8,10 @@ import { useShowbar } from "@/providers/showBarContext";
 
 export default function BudgetSummary() {
   const { data: responseData, isLoading } = useGetSummary()
-  const {showBar }= useShowbar()
+  const { showBar } = useShowbar()
+  const data = responseData?.data.budgets.filter((item, index)=> index <=3)
 
-  const indicators = responseData?.data?.budgetSummary?.snippet?.map((item, index) => {
+  const indicators = data?.map((item, index) => {
     return (
       <ColorBars
         key={index + 1}

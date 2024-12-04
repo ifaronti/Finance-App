@@ -47,6 +47,7 @@ export default function AddPot({falseModal}:props) {
         }
         await createPot(reqBody)
         await mutate(["/pots"])
+        await mutate(['/summary'])
         setLoading(false)
         falseModal()
         return

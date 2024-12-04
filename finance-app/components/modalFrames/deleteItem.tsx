@@ -42,6 +42,7 @@ export default function DeleteItem({ id, falseModal, nameCategory, deleteItem }:
     setIsLoading(true)
     await awaitDelete()
     await mutate([revalKey])
+    await mutate(["/summary"])
     setIsLoading(false)
     falseModal()
     if (revalKey === 'delete') {

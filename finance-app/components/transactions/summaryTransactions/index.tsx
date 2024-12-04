@@ -7,9 +7,8 @@ import useGetSummary from "@/hooks/getSummary";
 
 export default function SummaryTransactions() {
   const { data:responseData, isLoading } = useGetSummary()
-  const data = responseData?.data?.transactionsSummary;
 
-  const transactions = data?.map((item, index) => {
+  const transactions = responseData?.data?.transactions?.map((item, index) => {
     return (
       <div key={index + 1}>
         <OneTransaction
@@ -18,7 +17,7 @@ export default function SummaryTransactions() {
           profilePic={item.avatar.substring(1)}
           date={formatDate(item.date)}
         />
-        {index + 1 === data.length ? (
+        {index + 1 === responseData.data.transactions.length ? (
           ""
         ) : (
           <hr className="mt-5 h-[1px] bg-gray-100 mb-5" />

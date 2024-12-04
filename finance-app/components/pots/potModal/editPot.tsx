@@ -50,6 +50,7 @@ export default function EditPot({ falseModal, potId }: props) {
         }
         await editPot(data)
         await mutate(['/pots'])
+        await mutate(['/summary'])
         setLoading(false)
         falseModal()
         return

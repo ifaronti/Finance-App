@@ -50,6 +50,7 @@ export default function EditBudget({falseModal, id}: props) {
         setLoading(true)
         await editBudget(currentBudget)
         await mutate(["/budgets"])
+        await mutate(["/summary"])
         setLoading(false)
         falseModal()
         return

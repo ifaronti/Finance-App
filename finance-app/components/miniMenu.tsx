@@ -1,6 +1,7 @@
 import { usePathname } from "next/navigation"
 import { buttonEvent } from "./modalFrames/input1"
 
+
 type props = {
     editItem: (e:buttonEvent)=>void
     deleteItem:(e:buttonEvent)=>void
@@ -12,7 +13,7 @@ export default function DeleteEditMenu({ editItem, deleteItem }: props) {
     const text1 = isBudget ? "Edit Budget" : "Edit Pot";
     const text2 = isBudget ? "Delete Budget" : "Delete Pot";
     
-    const toggleEditModal = (e: buttonEvent) => {
+    const toggleEditModal = async (e: buttonEvent) => {
         editItem(e)
     }
 

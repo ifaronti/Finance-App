@@ -57,7 +57,7 @@ export default function AddBill({ falseModal }: props) {
         return alert('Ensure all fields are entered. Due day field can not be more than 31 or less than 1')
       }
       await addBill({ ...reqBody, amount: -reqBody.amount })
-      await mutate(['/bills?skip=0&sort=Latest&name='])
+      await mutate(['/bills?skip=0&sort=Latest&name=', '/summary'])
       setIsLoading(false)
       falseModal()
       return

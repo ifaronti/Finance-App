@@ -1,26 +1,40 @@
 import callClient from "@/lib/axios";
 import useSWR from "swr";
-import { transaction, pot, budget, bill } from "@/components/types";
 
-type GetSummaryResponse = {
+type budget = {
+  category: string,
+  theme: string,
+  spent: number
+  maximum: number
+}
+
+type pot = {
+  name: string
+  total: number
+  theme: string
+}
+
+type transaction = {
+  amount: number
+  date: string
+  avatar: string
+  name:string
+}
+export type GetSummaryResponse = {
   success: boolean;
   data: {
-    transactionsSummary: transaction[];
-    billsSummary: bill[];
-    paidBills:transaction[]
-    budgetSummary: {
-      summary: { _sum: { maximum: number; spent: number } };
-      snippet: budget[];
-    };
-    potSummary: {
-      totalSaved: { _sum: { total: number } };
-      summaryItems: pot[];
-    };
-    accountSummary: {
-      balance: number
-      expenses: number
-      income:number
-    },
+    income: number;
+    expenses: number;
+    balance: number
+    total_saved: number
+    paid_bills: number
+    upcoming_bills: number
+    due_soon: number
+    total_spent: number
+    total_limits: number
+    budgets: budget[]
+    transactions: transaction[]
+    pots:pot[]
   };
 };
 

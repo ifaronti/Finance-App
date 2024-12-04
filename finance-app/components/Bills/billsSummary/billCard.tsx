@@ -1,4 +1,4 @@
-type cardProps = { type: string; amount: string, isLoading:boolean};
+type cardProps = { type: string; amount: number, isLoading:boolean};
 
 export default function BillCard({ type, amount, isLoading }: cardProps) {
   const borderColor = () => {

@@ -1,18 +1,17 @@
-import useGetBudgets from "@/hooks/getBudgets"
+import useGetSummary from "@/hooks/getSummary"
 
 type obj = { theme: string, percentage: number }
 type arr =obj[]
 
 export default function RingChart() {
-    const {data:budget} = useGetBudgets({skip:0})
-    const maximum = budget?.data.map(item => Number(String(item.maximum).replace(/-/, '')))
-    .reduce((a, b)=> a+b,0)  
-    const spent = budget?.data.map(item => Number(String(item.spent).replace(/-/, '')))
-    .reduce((a, b)=> a+b,0)    
+    const {data:response} = useGetSummary()
+    const maximum = response?.data.budgets.map(item => Number(item.maximum)).reduce((a, b)=>a+b,0)
+    const spent = response?.data.budgets.map(item => Number(String(item.spent).replace('-', ''))).reduce((a, b)=> a+b,0)
 
-    const percentage = budget?.data.map(item => {
-        return {theme:item.theme, percentage:(Number(String(item.spent).replace(/-/, ''))/Number(spent)*100)}
-    }).sort((a, b)=>Number(a.percentage) - Number(b.percentage))
+    const percentage = response?.data.budgets.map(item => {
+        return {theme:item.theme, percentage:(Number(String(item.spent).replace("-", ''))/Number(spent)*100)}
+    }).sort((a, b) => Number(a.percentage) - Number(b.percentage))
+    
     
     function gradient(arr:arr) {
         let bg = `conic-gradient(`
