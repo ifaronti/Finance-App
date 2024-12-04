@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import Search from "@/components/searchInput";
 import { useShowbar } from "@/providers/showBarContext";
 import { deleteBill } from "@/components/API-Calls/bills";
+import Pagination from "@/components/transactions/transactionPage/pagination";
 
 export default function Bills() {
   const [currBillId, setCurrBillId] = useState(0)
@@ -63,6 +64,7 @@ export default function Bills() {
       <hr className="w-full hidden md:block h-[1px] bg-gray-500" />
       
       <div className="w-full flex flex-col gap-5">{renderBills}</div>
+      <Pagination isLastPage={Boolean(bills?.isLastPage)} />
       
       {showModal &&<div className="z-[200] flex items-center justify-center top-0 left-0 fixed w-full h-full">
         <DeleteItem deleteItem={()=>deleteBill(currBillId)} falseModal={falseModal} id={currBillId} nameCategory="bill" />
