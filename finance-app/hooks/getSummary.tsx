@@ -25,16 +25,17 @@ export type GetSummaryResponse = {
   data: {
     income: number;
     expenses: number;
-    balance: number
-    total_saved: number
-    paid_bills: number
-    upcoming_bills: number
-    due_soon: number
-    total_spent: number
-    total_limits: number
-    budgets: budget[]
-    transactions: transaction[]
-    pots:pot[]
+    balance: number;
+    total_saved: number;
+    paid_bills: number;
+    upcoming_bills: number;
+    due_soon: number;
+    total_spent: number;
+    total_limits: number;
+    total_bills: number;
+    budgets: budget[];
+    transactions: transaction[];
+    pots: pot[];
   };
 };
 

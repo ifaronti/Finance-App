@@ -3,7 +3,6 @@
 import { recurringSVG } from "@/components/svgAssets";
 import useGetBills from "@/hooks/getBills";
 import useGetSummary from "@/hooks/getSummary";
-import { formatAmount } from "@/components/transactions/summaryTransactions/formatStrings";
 
 export default function SummaryCards() {
   const { data, isLoading } = useGetBills({ skip: 0 })
@@ -12,9 +11,8 @@ export default function SummaryCards() {
   const paidBills = bills?.filter(item => item.status === 'paid')
   const upcoming = bills?.filter(item => item.status === 'upcoming')
   const dueSoon = bills?.filter(item => item.status === 'soon')  
+  const monthly_total = summary?.data?.total_bills
   
-  const monthly_total = Number(summary?.data.paid_bills) + Number(summary?.data.due_soon) + Number(summary?.data.upcoming_bills)
-
   const card1 = (
     <div className={`bg-gray-900 ${isLoading? 'animate-pulse':''} rounded-lg xl:h-[190px] md:h-[204px] h-[118px] items-center md:items-start p-6 gap-5 md:gap-8 md:pt-[38px] flex flex-row md:flex-col w-[343px] xl:w-[337px] md:w-[332px]`}>
       <span>{recurringSVG}</span>
@@ -32,19 +30,19 @@ export default function SummaryCards() {
         <div className="w-full flex items-center justify-between">
           <p className="text-gray-500 text-[12px]">Paid Bills</p>
           <p className="text-gray-900 font-bold  text-[12px]">
-            {paidBills?.length}(${String(summary?.data.paid_bills).replace(/-/, "")})
+            {paidBills?.length}(${String(summary?.data?.paid_bills).replace(/-/, "")})
             
           </p>
         </div>
         <hr className="w-full h-[1px] bg-gray-500" />
         <div className="w-full flex items-center justify-between">
           <p className="text-gray-500 text-[12px]">Total Upcoming</p>
-          <p className="text-gray-900 font-bold  text-[12px]">{upcoming?.length}(${ String(summary?.data.upcoming_bills).replace(/-/, "")})</p>
+          <p className="text-gray-900 font-bold  text-[12px]">{upcoming?.length}(${ String(summary?.data?.upcoming_bills).replace(/-/, "")})</p>
         </div>
         <hr className="w-full h-[1px] bg-gray-500" />
         <div className="w-full text-red-700 flex items-center justify-between">
           <p className="text-[12px]">Due Soon</p>
-          <p className="font-bold text-[12px]">{dueSoon?.length}(${String(summary?.data.due_soon).replace(/-/, "")})</p>
+          <p className="font-bold text-[12px]">{dueSoon?.length}(${String(summary?.data?.due_soon).replace(/-/, "")})</p>
         </div>
       </div>
     </div>

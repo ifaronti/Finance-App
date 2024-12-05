@@ -17,7 +17,7 @@ export default function SummaryTransactions() {
           profilePic={item.avatar.substring(1)}
           date={formatDate(item.date)}
         />
-        {index + 1 === responseData.data.transactions.length ? (
+        {index + 1 === responseData?.data?.transactions?.length ? (
           ""
         ) : (
           <hr className="mt-5 h-[1px] bg-gray-100 mb-5" />

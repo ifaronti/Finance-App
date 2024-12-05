@@ -5,10 +5,10 @@ type arr =obj[]
 
 export default function RingChart() {
     const {data:response} = useGetSummary()
-    const maximum = response?.data.budgets.map(item => Number(item.maximum)).reduce((a, b)=>a+b,0)
-    const spent = response?.data.budgets.map(item => Number(String(item.spent).replace('-', ''))).reduce((a, b)=> a+b,0)
+    const maximum = response?.data?.budgets.map(item => Number(item.maximum)).reduce((a, b)=>a+b,0)
+    const spent = response?.data?.budgets.map(item => Number(String(item.spent).replace('-', ''))).reduce((a, b)=> a+b,0)
 
-    const percentage = response?.data.budgets.map(item => {
+    const percentage = response?.data?.budgets.map(item => {
         return {theme:item.theme, percentage:(Number(String(item.spent).replace("-", ''))/Number(spent)*100)}
     }).sort((a, b) => Number(a.percentage) - Number(b.percentage))
     

@@ -7,8 +7,8 @@ import useGetSummary from "@/hooks/getSummary";
 
 export default function PotsSummary() {
   const { data:responseData, isLoading } = useGetSummary()
-  const potBars = responseData?.data.pots
-  const total = responseData?.data.total_saved
+  const potBars = responseData?.data?.pots
+  const total = responseData?.data?.total_saved
   const bars = potBars?.map((item, index) => {
     return (
       <ColorBars
