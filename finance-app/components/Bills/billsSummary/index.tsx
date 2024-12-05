@@ -9,9 +9,9 @@ export default function BillsSummary() {
   const { data: responseData, isLoading } = useGetSummary()
   
   const renderData = [
-    { type: "Paid Bills", amount: responseData?.data.paid_bills },
-    { type: "Total Upcoming", amount: responseData?.data.upcoming_bills },
-    { type: "Due Soon", amount: responseData?.data.due_soon, },
+    { type: "Paid Bills", amount: String(responseData?.data.paid_bills).replace(/-/, "") },
+    { type: "Total Upcoming", amount: (String(responseData?.data.upcoming_bills).replace(/-/, "")) },
+    { type: "Due Soon", amount: String(responseData?.data.due_soon).replace(/-/, ""), },
   ];
  
   const billsRender = renderData.map((item, index) => {

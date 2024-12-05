@@ -3,6 +3,7 @@
 import { recurringSVG } from "@/components/svgAssets";
 import useGetBills from "@/hooks/getBills";
 import useGetSummary from "@/hooks/getSummary";
+import { formatAmount } from "@/components/transactions/summaryTransactions/formatStrings";
 
 export default function SummaryCards() {
   const { data, isLoading } = useGetBills({ skip: 0 })
@@ -19,7 +20,7 @@ export default function SummaryCards() {
       <span>{recurringSVG}</span>
       <div className="flex text-white flex-col">
         <p className="text-[14px]">Total Bills</p>
-        <p className="text-white text-[2rem] font-bold">${monthly_total}</p>
+        <p className="text-white text-[2rem] font-bold">${String(monthly_total).replace(/-/, "")}</p>
       </div>
     </div>
   );
@@ -31,19 +32,19 @@ export default function SummaryCards() {
         <div className="w-full flex items-center justify-between">
           <p className="text-gray-500 text-[12px]">Paid Bills</p>
           <p className="text-gray-900 font-bold  text-[12px]">
-            {paidBills?.length}(${summary?.data.paid_bills})
+            {paidBills?.length}(${String(summary?.data.paid_bills).replace(/-/, "")})
             
           </p>
         </div>
         <hr className="w-full h-[1px] bg-gray-500" />
         <div className="w-full flex items-center justify-between">
           <p className="text-gray-500 text-[12px]">Total Upcoming</p>
-          <p className="text-gray-900 font-bold  text-[12px]">{upcoming?.length}(${Number(summary?.data.upcoming_bills)})</p>
+          <p className="text-gray-900 font-bold  text-[12px]">{upcoming?.length}(${ String(summary?.data.upcoming_bills).replace(/-/, "")})</p>
         </div>
         <hr className="w-full h-[1px] bg-gray-500" />
         <div className="w-full text-red-700 flex items-center justify-between">
           <p className="text-[12px]">Due Soon</p>
-          <p className="font-bold text-[12px]">{dueSoon?.length}(${Number(summary?.data.due_soon)})</p>
+          <p className="font-bold text-[12px]">{dueSoon?.length}(${String(summary?.data.due_soon).replace(/-/, "")})</p>
         </div>
       </div>
     </div>

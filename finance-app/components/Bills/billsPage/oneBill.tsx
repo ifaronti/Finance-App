@@ -3,6 +3,7 @@ import { bill } from "@/components/types";
 import { dueSVG, paidSVG } from "@/components/svgAssets";
 import { closeModal } from "@/components/svgAssets";
 import { formatDate } from "@/components/svgAssets";
+import { formatAmount } from "@/components/transactions/summaryTransactions/formatStrings";
 
 type props = {
   bill: bill;
@@ -30,7 +31,7 @@ export default function OneBill({ bill, deleteItemModal }: props) {
           bill.status === "soon" ? "text-red-500" : "text-gray-900"
         } text-[14px]`}
       >
-        -${bill?.amount}
+        {formatAmount(bill?.amount)}
       </p>
       <button onClick={deleteItemModal} className="absolute block md:hidden group-hover:block right-14">{closeModal}</button>
     </div>
