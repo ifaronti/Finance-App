@@ -77,18 +77,6 @@ export default function AuthenticationForm({
           />
         )}
 
-        {signUp && (
-          <AuthenticationInput
-            err={String(err.confirmPassword)}
-            name="income"
-            value={Number(userInfo?.income)}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            type='number'
-            placeholder="Enter your expected monthly Income"
-            isUpdate={isUpdate}
-          />
-        )}
       </div>
       <FormButton loading={loading} signUp={signUp} />
     </form>
