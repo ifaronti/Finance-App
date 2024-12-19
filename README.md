@@ -41,7 +41,9 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Frontend repo](https://github.com/ifaronti/Finance-App/)
-- Solution URL: [Backend repo](https://github.com/ifaronti/Finance-Backend)
+- Solution URL: [Backend repo Node/Express](https://github.com/ifaronti/Finance-Backend)
+- Solution URL: [Backend repo Python/Fastapi](https://github.com/ifaronti/Finance-Backend-Fastapi)
+- Live Site URL: [Interactive Backend Lambda Funtion Python/Fastapi](https://kfz6ct3p22dssy3p353ugp7b7u0yubvl.lambda-url.eu-west-1.on.aws/docs)
 - Live Site URL: [hosted on vercel.com](https://finance-app-eight-xi.vercel.app/)
 
 ### Built with
