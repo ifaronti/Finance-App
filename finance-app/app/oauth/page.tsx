@@ -33,6 +33,10 @@ export default function Page() {
 
     useEffect(() => {
         gitLogin()
+
+        const abortController = new AbortController()
+
+        return abortController.abort()
         //eslint-disable-next-line
     }, [])
     

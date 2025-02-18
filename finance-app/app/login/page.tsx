@@ -56,6 +56,7 @@ export default function Login() {
   const handleSubmit = async (e: formEvent) => {
     e.preventDefault();
     setLoading(true)
+    
     const { password, email } = userInfo;
     if (!email || !password) {
       return setErr({ email: "invalid", password: "", serverErr: "" });
